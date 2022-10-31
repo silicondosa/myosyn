@@ -1,0 +1,6 @@
+[submodule "lib/quickDAQ"]
+	path = lib/quickDAQ
+	url = git@github.com:solaremperor/quickDAQ.git
+[submodule "lib/cLinkedList"]
+	path = lib/cLinkedList
+	url = git@github.com:solaremperor/cLinkedList.git

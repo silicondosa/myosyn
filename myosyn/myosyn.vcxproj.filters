@@ -15,16 +15,55 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
+    <ClCompile Include="..\src\myosyn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="..\include\myosyn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\cLinkedList\include\cLinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\cLinkedList\include\macrodef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\quickDAQ\include\msunistd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\quickDAQ\include\quickDAQ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\quickDAQ\include\stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\quickDAQ\include\targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\quickDAQ\lib\NI-DAQmx\include\ansi_c.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\quickDAQ\lib\NI-DAQmx\include\NIDAQmx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <Library Include="..\lib\cLinkedList\bin\cLinkedList.lib" />
+    <Library Include="..\lib\quickDAQ\bin\win32\quickDAQ.lib" />
+    <Library Include="..\lib\quickDAQ\lib\NI-DAQmx\NIDAQmx.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\lib\quickDAQ\bin\win32\quickDAQ.idb" />
+    <None Include="..\lib\quickDAQ\bin\win32\quickDAQ.pdb" />
   </ItemGroup>
 </Project>

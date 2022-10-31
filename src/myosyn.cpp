@@ -5,6 +5,13 @@
 #include <quickDAQ.h>
 #include "..\include\myosyn.h"
 
+// Needed by visual studio
+#if defined(_WIN32) || defined(_WIN64)
+	#include "..\include\pch.h"
+	#include "..\include\framework.h"
+#endif
+
+
 extern unsigned muscle_mtr_val[16][2];
 extern unsigned muscle_mtr_en [16][2];
 extern unsigned muscle_enc_ring[ 8][2];

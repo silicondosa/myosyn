@@ -78,12 +78,17 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\include;$(SolutionDir)..\lib\quickDAQ\include;$(SolutionDir)..\lib\cLinkedList\include;$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx;$(SolutionDir)..\lib\quickDAQ\bin\win32;$(SolutionDir)..\lib\cLinkedList\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -95,6 +100,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\include;$(SolutionDir)..\lib\quickDAQ\include;$(SolutionDir)..\lib\cLinkedList\include;$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -103,6 +110,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx;$(SolutionDir)..\lib\quickDAQ\bin\win32;$(SolutionDir)..\lib\cLinkedList\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -134,6 +144,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\include;$(SolutionDir)..\lib\quickDAQ\include;$(SolutionDir)..\lib\cLinkedList\include;$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -142,18 +153,35 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx;$(SolutionDir)..\lib\quickDAQ\bin\win32;$(SolutionDir)..\lib\cLinkedList\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="pch.h" />
+    <ClCompile Include="..\src\myosyn.cpp" />
+    <ClCompile Include="..\src\pch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
+    <ClInclude Include="..\include\framework.h" />
+    <ClInclude Include="..\include\myosyn.h" />
+    <ClInclude Include="..\include\pch.h" />
+    <ClInclude Include="..\lib\cLinkedList\include\cLinkedList.h" />
+    <ClInclude Include="..\lib\cLinkedList\include\macrodef.h" />
+    <ClInclude Include="..\lib\quickDAQ\include\msunistd.h" />
+    <ClInclude Include="..\lib\quickDAQ\include\quickDAQ.h" />
+    <ClInclude Include="..\lib\quickDAQ\include\stdafx.h" />
+    <ClInclude Include="..\lib\quickDAQ\include\targetver.h" />
+    <ClInclude Include="..\lib\quickDAQ\lib\NI-DAQmx\include\ansi_c.h" />
+    <ClInclude Include="..\lib\quickDAQ\lib\NI-DAQmx\include\NIDAQmx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\lib\cLinkedList\bin\cLinkedList.lib" />
+    <Library Include="..\lib\quickDAQ\bin\win32\quickDAQ.lib" />
+    <Library Include="..\lib\quickDAQ\lib\NI-DAQmx\NIDAQmx.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\lib\quickDAQ\bin\win32\quickDAQ.idb" />
+    <None Include="..\lib\quickDAQ\bin\win32\quickDAQ.pdb" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

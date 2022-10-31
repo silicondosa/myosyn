@@ -7,7 +7,9 @@
 #ifndef PCH_H
 #define PCH_H
 
-// add headers that you want to pre-compile here
-#include "framework.h"
+#if defined(_WIN32) || defined(_WIN64)
+	// add headers that you want to pre-compile here
+	#include "framework.h"
+#endif
 
 #endif //PCH_H

@@ -78,33 +78,33 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 	// Set pin modes for all pins based on DAQ arrangement
 	if (channelID < mtrChannelLimit) {
 		// MOTOR VALUE OUTPUT
-		pinMode((*motor_value_config)[0], ANALOG_OUT, (*motor_value_config)[1]);
+		pinMode(motor_value_config[channelID][0], ANALOG_OUT, motor_value_config[channelID][1]);
 
 		// MOTOR ENABLE (ACTIVE HIGH OUTPUT)
-		if ((*motor_enable_config)[0] == 2) {
-			if ((*motor_enable_config)[1] < 8) { // For digital output pins of NI-DAQmx
-				pinMode((*motor_enable_config)[0], DIGITAL_OUT, 0);
+		if (motor_enable_config[channelID][0] == 2) {
+			if (motor_enable_config[channelID][1] < 8) { // For digital output pins of NI-DAQmx
+				pinMode(motor_enable_config[channelID][0], DIGITAL_OUT, 0);
 			}
-			else if ((*motor_enable_config)[1] > 15 && (*motor_enable_config)[1] < 24) { // For analog output pins of NI-DAQmx to behave like digital output pins
-				pinMode((*motor_enable_config)[1], ANALOG_OUT, 0);
+			else if (motor_enable_config[channelID][1] > 15 && motor_enable_config[channelID][1] < 24) { // For analog output pins of NI-DAQmx to behave like digital output pins
+				pinMode(motor_enable_config[channelID][0], ANALOG_OUT, motor_enable_config[channelID][1]);
 			}
 		}
 
 		// LOAD CELL INPUT
 		if (this->myDAQarrangement == RING_OF_FIRE)
 		{
-			pinMode((*loadcell_config)[0], ANALOG_IN, (*loadcell_config)[1]);
+			pinMode(loadcell_config[channelID][0], ANALOG_IN, loadcell_config[channelID][1]);
 		}
 
 		// ENCODER INPUT
 		if (this->myDAQarrangement != QUADRUPED)
 		{
 			// Main encoder
-			pinMode((*encoder_config)[0], CTR_ANGLE_IN, (*encoder_config)[1]);
+			pinMode(encoder_config[channelID][0], CTR_ANGLE_IN, encoder_config[channelID][1]);
 
 			// Optional encoder
 			if (encoder_opt_config != NULL && this->myDAQarrangement == MUSCLE_MODULE) {
-				pinMode((*encoder_opt_config)[0], CTR_ANGLE_IN, (*encoder_opt_config)[1]);
+				pinMode(encoder_opt_config[channelID][0], CTR_ANGLE_IN, encoder_opt_config[channelID][1]);
 			}
 		}
 	}

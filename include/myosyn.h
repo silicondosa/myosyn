@@ -92,6 +92,10 @@ unsigned muscle_ld_cell [8][2]		=  {{7, 0},  // Muscle Channel 0
 										{7,11},  // Muscle Channel 6
 										{7, 3}}; // Muscle Channel 7
 
+unsigned channel_limits[3][2] =		   {{ 7, 7},
+										{12, 0},
+										{12,12}};
+
 int T5_quickDAQstatus = 0;
 
 typedef enum _DAQarrangement
@@ -104,6 +108,8 @@ typedef enum _DAQarrangement
 class myosyn {
 	unsigned channelID;
 	DAQarrangement myDAQarrangement;
+
+	unsigned maxChannels_mtr, maxChannels_enc;
 
 	unsigned (*motor_enable_config)[2];
 	unsigned (*motor_value_config)[2];

@@ -23,7 +23,7 @@ extern int T5_quickDAQstatus;
 
 myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = MUSCLE_MODULE)
 {
-	// Initialize T5muscle object
+	// Initialize myosyn object basic settings
 	unsigned channelID	= muscleChannel;
 	this->myDAQarrangement		= myDAQarrangement;
 
@@ -33,50 +33,51 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		T5_quickDAQstatus = 1;
 	}
 	
-	// Acquire pin numbers based on DAQ arrangement
-	int encChannelLimit = 0;
-	int mtrChannelLimit = 0;
+	// Acquire pin configurations based on DAQ arrangement
+	maxChannels_enc = 0;
+	maxChannels_mtr = 0;
 	encoder_opt_config = NULL;
+
 	switch (this->myDAQarrangement)
 	{
 	case RING_OF_FIRE:
-		mtrChannelLimit		= 7;
+		maxChannels_mtr		= 7;
 		motor_enable_config = muscle_mtr_en;
 		motor_value_config	= muscle_mtr_val;
-		encChannelLimit		= 7;
+		maxChannels_enc		= 7;
 		encoder_config		= muscle_enc_ring;
 		encoder_opt_config	= NULL;
 		loadcell_config		= muscle_ld_cell;
 		break;
 
 	case QUADRUPED:
-		mtrChannelLimit		= 12;
+		maxChannels_mtr		= 12;
 		motor_enable_config = muscle_mtr_en;
 		motor_value_config	= muscle_mtr_val;
-		encChannelLimit		= 0;
+		maxChannels_enc		= 0;
 		encoder_config		= muscle_enc_kleo;
 		encoder_opt_config	= NULL;
 		loadcell_config		= NULL;
 		break;
 
 	case MUSCLE_MODULE:
-		mtrChannelLimit		= 12;
+		maxChannels_mtr		= 12;
 		motor_enable_config = muscle_mtr_en;
 		motor_value_config	= muscle_mtr_val;
-		encChannelLimit		= 12;
+		maxChannels_enc		= 12;
 		encoder_config		= muscle_enc_mtr;
 		encoder_opt_config	= muscle_enc_spl;
 		break;
 
 	default:
-		fprintf(ERRSTREAM, "ERROR: T5 Control: Invalid DAQ arrangement selected. Program will terminate.");
+		fprintf(ERRSTREAM, "ERROR: MyoSyn: Invalid DAQ arrangement selected. Program will terminate.");
 		quickDAQTerminate();
 		exit(-1);
 		break;
 	}
 
 	// Set pin modes for all pins based on DAQ arrangement
-	if (channelID < mtrChannelLimit) {
+	if (channelID < maxChannels_mtr) {
 		// MOTOR VALUE OUTPUT
 		pinMode(motor_value_config[channelID][0], ANALOG_OUT, motor_value_config[channelID][1]);
 
@@ -109,7 +110,7 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		}
 	}
 	else {
-		fprintf(ERRSTREAM, "ERROR: T5 Control: Requested channel ID %d is greater than the number of available motor channels %d. Program will terminate.", channelID, mtrChannelLimit);
+		fprintf(ERRSTREAM, "ERROR: MyoSyn: Requested channel ID %d is greater than the number of available motor channels %d. Program will terminate.", channelID, maxChannels_mtr);
 		exit(-1);
 	}
 	// Setup DAQ sampling rate and trigger mode

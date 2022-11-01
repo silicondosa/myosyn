@@ -120,24 +120,23 @@ class myosyn {
 	double muscleToneValue;
 	double max_muscleTension;
 
-	double loadCell_offset;
+	double loadCell_offset, loadcell_gain; // Voltage to force readout
+	double mtrTension_offset, mtrTension_gain; // Voltage to motor Tension
 
 	double current_muscleTension;
 
 public:
 	myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement);
 	
-	void	enable();
-	void	setMuscleTone(double myMuscleTone_value);
-	double	getMuscleTone();
+	void	enableDisableTone();
+	void	setMuscleToneValue(double myMuscleTone_value);
+	double	getMuscleToneValue();
+	void	disableMuscleTone();
 	void	setMaxMuscleTension(double max_tension);
 	double	getMaxMuscleTension();
-	void	disable();
 
 	void	setMuscleTension(double myTension);
 	double	getMuscleTension();
-
-	void disable();
 };
 
 class T5encoder {

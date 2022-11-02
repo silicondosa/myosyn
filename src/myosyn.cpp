@@ -99,9 +99,41 @@ unsigned channel_limits[3][2] =		   {{ 7, 7},
 int T5_quickDAQstatus = 0;
 unsigned numConfiguredMuscles = 0;
 
+void myosynStart() 
+{
+	switch (quickDAQgetStatus())
+	{
+	case STATUS_INIT:
+		// Setup DAQ sampling rate and trigger mode
+		setSampleClockTiming((samplingModes)HW_CLOCKED, DAQmxSamplingRate, DAQmxClockSource, (triggerModes)DAQmxTriggerEdge, DAQmxNumDataPointsPerSample, TRUE);
+
+	case STATUS_READY:
+		// Start quickDAQ - only need to call this once
+		quickDAQstart();
+	case STATUS_RUNNING:
+		// you need to do nothing here except maybe print something
+		break;
+	default:
+		// Print some error message
+		break;
+	}
+}
+
+void myosynStop() {
+	switch (quickDAQgetStatus())
+	{
+	case STATUS_RUNNING:
+		quickDAQstop();
+		break;
+	default:
+		// print some error message?
+		break;
+	}
+}
+
 myosyn::myosyn()
 {
-	setMuscleStatus(DISABLED);
+	setMuscleStatus(MYOSYN_DISABLED);
 }
 
 myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = MUSCLE_MODULE)
@@ -115,8 +147,8 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		quickDAQinit();
 		T5_quickDAQstatus = 1;
 	}
-	startDAQ = &quickDAQstart;
-	stopDAQ  = &quickDAQstop;
+	startDAQ = &myosynStart;
+	stopDAQ  = &myosynStop;
 
 	// Acquire pin configurations based on DAQ arrangement
 	maxChannels_enc		= 0;
@@ -205,33 +237,31 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		fprintf(ERRSTREAM, "ERROR: MyoSyn: Requested channel ID %d is greater than the number of available motor channels %d. Program will terminate.", channelID, maxChannels_mtr);
 		exit(-1);
 	}
-
-	// Setup DAQ sampling rate and trigger mode
-	setSampleClockTiming((samplingModes)HW_CLOCKED, DAQmxSamplingRate, DAQmxClockSource, (triggerModes)DAQmxTriggerEdge, DAQmxNumDataPointsPerSample, TRUE);
-
+	
 	// Set muscle status and increment numActiveMuscles
-	setMuscleStatus(READY_WINDDOWN);
+	setMuscleStatus(MYOSYN_READY_WINDDOWN);
 	numConfiguredMuscles++;
 }
 
 myosyn::~myosyn()
 {
-	if (numConfiguredMuscles > 0 && getMuscleStatus() != DISABLED) {
+	if (numConfiguredMuscles > 0 && getMuscleStatus() != MYOSYN_DISABLED) {
 		switch (getMuscleStatus()) {
-		case ACTIVE_CLOSEDLOOP:
+		case MYOSYN_CLOSEDLOOP:
 			// Call the function that shuts down closed loop controller
-		case WINDUP_OPENLOOP:
+		case MYOSYN_ENABLED_WINDUP:
 			windDown();
 		default:
-			this->status = DISABLED;
+			this->status = MYOSYN_DISABLED;
 		}
 		if (numConfiguredMuscles == 1 && quickDAQgetStatus() > STATUS_NASCENT) {
+			(*stopDAQ)();
 			quickDAQTerminate();
 			T5_quickDAQstatus = 0;
 		}
 		numConfiguredMuscles--;
 	}
-	setMuscleStatus(DISABLED);
+	setMuscleStatus(MYOSYN_DISABLED);
 }
 
 inline muscleStatus myosyn::getMuscleStatus()
@@ -246,20 +276,21 @@ inline void myosyn::setMuscleStatus(muscleStatus newStatus)
 
 void myosyn::windUp()
 {
-	if (getMuscleStatus() == READY_WINDDOWN) {
-		quickDAQstart();
+	if (getMuscleStatus() == MYOSYN_READY_WINDDOWN) {
+		(*startDAQ)();
 		if (motor_enable_config[channelID][1] < 8) {
 			writeDigitalPin(motor_enable_config[channelID][0], 0, motor_enable_config[channelID][1], TRUE);
 		}
 		else if (motor_enable_config[channelID][1] > 15 && motor_enable_config[channelID][1] < 24) {
 			setAnalogOutPin(motor_enable_config[channelID][0], motor_enable_config[channelID][1], (float64)DIGITAL_HIGH_VOLTS);
-			syncSampling();
 			writeAnalog_intBuf(motor_enable_config[channelID][0]);
 		}
 		setAnalogOutPin(motor_value_config[channelID][0], motor_value_config[channelID][1], (float64)WIND_UP_VOLTS);
-		syncSampling();
 		writeAnalog_intBuf(motor_value_config[channelID][0]);
-		setMuscleStatus(WINDUP_OPENLOOP);
+		setMuscleStatus(MYOSYN_ENABLED_WINDUP);
+	}
+	else {
+		// print warning and reurn something?
 	}
 }
 
@@ -267,9 +298,9 @@ void myosyn::windDown()
 {
 	switch (getMuscleStatus())
 	{
-	case ACTIVE_CLOSEDLOOP:
+	case MYOSYN_CLOSEDLOOP:
 		// do stuff pertaining to active closed loop control
-	case WINDUP_OPENLOOP:
+	case MYOSYN_ENABLED_WINDUP:
 		if (motor_enable_config[channelID][1] < 8) {
 			writeDigitalPin(motor_enable_config[channelID][0], 0, motor_enable_config[channelID][1], FALSE);
 		}
@@ -277,11 +308,14 @@ void myosyn::windDown()
 			setAnalogOutPin(motor_enable_config[channelID][0], motor_enable_config[channelID][1], (float64)DIGITAL_LOW_VOLTS);
 		}
 		setAnalogOutPin(motor_value_config [channelID][0], motor_value_config [channelID][1], (float64)WIND_DOWN_VOLTS);
-		syncSampling();
 		writeAnalog_intBuf(motor_enable_config[channelID][0]);
-		setMuscleStatus(READY_WINDDOWN);
+		setMuscleStatus(MYOSYN_READY_WINDDOWN);
+		if (numConfiguredMuscles == 1) {
+			(*stopDAQ)();
+		}
 		break;
 	default:
+		// print error
 		break;
 	}
 }

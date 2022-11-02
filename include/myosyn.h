@@ -18,6 +18,7 @@ extern unsigned muscle_enc_mtr[12][2];
 extern unsigned muscle_enc_spl[12][2];
 extern unsigned muscle_ld_cell[ 8][2];
 extern int T5_quickDAQstatus;
+extern unsigned numConfiguredMuscles;
 
 typedef enum _DAQarrangement
 {
@@ -28,14 +29,14 @@ typedef enum _DAQarrangement
 
 typedef enum _muscleStatus
 {
-	DISABLED			= 0,
-	READY_WINDDOWN		= 1,
-	WINDUP_OPENLOOP		= 2,
-	ACTIVE_CLOSEDLOOP	= 3
-
+	MYOSYN_DISABLED			= 0,
+	MYOSYN_READY_WINDDOWN	= 1,
+	MYOSYN_ENABLED_WINDUP	= 2,
+	MYOSYN_CLOSEDLOOP		= 3
 } muscleStatus;
 
-extern unsigned numConfiguredMuscles;
+void myosynStart();
+void myosynStop();
 
 class myosyn {
 	unsigned channelID;

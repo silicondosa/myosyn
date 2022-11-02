@@ -88,7 +88,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\suraj\codebase\myosyn\lib\quickDAQ\lib\NI-DAQmx;C:\Users\suraj\codebase\myosyn\lib\quickDAQ\bin\win32;C:\Users\suraj\codebase\myosyn\lib\cLinkedList\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\suraj\codebase\myosyn\bin\win32;C:\Users\suraj\codebase\myosyn\lib\quickDAQ\lib\NI-DAQmx;C:\Users\suraj\codebase\myosyn\lib\quickDAQ\bin\win32;C:\Users\suraj\codebase\myosyn\lib\cLinkedList\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,7 +107,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\suraj\codebase\myosyn\lib\quickDAQ\lib\NI-DAQmx;C:\Users\suraj\codebase\myosyn\lib\quickDAQ\bin\win32;C:\Users\suraj\codebase\myosyn\lib\cLinkedList\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\suraj\codebase\myosyn\bin\win32;C:\Users\suraj\codebase\myosyn\lib\quickDAQ\lib\NI-DAQmx;C:\Users\suraj\codebase\myosyn\lib\quickDAQ\bin\win32;C:\Users\suraj\codebase\myosyn\lib\cLinkedList\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -163,9 +163,7 @@
     <Library Include="..\lib\quickDAQ\lib\NI-DAQmx\NIDAQmx.lib" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\bin\win32\myosyn.idb" />
     <None Include="..\bin\win32\myosyn.pdb" />
-    <None Include="..\lib\quickDAQ\bin\win32\quickDAQ.idb" />
     <None Include="..\lib\quickDAQ\bin\win32\quickDAQ.pdb" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

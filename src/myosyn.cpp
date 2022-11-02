@@ -111,13 +111,13 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 	this->myDAQarrangement	= myDAQarrangement;
 
 	// Initialize quickDAQ library
-	if (quickDAQGetStatus()/*quickDAQStatus*/ == (int)STATUS_NASCENT) {
+	if (quickDAQgetStatus() == (int)STATUS_NASCENT) {
 		quickDAQinit();
 		T5_quickDAQstatus = 1;
-		startDAQ = &quickDAQstart;
-		stopDAQ  = &quickDAQstop;
 	}
-	
+	startDAQ = &quickDAQstart;
+	stopDAQ  = &quickDAQstop;
+
 	// Acquire pin configurations based on DAQ arrangement
 	maxChannels_enc		= 0;
 	maxChannels_mtr		= 0;
@@ -225,7 +225,7 @@ myosyn::~myosyn()
 		default:
 			this->status = DISABLED;
 		}
-		if (numConfiguredMuscles == 1 && quickDAQStatus > STATUS_NASCENT) {
+		if (numConfiguredMuscles == 1 && quickDAQgetStatus() > STATUS_NASCENT) {
 			quickDAQTerminate();
 			T5_quickDAQstatus = 0;
 		}

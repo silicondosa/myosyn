@@ -14,13 +14,13 @@ int main()
 	getchar();
 	muscle[0].windUp();
 	cout << "mtr 2\n"; getchar();
-	//muscle[1].windUp();
+	muscle[1].windUp();
 
 	cout<<"Press any key to wind down motor"<<endl;
 	getchar();
 	muscle[0].windDown();
 	cout << "mtr2\n"; getchar();
-	//muscle[1].windDown();
+	muscle[1].windDown();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

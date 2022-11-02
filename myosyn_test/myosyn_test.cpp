@@ -2,27 +2,25 @@
 //
 
 #include <iostream>
-#include <quickDAQ.h>
 #include <myosyn.h>
 
 using namespace std;
 int main()
 {
 	std::cout << "Hello World!\n";
-	myosyn muscle(2, RING_OF_FIRE);
+	myosyn muscle[] = { myosyn(3, RING_OF_FIRE), myosyn(2, RING_OF_FIRE)};
 	
 	cout<<"Press any key to wind up motor"<<endl;
 	getchar();
-	muscle.windUp();
+	muscle[0].windUp();
+	cout << "mtr 2\n"; getchar();
+	//muscle[1].windUp();
 
 	cout<<"Press any key to wind down motor"<<endl;
 	getchar();
-	muscle.windDown();
-
-	cout<<"Press any key to wind up motor"<<endl;
-	getchar();
-	muscle.windUp();
-
+	muscle[0].windDown();
+	cout << "mtr2\n"; getchar();
+	//muscle[1].windDown();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

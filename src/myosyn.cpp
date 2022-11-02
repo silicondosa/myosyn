@@ -83,14 +83,14 @@ unsigned muscle_enc_spl[12][2]		=  {{3, 1},  // Muscle Channel 0
 										{8, 5},  // Muscle Channel 10
 										{8, 7}}; // Muscle Channel 11
 
-unsigned muscle_ld_cell [8][2]		=  {{7, 0},  // Muscle Channel 0
-										{7, 8},  // Muscle Channel 1
-										{7, 1},  // Muscle Channel 2
-										{7, 9},  // Muscle Channel 3
-										{7, 2},  // Muscle Channel 4
-										{7,10},  // Muscle Channel 5
-										{7,11},  // Muscle Channel 6
-										{7, 3}}; // Muscle Channel 7
+unsigned muscle_ld_cell [8][2]		=  {{5, 0},  // Muscle Channel 0
+										{5, 8},  // Muscle Channel 1
+										{5, 1},  // Muscle Channel 2
+										{5, 9},  // Muscle Channel 3
+										{5, 2},  // Muscle Channel 4
+										{5,10},  // Muscle Channel 5
+										{5,11},  // Muscle Channel 6
+										{5, 3}}; // Muscle Channel 7
 
 unsigned channel_limits[3][2] =		   {{ 7, 7},
 										{12, 0},
@@ -111,7 +111,7 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 	this->myDAQarrangement	= myDAQarrangement;
 
 	// Initialize quickDAQ library
-	if (quickDAQStatus == (int)STATUS_NASCENT) {
+	if (quickDAQGetStatus()/*quickDAQStatus*/ == (int)STATUS_NASCENT) {
 		quickDAQinit();
 		T5_quickDAQstatus = 1;
 		startDAQ = &quickDAQstart;
@@ -170,6 +170,12 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 
 	// Set pin modes for all pins based on DAQ arrangement
 	if (channelID < maxChannels_mtr) {
+		// LOAD CELL INPUT
+		if (this->myDAQarrangement == RING_OF_FIRE)
+		{
+			pinMode(loadcell_config[channelID][0], ANALOG_IN, loadcell_config[channelID][1]);
+		}
+		
 		// MOTOR VALUE OUTPUT
 		pinMode(motor_value_config[channelID][0], ANALOG_OUT, motor_value_config[channelID][1]);
 
@@ -181,13 +187,7 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 			else if (motor_enable_config[channelID][1] > 15 && motor_enable_config[channelID][1] < 24) { // For analog output pins of NI-DAQmx to behave like digital output pins
 				pinMode(motor_enable_config[channelID][0], ANALOG_OUT, motor_enable_config[channelID][1]);
 			}
-		}
-
-		// LOAD CELL INPUT
-		if (this->myDAQarrangement == RING_OF_FIRE)
-		{
-			pinMode(loadcell_config[channelID][0], ANALOG_IN, loadcell_config[channelID][1]);
-		}
+		}	
 
 		// ENCODER INPUT
 		if (this->myDAQarrangement != QUADRUPED)
@@ -225,7 +225,7 @@ myosyn::~myosyn()
 		default:
 			this->status = DISABLED;
 		}
-		if (numConfiguredMuscles == 1 && quickDAQGetStatus() > STATUS_NASCENT) {
+		if (numConfiguredMuscles == 1 && quickDAQStatus > STATUS_NASCENT) {
 			quickDAQTerminate();
 			T5_quickDAQstatus = 0;
 		}

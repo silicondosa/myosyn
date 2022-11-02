@@ -5,38 +5,123 @@
 #include <quickDAQ.h>
 #include "..\include\myosyn.h"
 
-// Needed by visual studio
-#if defined(_WIN32) || defined(_WIN64)
-	#include "..\include\pch.h"
-	#include "..\include\framework.h"
-#endif
+unsigned muscle_mtr_val[16][2]		=  {{2, 0}, // Muscle Channel 0
+										{2, 1}, // Muscle Channel 1
+										{2, 2}, // Muscle Channel 2
+										{2, 3}, // Muscle Channel 3
+										{2, 4}, // Muscle Channel 4
+										{2, 5}, // Muscle Channel 5
+										{2, 6}, // Muscle Channel 6
+										{2, 7}, // Muscle Channel 7
+										{2, 8}, // Muscle Channel 8
+										{2, 9}, // Muscle Channel 9
+										{2,10}, // Muscle Channel 10
+										{2,11}, // Muscle Channel 11
+										{2,12}, // Muscle Channel 12
+										{2,13}, // Muscle Channel 13
+										{2,14}, // Muscle Channel 14
+										{2,15}};// Muscle Channel 15
 
+unsigned muscle_mtr_en [16][2]		=  {{2, 0},  // Muscle Channel 0
+										{2, 1},  // Muscle Channel 1
+										{2, 2},  // Muscle Channel 2
+										{2, 3},  // Muscle Channel 3
+										{2, 4},  // Muscle Channel 4
+										{2, 5},  // Muscle Channel 5
+										{2, 6},  // Muscle Channel 6
+										{2, 7},  // Muscle Channel 7
+										{2,16},  // Muscle Channel 8
+										{2,17},  // Muscle Channel 9
+										{2,18},  // Muscle Channel 10
+										{2,19},  // Muscle Channel 11
+										{2,20},  // Muscle Channel 12
+										{2,21},  // Muscle Channel 13
+										{2,22},  // Muscle Channel 14
+										{2,23}}; // Muscle Channel 15
 
-extern unsigned muscle_mtr_val[16][2];
-extern unsigned muscle_mtr_en [16][2];
-extern unsigned muscle_enc_ring[ 8][2];
-extern unsigned muscle_enc_kleo[ 8][2];
-extern unsigned muscle_enc_mtr[12][2];
-extern unsigned muscle_enc_spl[12][2];
-extern unsigned muscle_ld_cell[ 8][2];
-extern int T5_quickDAQstatus;
+unsigned muscle_enc_ring [8][2]		=  {{3, 0},  // Muscle Channel 0
+										{3, 1},  // Muscle Channel 1
+										{3, 2},  // Muscle Channel 2
+										{3, 3},  // Muscle Channel 3
+										{3, 4},  // Muscle Channel 4
+										{3, 5},  // Muscle Channel 5
+										{3, 6},  // Muscle Channel 6
+										{3, 7}}; // Muscle Channel 7
+
+unsigned muscle_enc_kleo [8][2]		=  {{7, 0},  // Muscle Channel 0
+										{7, 1},  // Muscle Channel 1
+										{7, 2},  // Muscle Channel 2
+										{7, 3},  // Muscle Channel 3
+										{7, 4},  // Muscle Channel 4
+										{7, 5},  // Muscle Channel 5
+										{7, 6},  // Muscle Channel 6
+										{7, 7}}; // Muscle Channel 7
+
+unsigned muscle_enc_mtr[12][2]		=  {{3, 0},  // Muscle Channel 0
+										{3, 2},  // Muscle Channel 1
+										{3, 4},  // Muscle Channel 2
+										{3, 6},  // Muscle Channel 3
+										{7, 0},  // Muscle Channel 4
+										{7, 2},  // Muscle Channel 5
+										{7, 4},  // Muscle Channel 6
+										{7, 6},  // Muscle Channel 7
+										{8, 0},  // Muscle Channel 8
+										{8, 2},  // Muscle Channel 9
+										{8, 4},  // Muscle Channel 10
+										{8, 6}}; // Muscle Channel 11
+
+unsigned muscle_enc_spl[12][2]		=  {{3, 1},  // Muscle Channel 0
+										{3, 3},  // Muscle Channel 1
+										{3, 5},  // Muscle Channel 2
+										{3, 7},  // Muscle Channel 3
+										{7, 1},  // Muscle Channel 4
+										{7, 3},  // Muscle Channel 5
+										{7, 5},  // Muscle Channel 6
+										{7, 7},  // Muscle Channel 7
+										{8, 1},  // Muscle Channel 8
+										{8, 3},  // Muscle Channel 9
+										{8, 5},  // Muscle Channel 10
+										{8, 7}}; // Muscle Channel 11
+
+unsigned muscle_ld_cell [8][2]		=  {{7, 0},  // Muscle Channel 0
+										{7, 8},  // Muscle Channel 1
+										{7, 1},  // Muscle Channel 2
+										{7, 9},  // Muscle Channel 3
+										{7, 2},  // Muscle Channel 4
+										{7,10},  // Muscle Channel 5
+										{7,11},  // Muscle Channel 6
+										{7, 3}}; // Muscle Channel 7
+
+unsigned channel_limits[3][2] =		   {{ 7, 7},
+										{12, 0},
+										{12,12}};
+
+int T5_quickDAQstatus = 0;
+unsigned numConfiguredMuscles = 0;
+
+myosyn::myosyn()
+{
+	setMuscleStatus(DISABLED);
+}
 
 myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = MUSCLE_MODULE)
 {
 	// Initialize myosyn object basic settings
-	unsigned channelID	= muscleChannel;
-	this->myDAQarrangement		= myDAQarrangement;
+	this->channelID			= muscleChannel;
+	this->myDAQarrangement	= myDAQarrangement;
 
 	// Initialize quickDAQ library
-	if (T5_quickDAQstatus == 0) {
+	if (quickDAQStatus == (int)STATUS_NASCENT) {
 		quickDAQinit();
 		T5_quickDAQstatus = 1;
+		startDAQ = &quickDAQstart;
+		stopDAQ  = &quickDAQstop;
 	}
 	
 	// Acquire pin configurations based on DAQ arrangement
-	maxChannels_enc = 0;
-	maxChannels_mtr = 0;
-	encoder_opt_config = NULL;
+	maxChannels_enc		= 0;
+	maxChannels_mtr		= 0;
+	encoder_opt_config	= NULL;
 
 	switch (this->myDAQarrangement)
 	{
@@ -44,9 +129,11 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		maxChannels_mtr		= 7;
 		motor_enable_config = muscle_mtr_en;
 		motor_value_config	= muscle_mtr_val;
+		
 		maxChannels_enc		= 7;
 		encoder_config		= muscle_enc_ring;
 		encoder_opt_config	= NULL;
+		
 		loadcell_config		= muscle_ld_cell;
 		break;
 
@@ -54,9 +141,11 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		maxChannels_mtr		= 12;
 		motor_enable_config = muscle_mtr_en;
 		motor_value_config	= muscle_mtr_val;
+		
 		maxChannels_enc		= 0;
 		encoder_config		= muscle_enc_kleo;
 		encoder_opt_config	= NULL;
+		
 		loadcell_config		= NULL;
 		break;
 
@@ -64,9 +153,12 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		maxChannels_mtr		= 12;
 		motor_enable_config = muscle_mtr_en;
 		motor_value_config	= muscle_mtr_val;
+		
 		maxChannels_enc		= 12;
 		encoder_config		= muscle_enc_mtr;
 		encoder_opt_config	= muscle_enc_spl;
+		
+		loadcell_config		= NULL;
 		break;
 
 	default:
@@ -113,5 +205,114 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		fprintf(ERRSTREAM, "ERROR: MyoSyn: Requested channel ID %d is greater than the number of available motor channels %d. Program will terminate.", channelID, maxChannels_mtr);
 		exit(-1);
 	}
+
 	// Setup DAQ sampling rate and trigger mode
+	setSampleClockTiming((samplingModes)HW_CLOCKED, DAQmxSamplingRate, DAQmxClockSource, (triggerModes)DAQmxTriggerEdge, DAQmxNumDataPointsPerSample, TRUE);
+
+	// Set muscle status and increment numActiveMuscles
+	setMuscleStatus(READY_WINDDOWN);
+	numConfiguredMuscles++;
 }
+
+myosyn::~myosyn()
+{
+	if (numConfiguredMuscles > 0 && getMuscleStatus() != DISABLED) {
+		switch (getMuscleStatus()) {
+		case ACTIVE_CLOSEDLOOP:
+			// Call the function that shuts down closed loop controller
+		case WINDUP_OPENLOOP:
+			windDown();
+		default:
+			this->status = DISABLED;
+		}
+		if (numConfiguredMuscles == 1 && quickDAQGetStatus() > STATUS_NASCENT) {
+			quickDAQTerminate();
+			T5_quickDAQstatus = 0;
+		}
+		numConfiguredMuscles--;
+	}
+	setMuscleStatus(DISABLED);
+}
+
+inline muscleStatus myosyn::getMuscleStatus()
+{
+	return this->status;
+}
+
+inline void myosyn::setMuscleStatus(muscleStatus newStatus)
+{
+	this->status = newStatus;
+}
+
+void myosyn::windUp()
+{
+	if (getMuscleStatus() == READY_WINDDOWN) {
+		quickDAQstart();
+		if (motor_enable_config[channelID][1] < 8) {
+			writeDigitalPin(motor_enable_config[channelID][0], 0, motor_enable_config[channelID][1], TRUE);
+		}
+		else if (motor_enable_config[channelID][1] > 15 && motor_enable_config[channelID][1] < 24) {
+			setAnalogOutPin(motor_enable_config[channelID][0], motor_enable_config[channelID][1], (float64)DIGITAL_HIGH_VOLTS);
+			syncSampling();
+			writeAnalog_intBuf(motor_enable_config[channelID][0]);
+		}
+		setAnalogOutPin(motor_value_config[channelID][0], motor_value_config[channelID][1], (float64)WIND_UP_VOLTS);
+		syncSampling();
+		writeAnalog_intBuf(motor_value_config[channelID][0]);
+		setMuscleStatus(WINDUP_OPENLOOP);
+	}
+}
+
+void myosyn::windDown()
+{
+	switch (getMuscleStatus())
+	{
+	case ACTIVE_CLOSEDLOOP:
+		// do stuff pertaining to active closed loop control
+	case WINDUP_OPENLOOP:
+		if (motor_enable_config[channelID][1] < 8) {
+			writeDigitalPin(motor_enable_config[channelID][0], 0, motor_enable_config[channelID][1], FALSE);
+		}
+		else if (motor_enable_config[channelID][1] > 15 && motor_enable_config[channelID][1] < 24) {
+			setAnalogOutPin(motor_enable_config[channelID][0], motor_enable_config[channelID][1], (float64)DIGITAL_LOW_VOLTS);
+		}
+		setAnalogOutPin(motor_value_config [channelID][0], motor_value_config [channelID][1], (float64)WIND_DOWN_VOLTS);
+		syncSampling();
+		writeAnalog_intBuf(motor_enable_config[channelID][0]);
+		setMuscleStatus(READY_WINDDOWN);
+		break;
+	default:
+		break;
+	}
+}
+
+inline void myosyn::setMuscleToneValue(double myMuscleTone_value)
+{
+	this->muscleToneValue = myMuscleTone_value;
+}
+
+inline double myosyn::getMuscleToneValue()
+{
+	return this->muscleToneValue;
+}
+
+inline void myosyn::setMaxMuscleTension(double max_tension)
+{
+	this->maxMuscleTension = max_tension;
+}
+
+inline double myosyn::getMaxMuscleTension()
+{
+	return this->maxMuscleTension;
+}
+
+inline void myosyn::setMuscleTension(double refTension)
+{
+	this->refMuscleTension = refTension;
+}
+
+inline double myosyn::getMuscleTension()
+{
+	return this->refMuscleTension;
+}
+

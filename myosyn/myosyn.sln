@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "myosyn", "myosyn.vcxproj", "{40B19934-314E-48A5-9B9C-33AE135DD1D2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "myosyn_test", "..\myosyn_test\myosyn_test.vcxproj", "{D1C2DAA3-B4D5-4B69-AC55-5CA2873A7686}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{40B19934-314E-48A5-9B9C-33AE135DD1D2}.Release|x64.Build.0 = Release|x64
 		{40B19934-314E-48A5-9B9C-33AE135DD1D2}.Release|x86.ActiveCfg = Release|Win32
 		{40B19934-314E-48A5-9B9C-33AE135DD1D2}.Release|x86.Build.0 = Release|Win32
+		{D1C2DAA3-B4D5-4B69-AC55-5CA2873A7686}.Debug|x64.ActiveCfg = Debug|x64
+		{D1C2DAA3-B4D5-4B69-AC55-5CA2873A7686}.Debug|x64.Build.0 = Debug|x64
+		{D1C2DAA3-B4D5-4B69-AC55-5CA2873A7686}.Debug|x86.ActiveCfg = Debug|Win32
+		{D1C2DAA3-B4D5-4B69-AC55-5CA2873A7686}.Debug|x86.Build.0 = Debug|Win32
+		{D1C2DAA3-B4D5-4B69-AC55-5CA2873A7686}.Release|x64.ActiveCfg = Release|x64
+		{D1C2DAA3-B4D5-4B69-AC55-5CA2873A7686}.Release|x64.Build.0 = Release|x64
+		{D1C2DAA3-B4D5-4B69-AC55-5CA2873A7686}.Release|x86.ActiveCfg = Release|Win32
+		{D1C2DAA3-B4D5-4B69-AC55-5CA2873A7686}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

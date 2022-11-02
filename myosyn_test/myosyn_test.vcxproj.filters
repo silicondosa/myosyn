@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\myosyn.cpp">
+    <ClCompile Include="myosyn_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -52,9 +52,12 @@
     <Library Include="..\lib\cLinkedList\bin\cLinkedList.lib" />
     <Library Include="..\lib\quickDAQ\bin\win32\quickDAQ.lib" />
     <Library Include="..\lib\quickDAQ\lib\NI-DAQmx\NIDAQmx.lib" />
+    <Library Include="..\bin\win32\myosyn.lib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\lib\quickDAQ\bin\win32\quickDAQ.idb" />
     <None Include="..\lib\quickDAQ\bin\win32\quickDAQ.pdb" />
+    <None Include="..\bin\win32\myosyn.idb" />
+    <None Include="..\bin\win32\myosyn.pdb" />
   </ItemGroup>
 </Project>

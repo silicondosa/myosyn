@@ -240,6 +240,7 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 	
 	// Set muscle status and increment numActiveMuscles
 	setMuscleStatus(MYOSYN_READY_WINDDOWN);
+	eprintf("myosyn: Muscle %d enabled.\n", channelID);
 	numConfiguredMuscles++;
 }
 
@@ -262,6 +263,7 @@ myosyn::~myosyn()
 		numConfiguredMuscles--;
 	}
 	setMuscleStatus(MYOSYN_DISABLED);
+	eprintf("myosyn: Muscle %d disabled.\n", channelID);
 }
 
 inline muscleStatus myosyn::getMuscleStatus()

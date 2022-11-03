@@ -5,6 +5,8 @@
 #include <iostream>
 #include <quickDAQ.h>
 
+#define eprintf(_STR, ...) fprintf(ERRSTREAM, _STR, __VA_ARGS__)
+
 #define DIGITAL_HIGH_VOLTS	5.0
 #define DIGITAL_LOW_VOLTS	0.0
 #define WIND_UP_VOLTS		0.8

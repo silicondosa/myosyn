@@ -3,24 +3,39 @@
 
 #include <iostream>
 #include <myosyn.h>
+unsigned nMuscles = 2;
+unsigned muscleID[] = { 3,2 };
 
 using namespace std;
 int main()
 {
 	std::cout << "Hello World!\n";
-	myosyn m[] = { myosyn(3, RING_OF_FIRE), myosyn(2, RING_OF_FIRE)};
+	unsigned i;
+	myosyn *m = new myosyn[nMuscles];
 	
-	cout<<"Press any key to wind up motor"<<endl;
+	for (i = 0; i < nMuscles; i++) {
+		new(&(m[i])) myosyn(muscleID[i], RING_OF_FIRE); // Based on https://stackoverflow.com/a/35089001/4028978
+	}
+	
+	cout << "Press any key to wind up motors...\n";
 	getchar();
-	m[0].windUp();
-	cout << "mtr 2\n"; getchar();
-	m[1].windUp();
 
-	cout<<"Press any key to wind down motor"<<endl;
+	for (i = 0; i < nMuscles; i++) {
+		m[i].windUp();
+	}
+	cout << "Windup complete!\n";
 	getchar();
-	m[0].windDown();
-	cout << "mtr2\n"; getchar();
-	m[1].windDown();
+
+
+
+	cout << "Press any key to wind down motors.\n";
+	getchar();
+	for (i = 0; i < nMuscles; i++) {
+		m[i].windDown();
+	}
+	
+	delete[] m;
+	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

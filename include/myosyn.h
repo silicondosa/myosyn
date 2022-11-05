@@ -11,16 +11,10 @@
 #define DIGITAL_LOW_VOLTS	0.0
 #define WIND_UP_VOLTS		0.8
 #define WIND_DOWN_VOLTS		0.0
-
-extern unsigned muscle_mtr_val[16][2];
-extern unsigned muscle_mtr_en [16][2];
-extern unsigned muscle_enc_ring[ 8][2];
-extern unsigned muscle_enc_kleo[ 8][2];
-extern unsigned muscle_enc_mtr[12][2];
-extern unsigned muscle_enc_spl[12][2];
-extern unsigned muscle_ld_cell[ 8][2];
-extern int T5_quickDAQstatus;
-extern unsigned numConfiguredMuscles;
+#define DEFAULT_MUSCLE_TONE 1.0		// Newtons
+#define MAX_MUSCLE_TENSION	30.0	// Newtons
+#define MOTOR_SHAFT_DIAMTR	6		// millimeters
+#define LOADCELL_TARE_NSAMP 100
 
 typedef enum _DAQarrangement
 {
@@ -37,12 +31,40 @@ typedef enum _muscleStatus
 	MYOSYN_CLOSEDLOOP		= 3
 } muscleStatus;
 
+// myosyn global variables
+//extern int T5_quickDAQstatus;
+extern DAQarrangement myosynConfiguration;
+extern unsigned numConfiguredMuscles;
+extern int myosynLeader;
+extern double myosyn_samplingRate_global;
+
+// Some global reconfigurable DAQ configuration/pin mapping variables
+extern unsigned muscle_mtr_val	[16][2];
+extern unsigned muscle_mtr_en	[16][2];
+extern unsigned muscle_enc_ring	[ 8][2];
+extern unsigned muscle_enc_kleo	[ 8][2];
+extern unsigned muscle_enc_mtr	[12][2];
+extern unsigned muscle_enc_spl	[12][2];
+extern unsigned muscle_ld_cell	[ 8][2];
+extern double	loadcell_calib	[ 8][2]; // gain, bias for each of 8 load cells
+extern double	mtr_trque_calib	[16][2]; // gain, bias for each of 8 load cells
+
+// Global myosyn functions
+unsigned myosynNumMuscles();
+DAQarrangement myosynGetConfiguration();
+void myosynSetConfiguration(DAQarrangement DAQconfiguration);
+double myosynSamplingRate(double newSamplingRate = myosyn_samplingRate_global);
 void myosynStart();
 void myosynStop();
+int myosynGetLeader();
+void myosynReadInputs();
+void myosynWriteOutputs();
+void myosynWaitForClock();
 
+// MyoSyn class
 class myosyn {
 	unsigned channelID;
-	DAQarrangement myDAQarrangement;
+	DAQarrangement* myDAQarrangement;
 	muscleStatus status;
 
 	unsigned maxChannels_mtr, maxChannels_enc;
@@ -54,21 +76,28 @@ class myosyn {
 	unsigned (*loadcell_config)[2];
 
 	// Muscle constant parameters for closed-loop control
-	double muscleToneValue;
+	double muscleToneTension;
 	double maxMuscleTension;
 
-	double loadCell_offset, loadcell_gain; // Voltage to force readout
+	//Sensor and motor calibration parameters
+	double loadcell_offset, loadcell_gain; // Voltage to force calibration for loadcell
+	double encoder_offset_angle; // zero out encoder angle after windup
+	double encoder_angle_to_excursion_ratio; // Angle to tendon excursion calibration for encoder
+
 	double mtrTension_offset, mtrTension_gain; // Voltage to motor Tension
 
+	// Live update variables
 	double refMuscleTension;
+	double myMuscleTension;
 
 public:
-	// Constructor and destructor
+	// Constructors and destructor
 	myosyn();
-	myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement);
+	myosyn(unsigned muscleChannel);
 	~myosyn();
 	
 	// myosyn support functions
+	unsigned		getChannelID();
 	muscleStatus	getMuscleStatus();
 	void			setMuscleStatus(muscleStatus newStatus);
 
@@ -81,13 +110,24 @@ public:
 	void			windDown();
 
 	// Functions for muscle closed-loop parameter settings
-	void			setMuscleToneValue(double myMuscleTone_value);
-	double			getMuscleToneValue();
+	void			setMuscleToneTension(double myMuscleTone_value);
+	double			getMuscleToneTension();
 	void			setMaxMuscleTension(double max_tension);
 	double			getMaxMuscleTension();
 		// Use these functions to set current closed-loop muscle tension refernce voltage in Newtons
-	void			setMuscleTension(double myTension);
+	void			setReferenceTension(double myTension);
+	double			getReferenceTension();
+
+	// Functions to read and scale sensor data
+	void			calibrateTension(double loadCellGain = NAN);
+	double			loadcellV2F(double LCvoltage);
+	void			readMuscleTension();
 	double			getMuscleTension();
+	
+	void			calibrateExcursion(double spoolDiameter = NAN); // diameter in mm
+	double			encoderAngle2Excursion(double encoderAngle);
+	void			readTendonExcursion();
+	double			getTendonExcursion();
 };
 
 class T5encoder {

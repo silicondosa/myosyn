@@ -10,25 +10,45 @@ using namespace std;
 int main()
 {
 	std::cout << "Hello World!\n";
-	unsigned i;
+	unsigned i, j;
+	double mySamplingRate = 1000.0; // Hz
+	unsigned mySampleCount = 30000;
 	myosyn *m = new myosyn[nMuscles];
 	
+	// Initialize myosyn library
+	myosynSetConfiguration(RING_OF_FIRE);
+	myosynSamplingRate(mySamplingRate);
+
 	for (i = 0; i < nMuscles; i++) {
-		new(&(m[i])) myosyn(muscleID[i], RING_OF_FIRE); // Based on https://stackoverflow.com/a/35089001/4028978
+		new(&(m[i])) myosyn(muscleID[i]); // Based on https://stackoverflow.com/a/35089001/4028978
 	}
 	
-	cout << "Press any key to wind up motors...\n";
+	cout << "Muscles initialized. Press any key to calibrate sensors and wind up motor for each muscle...\n";
 	getchar();
-
 	for (i = 0; i < nMuscles; i++) {
+		m[i].calibrateTension();
 		m[i].windUp();
+		m[i].calibrateExcursion();
 	}
-	cout << "Windup complete!\n";
+
+	cout << "Windup complete! Let's read data for " << mySampleCount/mySamplingRate << "seconds...\n";
 	getchar();
-
-
-
-	cout << "Press any key to wind down motors.\n";
+	cout << endl;
+	for (i = 0; i < mySampleCount; i++) {
+		for (j = 0; j < myosynNumMuscles(); j++) {
+			m[j].readMuscleTension();
+			m[j].readTendonExcursion();
+			// SCR: DO PRINTING HERE
+			printf("M(%ud):: LC: %0.4fN, ENC:%0.4f. ", \
+					m[j].getChannelID(), \
+					m[j].getMuscleTension(), \
+					m[j].getTendonExcursion());
+		}
+		printf("\r");
+		myosynWaitForClock();
+	}
+	
+	cout << "\nSampling complete! Press any key to wind down motors.\n";
 	getchar();
 	for (i = 0; i < nMuscles; i++) {
 		m[i].windDown();

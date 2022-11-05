@@ -4,6 +4,8 @@
 #include <iostream>
 #include <quickDAQ.h>
 #include "..\include\myosyn.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 unsigned muscle_mtr_val[16][2]		=  {{2, 0}, // Muscle Channel 0
 										{2, 1}, // Muscle Channel 1
@@ -92,34 +94,79 @@ unsigned muscle_ld_cell [8][2]		=  {{5, 0},  // Muscle Channel 0
 										{5,11},  // Muscle Channel 6
 										{5, 3}}; // Muscle Channel 7
 
+double	loadcell_calib[8][2] =		   {{1, 0},  // Muscle Channel 0
+										{1, 0},  // Muscle Channel 1
+										{1, 0},  // Muscle Channel 2
+										{1, 0},  // Muscle Channel 3
+										{1, 0},  // Muscle Channel 4
+										{1, 0},  // Muscle Channel 5
+										{1, 0},  // Muscle Channel 6
+										{0, 0}}; // Muscle Channel 7
+
 unsigned channel_limits[3][2] =		   {{ 7, 7},
 										{12, 0},
 										{12,12}};
 
-int T5_quickDAQstatus = 0;
-unsigned numConfiguredMuscles = 0;
+//int T5_quickDAQstatus = 0;
+DAQarrangement	myosynConfiguration = RING_OF_FIRE;
+unsigned		numConfiguredMuscles = 0;
+int				myosynLeader = -1;
+double			myosyn_samplingRate_global = 1000.0; // Sampling rate in Hz
 
-void myosynStart() 
+// Global myosyn functions
+inline unsigned myosynNumMuscles()
 {
-	switch (quickDAQgetStatus())
-	{
-	case STATUS_INIT:
-		// Setup DAQ sampling rate and trigger mode
-		setSampleClockTiming((samplingModes)HW_CLOCKED, DAQmxSamplingRate, DAQmxClockSource, (triggerModes)DAQmxTriggerEdge, DAQmxNumDataPointsPerSample, TRUE);
+	return numConfiguredMuscles;
+}
 
-	case STATUS_READY:
-		// Start quickDAQ - only need to call this once
-		quickDAQstart();
-	case STATUS_RUNNING:
-		// you need to do nothing here except maybe print something
-		break;
-	default:
-		// Print some error message
-		break;
+inline DAQarrangement myosynGetConfiguration()
+{
+	return myosynConfiguration;
+}
+inline void myosynSetConfiguration(DAQarrangement DAQconfiguration)
+{
+	if (myosynNumMuscles() == 0) {
+		myosynConfiguration = DAQconfiguration;
+	}
+	else {
+		// print error/warning message?
 	}
 }
 
-void myosynStop() {
+inline double myosynSamplingRate(double newSamplingRate = myosyn_samplingRate_global)
+{
+	if (quickDAQgetStatus() <= STATUS_INIT) {
+		myosyn_samplingRate_global = newSamplingRate;
+		return myosyn_samplingRate_global;
+	}
+	// print error/warning?
+	return -1;
+}
+
+inline void myosynStart() 
+{
+	if (myosynNumMuscles() > 0) {
+		switch (quickDAQgetStatus())
+		{
+		case STATUS_INIT:
+			// Setup DAQ sampling rate and trigger mode
+			setSampleClockTiming((samplingModes)HW_CLOCKED, (float64)myosynSamplingRate(), DAQmxClockSource, (triggerModes)DAQmxTriggerEdge, DAQmxNumDataPointsPerSample, TRUE);
+
+		case STATUS_READY:
+			// Start quickDAQ - only need to call this once
+			quickDAQstart();
+		case STATUS_RUNNING:
+			// you need to do nothing here
+			break;
+		default:
+			// Print some error message
+			break;
+		}
+	}
+}
+
+void myosynStop()
+{
 	switch (quickDAQgetStatus())
 	{
 	case STATUS_RUNNING:
@@ -131,21 +178,48 @@ void myosynStop() {
 	}
 }
 
+inline int myosynGetLeader()
+{
+	return myosynLeader;
+}
+
+inline void myosynReadInputs()
+{
+	if (quickDAQgetStatus() == STATUS_RUNNING && myosynNumMuscles() > 0) {
+		if (myosynGetConfiguration() == RING_OF_FIRE && myosynNumMuscles() > 0) {
+			readAnalog_intBuf(myosynLeader);
+		}
+	}
+	else {
+		// print and return something?
+	}
+}
+
+inline void myosynWriteOutputs()
+{
+	// write the code here
+}
+
+inline void myosynWaitForClock()
+{
+	syncSampling();
+}
+
+// Constructors and destructor
 myosyn::myosyn()
 {
 	setMuscleStatus(MYOSYN_DISABLED);
 }
 
-myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = MUSCLE_MODULE)
+myosyn::myosyn(unsigned muscleChannel)
 {
 	// Initialize myosyn object basic settings
 	this->channelID			= muscleChannel;
-	this->myDAQarrangement	= myDAQarrangement;
+	this->myDAQarrangement	= &myosynConfiguration;
 
 	// Initialize quickDAQ library
 	if (quickDAQgetStatus() == (int)STATUS_NASCENT) {
 		quickDAQinit();
-		T5_quickDAQstatus = 1;
 	}
 	startDAQ = &myosynStart;
 	stopDAQ  = &myosynStop;
@@ -155,7 +229,7 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 	maxChannels_mtr		= 0;
 	encoder_opt_config	= NULL;
 
-	switch (this->myDAQarrangement)
+	switch (myosynGetConfiguration())
 	{
 	case RING_OF_FIRE:
 		maxChannels_mtr		= 7;
@@ -167,6 +241,9 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		encoder_opt_config	= NULL;
 		
 		loadcell_config		= muscle_ld_cell;
+		loadcell_gain		= loadcell_config[channelID][0];
+		loadcell_offset		= loadcell_config[channelID][1];
+
 		break;
 
 	case QUADRUPED:
@@ -179,6 +256,8 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		encoder_opt_config	= NULL;
 		
 		loadcell_config		= NULL;
+		loadcell_gain		= 0;
+		loadcell_offset		= 0;
 		break;
 
 	case MUSCLE_MODULE:
@@ -187,10 +266,12 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		motor_value_config	= muscle_mtr_val;
 		
 		maxChannels_enc		= 12;
-		encoder_config		= muscle_enc_mtr;
-		encoder_opt_config	= muscle_enc_spl;
-		
+		encoder_config		= muscle_enc_spl;
+		encoder_opt_config	= muscle_enc_mtr;
+
 		loadcell_config		= NULL;
+		loadcell_gain		= 0;
+		loadcell_offset		= 0;
 		break;
 
 	default:
@@ -200,10 +281,15 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		break;
 	}
 
+	// Initialize calibration parameters
+	muscleToneTension	= DEFAULT_MUSCLE_TONE;
+	maxMuscleTension	= MAX_MUSCLE_TENSION;
+	encoder_angle_to_excursion_ratio = M_PI * MOTOR_SHAFT_DIAMTR * 0.001; // circumference with conversion from mm to meters
+
 	// Set pin modes for all pins based on DAQ arrangement
 	if (channelID < maxChannels_mtr) {
 		// LOAD CELL INPUT
-		if (this->myDAQarrangement == RING_OF_FIRE)
+		if (myosynGetConfiguration() == RING_OF_FIRE)
 		{
 			pinMode(loadcell_config[channelID][0], ANALOG_IN, loadcell_config[channelID][1]);
 		}
@@ -222,13 +308,13 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 		}	
 
 		// ENCODER INPUT
-		if (this->myDAQarrangement != QUADRUPED)
+		if (myosynGetConfiguration() != QUADRUPED)
 		{
 			// Main encoder
 			pinMode(encoder_config[channelID][0], CTR_ANGLE_IN, encoder_config[channelID][1]);
 
 			// Optional encoder
-			if (encoder_opt_config != NULL && this->myDAQarrangement == MUSCLE_MODULE) {
+			if (encoder_opt_config != NULL && myosynGetConfiguration() == MUSCLE_MODULE) {
 				pinMode(encoder_opt_config[channelID][0], CTR_ANGLE_IN, encoder_opt_config[channelID][1]);
 			}
 		}
@@ -242,6 +328,9 @@ myosyn::myosyn(unsigned muscleChannel, const DAQarrangement myDAQarrangement = M
 	setMuscleStatus(MYOSYN_READY_WINDDOWN);
 	eprintf("myosyn: Muscle %d enabled.\n", channelID);
 	numConfiguredMuscles++;
+	if (myosynGetConfiguration() == 1) {
+		myosynLeader = channelID;
+	}
 }
 
 myosyn::~myosyn()
@@ -258,12 +347,17 @@ myosyn::~myosyn()
 		if (numConfiguredMuscles == 1 && quickDAQgetStatus() > STATUS_NASCENT) {
 			(*stopDAQ)();
 			quickDAQTerminate();
-			T5_quickDAQstatus = 0;
 		}
 		numConfiguredMuscles--;
 	}
 	setMuscleStatus(MYOSYN_DISABLED);
 	eprintf("myosyn: Muscle %d disabled.\n", channelID);
+}
+
+// myosyn support functions
+inline unsigned	myosyn::getChannelID()
+{
+	return this->channelID;
 }
 
 inline muscleStatus myosyn::getMuscleStatus()
@@ -276,6 +370,7 @@ inline void myosyn::setMuscleStatus(muscleStatus newStatus)
 	this->status = newStatus;
 }
 
+// Muscle open-loop operations
 void myosyn::windUp()
 {
 	if (getMuscleStatus() == MYOSYN_READY_WINDDOWN) {
@@ -292,7 +387,7 @@ void myosyn::windUp()
 		setMuscleStatus(MYOSYN_ENABLED_WINDUP);
 	}
 	else {
-		// print warning and reurn something?
+		// print warning and return something?
 	}
 }
 
@@ -322,14 +417,15 @@ void myosyn::windDown()
 	}
 }
 
-inline void myosyn::setMuscleToneValue(double myMuscleTone_value)
+// Functions for muscle closed-loop parameter settings
+inline void myosyn::setMuscleToneTension(double myMuscleTone_value)
 {
-	this->muscleToneValue = myMuscleTone_value;
+	this->muscleToneTension = myMuscleTone_value;
 }
 
-inline double myosyn::getMuscleToneValue()
+inline double myosyn::getMuscleToneTension()
 {
-	return this->muscleToneValue;
+	return this->muscleToneTension;
 }
 
 inline void myosyn::setMaxMuscleTension(double max_tension)
@@ -342,13 +438,140 @@ inline double myosyn::getMaxMuscleTension()
 	return this->maxMuscleTension;
 }
 
-inline void myosyn::setMuscleTension(double refTension)
+inline void myosyn::setReferenceTension(double refTension)
 {
 	this->refMuscleTension = refTension;
+
+	// Sanity check the reference tension
+	if (this->refMuscleTension < this->muscleToneTension) {
+		this->refMuscleTension = this->muscleToneTension;
+		// print a warning?
+	}
+	else if (this->refMuscleTension > this->maxMuscleTension) {
+		this->refMuscleTension = this->maxMuscleTension;
+		// print a warning?
+	}
 }
 
-inline double myosyn::getMuscleTension()
+inline double myosyn::getReferenceTension()
 {
 	return this->refMuscleTension;
 }
 
+// Functions to read and scale sensor data
+inline void myosyn::calibrateTension(double loadCellGain = NAN)
+{
+	unsigned i;
+	this->loadcell_gain = (loadCellGain != NAN) ? loadCellGain : 1;
+	switch (getMuscleStatus()) {
+	case MYOSYN_CLOSEDLOOP:
+		//shut down loop
+	case MYOSYN_ENABLED_WINDUP:
+		windDown();
+	case MYOSYN_READY_WINDDOWN:
+		(*startDAQ)();
+		if (myosynGetConfiguration() == RING_OF_FIRE) {
+			for (i = 0, loadcell_offset = 0.0; i < LOADCELL_TARE_NSAMP; i++) {
+				readAnalog_intBuf(loadcell_config[channelID][0]);
+				loadcell_offset += getAnalogInPin(loadcell_config[channelID][0], loadcell_config[channelID][1]);
+				syncSampling();
+			}
+			loadcell_offset /= LOADCELL_TARE_NSAMP;
+		}
+		else if (myosynGetConfiguration() == MUSCLE_MODULE) {
+			// calibrate second encoder on the side of the spool
+		}
+		else {
+			// print some error message
+		}
+		case MYOSYN_DISABLED:
+		// print something
+	}
+
+}
+
+inline double myosyn::loadcellV2F(double LCvoltage)
+{
+	return ((LCvoltage - loadcell_offset) * loadcell_gain);
+}
+
+inline void myosyn::readMuscleTension()
+{
+	if (myosynGetConfiguration() == RING_OF_FIRE && myosynGetLeader() == channelID) {
+		myosynReadInputs();
+	}
+	else if (myosynGetConfiguration() == MUSCLE_MODULE) {
+		readCounterAngle_intBuf(encoder_opt_config[channelID][0], encoder_opt_config[channelID][1]);
+	}
+	else {
+		// print warning or something?
+	}
+}
+
+inline double myosyn::getMuscleTension()
+{
+	if (getMuscleStatus() == MYOSYN_DISABLED) {
+		// print error or something
+		return NAN;
+	}
+	(*startDAQ)();
+	if (myosynGetConfiguration() == RING_OF_FIRE) {
+		return loadcellV2F( (double)getAnalogInPin(loadcell_config[channelID][0], loadcell_config[channelID][1]) );
+	}
+	else if (myosynGetConfiguration() == MUSCLE_MODULE) {
+		return encoderAngle2Excursion((double)getCounterAngle(encoder_config[channelID][0], encoder_config[channelID][1]));
+	}
+	return NAN;
+}
+
+void myosyn::calibrateExcursion(double spoolDiameter = NAN) // diameter in mm
+{
+	switch (getMuscleStatus()) {
+	case MYOSYN_CLOSEDLOOP:
+		// shut down closed loop
+		break;
+	case MYOSYN_READY_WINDDOWN:
+		windUp();
+		break;
+	default:
+		//print some error
+		return;
+	}
+	this->encoder_angle_to_excursion_ratio = M_PI * ((spoolDiameter != NAN) ? spoolDiameter : MOTOR_SHAFT_DIAMTR) * 0.001;
+	if (myosynGetConfiguration() == RING_OF_FIRE) {
+		readCounterAngle_intBuf(encoder_config[channelID][0], encoder_config[channelID][1]);
+		encoder_offset_angle = (double)getCounterAngle(encoder_config[channelID][0], encoder_config[channelID][1]);
+		syncSampling();
+	}
+	else {
+		// print something?
+	}
+
+}
+
+inline double myosyn::encoderAngle2Excursion(double encoderAngle)
+{
+	return ((encoderAngle - this->encoder_offset_angle) * this->encoder_angle_to_excursion_ratio);
+}
+
+inline void myosyn::readTendonExcursion()
+{
+	if (quickDAQgetStatus() == STATUS_RUNNING) {
+		readCounterAngle_intBuf(encoder_config[channelID][0], encoder_config[channelID][1]);
+	}
+	else {
+		// print and return something?
+	}
+}
+
+inline double myosyn::getTendonExcursion()
+{
+	if (getMuscleStatus() == MYOSYN_DISABLED) {
+		// print error or something
+		return NAN;
+	}
+	(*startDAQ)();
+	return encoderAngle2Excursion((double)getCounterAngle(encoder_config[channelID][0], encoder_config[channelID][1]));
+}
+
+// End of file

@@ -96,8 +96,8 @@ unsigned muscle_ld_cell [8][2]		=  {{5, 0},  // Muscle Channel 0
 
 double	loadcell_calib[8][2] =		   {{1, 0},  // Muscle Channel 0
 										{1, 0},  // Muscle Channel 1
-										{1, 0},  // Muscle Channel 2
-										{1, 0},  // Muscle Channel 3
+										{0.020997, 0.138763},  // Muscle Channel 2
+										{0.019916,-0.062009},  // Muscle Channel 3
 										{1, 0},  // Muscle Channel 4
 										{1, 0},  // Muscle Channel 5
 										{1, 0},  // Muscle Channel 6

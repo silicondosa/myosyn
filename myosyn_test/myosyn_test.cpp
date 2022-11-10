@@ -11,7 +11,9 @@ int main()
 {
 	std::cout << "Hello World!\n";
 	unsigned i, j;
+	double t;
 	double mySamplingRate = 1000.0; // Hz
+	double samplePeriod = 1 / mySamplingRate;
 	unsigned mySampleCount = 30000;
 	myosyn *m = new myosyn[nMuscles];
 	
@@ -29,20 +31,22 @@ int main()
 		m[i].calibrateTension();
 		m[i].windUp();
 		m[i].calibrateExcursion();
+		cout << "\t- Muscle " << i << " calibrated...\n";
 	}
 
 	cout << "Windup complete! Let's read data for " << mySampleCount/mySamplingRate << "seconds...\n";
 	getchar();
 	cout << endl;
-	for (i = 0; i < mySampleCount; i++) {
+	for (i = 0, t = 0.0; i < mySampleCount; i++, t+=samplePeriod) {
+		printf("%0.3lf : ", t);
 		for (j = 0; j < myosynNumMuscles(); j++) {
 			m[j].readMuscleTension();
 			m[j].readTendonExcursion();
 			// SCR: DO PRINTING HERE
-			printf("M(%ud):: LC: %0.4fN, ENC:%0.4f. ", \
-					m[j].getChannelID(), \
-					m[j].getMuscleTension(), \
-					m[j].getTendonExcursion());
+			printf("M(%d):: LC: %0.4lf N\t",/* ENC: % 0.4lf N",*/ \
+				(int)m[j].getChannelID(), \
+				m[j].getMuscleTension());//, \
+					/*m[j].getTendonExcursion());*/
 		}
 		printf("\r");
 		myosynWaitForClock();

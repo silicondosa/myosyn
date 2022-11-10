@@ -113,17 +113,17 @@ unsigned		numConfiguredMuscles = 0;
 int				myosynLeader = -1;
 double			myosyn_samplingRate_global = 1000.0; // Sampling rate in Hz
 
-// Global myosyn functions
-inline unsigned myosynNumMuscles()
+// Global myosyn function defintions
+/*inline*/ unsigned myosynNumMuscles()
 {
 	return numConfiguredMuscles;
 }
 
-inline DAQarrangement myosynGetConfiguration()
+/*inline*/ DAQarrangement myosynGetConfiguration()
 {
 	return myosynConfiguration;
 }
-inline void myosynSetConfiguration(DAQarrangement DAQconfiguration)
+/*inline*/ void myosynSetConfiguration(DAQarrangement DAQconfiguration)
 {
 	if (myosynNumMuscles() == 0) {
 		myosynConfiguration = DAQconfiguration;
@@ -133,7 +133,7 @@ inline void myosynSetConfiguration(DAQarrangement DAQconfiguration)
 	}
 }
 
-inline double myosynSamplingRate(double newSamplingRate = myosyn_samplingRate_global)
+/*inline*/ double myosynSamplingRate(double newSamplingRate/* = myosyn_samplingRate_global*/)
 {
 	if (quickDAQgetStatus() <= STATUS_INIT) {
 		myosyn_samplingRate_global = newSamplingRate;
@@ -143,7 +143,7 @@ inline double myosynSamplingRate(double newSamplingRate = myosyn_samplingRate_gl
 	return -1;
 }
 
-inline void myosynStart() 
+/*inline*/ void myosynStart() 
 {
 	if (myosynNumMuscles() > 0) {
 		switch (quickDAQgetStatus())
@@ -165,7 +165,7 @@ inline void myosynStart()
 	}
 }
 
-void myosynStop()
+/*inline*/ void myosynStop()
 {
 	switch (quickDAQgetStatus())
 	{
@@ -178,12 +178,12 @@ void myosynStop()
 	}
 }
 
-inline int myosynGetLeader()
+/*inline*/ int myosynGetLeader()
 {
 	return myosynLeader;
 }
 
-inline void myosynReadInputs()
+/*inline*/ void myosynReadInputs()
 {
 	if (quickDAQgetStatus() == STATUS_RUNNING && myosynNumMuscles() > 0) {
 		if (myosynGetConfiguration() == RING_OF_FIRE && myosynNumMuscles() > 0) {
@@ -195,12 +195,12 @@ inline void myosynReadInputs()
 	}
 }
 
-inline void myosynWriteOutputs()
+/*inline*/ void myosynWriteOutputs()
 {
 	// write the code here
 }
 
-inline void myosynWaitForClock()
+/*inline*/ void myosynWaitForClock()
 {
 	syncSampling();
 }
@@ -355,17 +355,17 @@ myosyn::~myosyn()
 }
 
 // myosyn support functions
-inline unsigned	myosyn::getChannelID()
+/*inline*/ unsigned	myosyn::getChannelID()
 {
 	return this->channelID;
 }
 
-inline muscleStatus myosyn::getMuscleStatus()
+/*inline*/ muscleStatus myosyn::getMuscleStatus()
 {
 	return this->status;
 }
 
-inline void myosyn::setMuscleStatus(muscleStatus newStatus)
+/*inline*/ void myosyn::setMuscleStatus(muscleStatus newStatus)
 {
 	this->status = newStatus;
 }
@@ -418,27 +418,27 @@ void myosyn::windDown()
 }
 
 // Functions for muscle closed-loop parameter settings
-inline void myosyn::setMuscleToneTension(double myMuscleTone_value)
+/*inline*/ void myosyn::setMuscleToneTension(double myMuscleTone_value)
 {
 	this->muscleToneTension = myMuscleTone_value;
 }
 
-inline double myosyn::getMuscleToneTension()
+/*inline*/ double myosyn::getMuscleToneTension()
 {
 	return this->muscleToneTension;
 }
 
-inline void myosyn::setMaxMuscleTension(double max_tension)
+/*inline*/ void myosyn::setMaxMuscleTension(double max_tension)
 {
 	this->maxMuscleTension = max_tension;
 }
 
-inline double myosyn::getMaxMuscleTension()
+/*inline*/ double myosyn::getMaxMuscleTension()
 {
 	return this->maxMuscleTension;
 }
 
-inline void myosyn::setReferenceTension(double refTension)
+/*inline*/ void myosyn::setReferenceTension(double refTension)
 {
 	this->refMuscleTension = refTension;
 
@@ -453,13 +453,13 @@ inline void myosyn::setReferenceTension(double refTension)
 	}
 }
 
-inline double myosyn::getReferenceTension()
+/*inline*/ double myosyn::getReferenceTension()
 {
 	return this->refMuscleTension;
 }
 
 // Functions to read and scale sensor data
-inline void myosyn::calibrateTension(double loadCellGain = NAN)
+/*inline*/ void myosyn::calibrateTension(double loadCellGain/* = NAN*/)
 {
 	unsigned i;
 	this->loadcell_gain = (loadCellGain != NAN) ? loadCellGain : 1;
@@ -473,7 +473,7 @@ inline void myosyn::calibrateTension(double loadCellGain = NAN)
 		if (myosynGetConfiguration() == RING_OF_FIRE) {
 			for (i = 0, loadcell_offset = 0.0; i < LOADCELL_TARE_NSAMP; i++) {
 				readAnalog_intBuf(loadcell_config[channelID][0]);
-				loadcell_offset += getAnalogInPin(loadcell_config[channelID][0], loadcell_config[channelID][1]);
+				loadcell_offset += (double) getAnalogInPin(loadcell_config[channelID][0], loadcell_config[channelID][1]);
 				syncSampling();
 			}
 			loadcell_offset /= LOADCELL_TARE_NSAMP;
@@ -484,18 +484,20 @@ inline void myosyn::calibrateTension(double loadCellGain = NAN)
 		else {
 			// print some error message
 		}
-		case MYOSYN_DISABLED:
+	case MYOSYN_DISABLED:
 		// print something
+		break;
+	default:
+		break;
 	}
-
 }
 
-inline double myosyn::loadcellV2F(double LCvoltage)
+/*inline*/ double myosyn::loadcellV2F(double LCvoltage)
 {
 	return ((LCvoltage - loadcell_offset) * loadcell_gain);
 }
 
-inline void myosyn::readMuscleTension()
+/*inline*/ void myosyn::readMuscleTension()
 {
 	if (myosynGetConfiguration() == RING_OF_FIRE && myosynGetLeader() == channelID) {
 		myosynReadInputs();
@@ -508,7 +510,7 @@ inline void myosyn::readMuscleTension()
 	}
 }
 
-inline double myosyn::getMuscleTension()
+/*inline*/ double myosyn::getMuscleTension()
 {
 	if (getMuscleStatus() == MYOSYN_DISABLED) {
 		// print error or something
@@ -524,7 +526,7 @@ inline double myosyn::getMuscleTension()
 	return NAN;
 }
 
-void myosyn::calibrateExcursion(double spoolDiameter = NAN) // diameter in mm
+void myosyn::calibrateExcursion(double spoolDiameter/* = NAN*/) // diameter in mm
 {
 	switch (getMuscleStatus()) {
 	case MYOSYN_CLOSEDLOOP:
@@ -549,12 +551,12 @@ void myosyn::calibrateExcursion(double spoolDiameter = NAN) // diameter in mm
 
 }
 
-inline double myosyn::encoderAngle2Excursion(double encoderAngle)
+/*inline*/ double myosyn::encoderAngle2Excursion(double encoderAngle)
 {
 	return ((encoderAngle - this->encoder_offset_angle) * this->encoder_angle_to_excursion_ratio);
 }
 
-inline void myosyn::readTendonExcursion()
+/*inline*/ void myosyn::readTendonExcursion()
 {
 	if (quickDAQgetStatus() == STATUS_RUNNING) {
 		readCounterAngle_intBuf(encoder_config[channelID][0], encoder_config[channelID][1]);
@@ -564,7 +566,7 @@ inline void myosyn::readTendonExcursion()
 	}
 }
 
-inline double myosyn::getTendonExcursion()
+/*inline*/ double myosyn::getTendonExcursion()
 {
 	if (getMuscleStatus() == MYOSYN_DISABLED) {
 		// print error or something

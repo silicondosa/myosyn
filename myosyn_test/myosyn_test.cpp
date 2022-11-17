@@ -25,16 +25,24 @@ int main()
 		new(&(m[i])) myosyn(muscleID[i]); // Based on https://stackoverflow.com/a/35089001/4028978
 	}
 	
-	cout << "Muscles initialized. Press any key to calibrate sensors and wind up motor for each muscle...\n";
+	cout << "Muscles initialized. Press any key to calibrate loadcells and wind up motor for each muscle...\n";
 	getchar();
 	for (i = 0; i < nMuscles; i++) {
 		m[i].calibrateTension();
 		m[i].windUp();
+		cout << "\t- Muscle " << i << " wound up and LC calibrated...\n";
+	}
+	myosynWaitForClock();
+
+	cout << "Muscle windup complete! Press any key to calibrate encoders for each muscle...\n";
+	getchar();
+	for (i = 0; i < nMuscles; i++) {
 		m[i].calibrateExcursion();
 		cout << "\t- Muscle " << i << " calibrated...\n";
 	}
+	myosynWaitForClock();
 
-	cout << "Windup complete! Let's read data for " << mySampleCount/mySamplingRate << "seconds...\n";
+	cout << "Calibration complete! Let's read data for " << mySampleCount/mySamplingRate << "seconds...\n";
 	getchar();
 	cout << endl;
 	for (i = 0, t = 0.0; i < mySampleCount; i++, t+=samplePeriod) {
@@ -43,10 +51,10 @@ int main()
 			m[j].readMuscleTension();
 			m[j].readTendonExcursion();
 			// SCR: DO PRINTING HERE
-			printf("M(%d):: LC: %0.4lf N\t",/* ENC: % 0.4lf N",*/ \
+			printf("M(%d):: LC: %0.4lf N, ENC: % 0.4lf N ", \
 				(int)m[j].getChannelID(), \
-				m[j].getMuscleTension());//, \
-					/*m[j].getTendonExcursion());*/
+					m[j].getMuscleTension(), \
+						m[j].getTendonExcursion());
 		}
 		printf("\r");
 		myosynWaitForClock();

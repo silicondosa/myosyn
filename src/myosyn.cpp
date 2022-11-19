@@ -94,14 +94,14 @@ unsigned muscle_ld_cell [8][2]		=  {{5, 0},  // Muscle Channel 0
 										{5,11},  // Muscle Channel 6
 										{5, 3}}; // Muscle Channel 7
 
-double	loadcell_calib[8][2] =		   {{1, 0},  // Muscle Channel 0
-										{1, 0},  // Muscle Channel 1
-										{0.020997, 0.138763},  // Muscle Channel 2
-										{0.019916,-0.062009},  // Muscle Channel 3
-										{1, 0},  // Muscle Channel 4
-										{1, 0},  // Muscle Channel 5
-										{1, 0},  // Muscle Channel 6
-										{0, 0}}; // Muscle Channel 7
+double	loadcell_calib[8][2] =		   {{1, 0},						// Muscle Channel 0 - Gain, Bias
+										{1, 0},						// Muscle Channel 1
+										{0.020997, 0.138763},		// Muscle Channel 2
+										{0.019916,-0.062009},		// Muscle Channel 3
+										{1, 0},						// Muscle Channel 4
+										{1, 0},						// Muscle Channel 5
+										{1, 0},						// Muscle Channel 6
+										{0, 0}};					// Muscle Channel 7
 
 unsigned channel_limits[3][2] =		   {{ 7, 7},
 										{12, 0},
@@ -462,7 +462,7 @@ void myosyn::windDown()
 /*inline*/ void myosyn::calibrateTension(double loadCellGain/* = NAN*/)
 {
 	unsigned i;
-	this->loadcell_gain = (loadCellGain != NAN) ? loadCellGain : 1;
+	this->loadcell_gain = (isnan(loadCellGain)) ? loadcell_calib[channelID][0] : loadCellGain;
 	switch (getMuscleStatus()) {
 	case MYOSYN_CLOSEDLOOP:
 		//shut down loop

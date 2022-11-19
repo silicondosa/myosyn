@@ -14,7 +14,7 @@ int main()
 	double t;
 	double mySamplingRate = 1000.0; // Hz
 	double samplePeriod = 1 / mySamplingRate;
-	unsigned mySampleCount = 30000;
+	unsigned mySampleCount = 10000;
 	myosyn *m = new myosyn[nMuscles];
 	
 	// Initialize myosyn library
@@ -51,7 +51,7 @@ int main()
 			m[j].readMuscleTension();
 			m[j].readTendonExcursion();
 			// SCR: DO PRINTING HERE
-			printf("M(%d):: LC: %0.4lf N, ENC: % 0.4lf N ", \
+			printf("M(%d):: LC: %0.4lf N, ENC: % 0.4lf mm ", \
 				(int)m[j].getChannelID(), \
 					m[j].getMuscleTension(), \
 						m[j].getTendonExcursion());

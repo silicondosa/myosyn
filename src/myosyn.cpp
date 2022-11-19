@@ -284,7 +284,7 @@ myosyn::myosyn(unsigned muscleChannel)
 	// Initialize calibration parameters
 	muscleToneTension	= DEFAULT_MUSCLE_TONE;
 	maxMuscleTension	= MAX_MUSCLE_TENSION;
-	encoder_angle_to_excursion_ratio = 3.14159 * MOTOR_SHAFT_DIAMTR * 0.001; // circumference with conversion from mm to meters
+	encoder_angle_to_excursion_ratio = (M_PI/360.00) * MOTOR_SHAFT_DIAMTR; // circumference with conversion from mm to meters
 
 	// Set pin modes for all pins based on DAQ arrangement
 	if (channelID < maxChannels_mtr) {
@@ -539,7 +539,9 @@ void myosyn::calibrateExcursion(double spoolDiameter/* = NAN*/) // diameter in m
 		// do nothing
 		break;
 	}
-	this->encoder_angle_to_excursion_ratio = M_PI * ((spoolDiameter != NAN) ? spoolDiameter : MOTOR_SHAFT_DIAMTR) * 0.001;
+	if (isnan(spoolDiameter)) 
+		spoolDiameter = MOTOR_SHAFT_DIAMTR;
+	this->encoder_angle_to_excursion_ratio = (M_PI/360.00) * spoolDiameter;
 	if (myosynGetConfiguration() == RING_OF_FIRE) {
 		readCounterAngle_intBuf(encoder_config[channelID][0], encoder_config[channelID][1]);
 		encoder_offset_angle = (double)getCounterAngle(encoder_config[channelID][0], encoder_config[channelID][1]);

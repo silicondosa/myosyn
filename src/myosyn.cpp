@@ -7,7 +7,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-unsigned muscle_mtr_val[16][2]		=  {{2, 0}, // Muscle Channel 0
+unsigned muscle_mtr_val[16][2]		=  {{2, 0}, // Muscle Channel 0 : {Device Number, Pin Number}
 										{2, 1}, // Muscle Channel 1
 										{2, 2}, // Muscle Channel 2
 										{2, 3}, // Muscle Channel 3
@@ -24,7 +24,7 @@ unsigned muscle_mtr_val[16][2]		=  {{2, 0}, // Muscle Channel 0
 										{2,14}, // Muscle Channel 14
 										{2,15}};// Muscle Channel 15
 
-unsigned muscle_mtr_en [16][2]		=  {{2, 0},  // Muscle Channel 0
+unsigned muscle_mtr_en [16][2]		=  {{2, 0},  // Muscle Channel 0 : {Device Number, Pin Number}
 										{2, 1},  // Muscle Channel 1
 										{2, 2},  // Muscle Channel 2
 										{2, 3},  // Muscle Channel 3
@@ -41,7 +41,7 @@ unsigned muscle_mtr_en [16][2]		=  {{2, 0},  // Muscle Channel 0
 										{2,22},  // Muscle Channel 14
 										{2,23}}; // Muscle Channel 15
 
-unsigned muscle_enc_ring [8][2]		=  {{3, 0},  // Muscle Channel 0
+unsigned muscle_enc_ring [8][2]		=  {{3, 0},  // Muscle Channel 0 : {Device Number, Pin Number}
 										{3, 1},  // Muscle Channel 1
 										{3, 2},  // Muscle Channel 2
 										{3, 3},  // Muscle Channel 3
@@ -50,7 +50,7 @@ unsigned muscle_enc_ring [8][2]		=  {{3, 0},  // Muscle Channel 0
 										{3, 6},  // Muscle Channel 6
 										{3, 7}}; // Muscle Channel 7
 
-unsigned muscle_enc_kleo [8][2]		=  {{7, 0},  // Muscle Channel 0
+unsigned muscle_enc_kleo [8][2]		=  {{7, 0},  // Muscle Channel 0 : {Device Number, Pin Number}
 										{7, 1},  // Muscle Channel 1
 										{7, 2},  // Muscle Channel 2
 										{7, 3},  // Muscle Channel 3
@@ -59,7 +59,7 @@ unsigned muscle_enc_kleo [8][2]		=  {{7, 0},  // Muscle Channel 0
 										{7, 6},  // Muscle Channel 6
 										{7, 7}}; // Muscle Channel 7
 
-unsigned muscle_enc_mtr[12][2]		=  {{3, 0},  // Muscle Channel 0
+unsigned muscle_enc_mtr[12][2]		=  {{3, 0},  // Muscle Channel 0 : {Device Number, Pin Number}
 										{3, 2},  // Muscle Channel 1
 										{3, 4},  // Muscle Channel 2
 										{3, 6},  // Muscle Channel 3
@@ -72,7 +72,7 @@ unsigned muscle_enc_mtr[12][2]		=  {{3, 0},  // Muscle Channel 0
 										{8, 4},  // Muscle Channel 10
 										{8, 6}}; // Muscle Channel 11
 
-unsigned muscle_enc_spl[12][2]		=  {{3, 1},  // Muscle Channel 0
+unsigned muscle_enc_spl[12][2]		=  {{3, 1},  // Muscle Channel 0 : {Device Number, Pin Number}
 										{3, 3},  // Muscle Channel 1
 										{3, 5},  // Muscle Channel 2
 										{3, 7},  // Muscle Channel 3
@@ -85,7 +85,7 @@ unsigned muscle_enc_spl[12][2]		=  {{3, 1},  // Muscle Channel 0
 										{8, 5},  // Muscle Channel 10
 										{8, 7}}; // Muscle Channel 11
 
-unsigned muscle_ld_cell [8][2]		=  {{5, 0},  // Muscle Channel 0
+unsigned muscle_ld_cell [8][2]		=  {{5, 0},  // Muscle Channel 0 : {Device Number, Pin Number}
 										{5, 8},  // Muscle Channel 1
 										{5, 1},  // Muscle Channel 2
 										{5, 9},  // Muscle Channel 3
@@ -96,8 +96,8 @@ unsigned muscle_ld_cell [8][2]		=  {{5, 0},  // Muscle Channel 0
 
 double	loadcell_calib[8][2] =		   {{1, 0},						// Muscle Channel 0 - Gain, Bias
 										{1, 0},						// Muscle Channel 1
-										{0.020997, 0.138763},		// Muscle Channel 2
-										{0.019916,-0.062009},		// Muscle Channel 3
+										{1/0.020997, 0.138763},		// Muscle Channel 2
+										{1/0.019916,-0.062009},		// Muscle Channel 3
 										{1, 0},						// Muscle Channel 4
 										{1, 0},						// Muscle Channel 5
 										{1, 0},						// Muscle Channel 6
@@ -178,9 +178,14 @@ double			myosyn_samplingRate_global = 1000.0; // Sampling rate in Hz
 	}
 }
 
-/*inline*/ int myosynGetLeader()
+/*inline*/ int myosynGetLeaderChannel()
 {
 	return myosynLeader;
+}
+
+void myosynSetLeaderChannel(int newLeader)
+{
+	myosynLeader = newLeader;
 }
 
 /*inline*/ void myosynReadInputs()
@@ -328,8 +333,8 @@ myosyn::myosyn(unsigned muscleChannel)
 	setMuscleStatus(MYOSYN_READY_WINDDOWN);
 	eprintf("myosyn: Muscle %d enabled.\n", channelID);
 	numConfiguredMuscles++;
-	if (myosynGetConfiguration() == 1) {
-		myosynLeader = channelID;
+	if (myosynNumMuscles() == 1) {
+		myosynSetLeaderChannel(channelID);
 	}
 }
 
@@ -499,8 +504,9 @@ void myosyn::windDown()
 
 /*inline*/ void myosyn::readMuscleTension()
 {
-	if (myosynGetConfiguration() == RING_OF_FIRE && myosynGetLeader() == channelID) {
-		myosynReadInputs();
+	if (myosynGetConfiguration() == RING_OF_FIRE && myosynNumMuscles() > 0 && myosynGetLeaderChannel() == channelID) {
+		//myosynReadInputs();
+		readAnalog_intBuf(muscle_ld_cell[channelID][0]);
 	}
 	else if (myosynGetConfiguration() == MUSCLE_MODULE) {
 		readCounterAngle_intBuf(encoder_opt_config[channelID][0], encoder_opt_config[channelID][1]);

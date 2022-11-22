@@ -14,7 +14,7 @@ int main()
 	double t;
 	double mySamplingRate = 1000.0; // Hz
 	double samplePeriod = 1 / mySamplingRate;
-	unsigned mySampleCount = 10000;
+	unsigned mySampleCount = 30000;
 	myosyn *m = new myosyn[nMuscles];
 	
 	// Initialize myosyn library
@@ -36,32 +36,34 @@ int main()
 
 	cout << "Muscle windup complete! Press any key to calibrate encoders for each muscle...\n";
 	getchar();
+	myosynWaitForClock();
 	for (i = 0; i < nMuscles; i++) {
 		m[i].calibrateExcursion();
 		cout << "\t- Muscle " << i << " calibrated...\n";
 	}
-	myosynWaitForClock();
 
 	cout << "Calibration complete! Let's read data for " << mySampleCount/mySamplingRate << "seconds...\n";
 	getchar();
+	myosynWaitForClock();
 	cout << endl;
 	for (i = 0, t = 0.0; i < mySampleCount; i++, t+=samplePeriod) {
 		printf("%0.3lf : ", t);
 		for (j = 0; j < myosynNumMuscles(); j++) {
+			myosynWaitForClock();
 			m[j].readMuscleTension();
 			m[j].readTendonExcursion();
 			// SCR: DO PRINTING HERE
-			printf("M(%d):: LC: %0.4lf N, ENC: % 0.4lf mm ", \
+			printf("M(%d):: LC: %+0.3lf N, ENC: %+0.3lf mm ", \
 				(int)m[j].getChannelID(), \
 					m[j].getMuscleTension(), \
 						m[j].getTendonExcursion());
 		}
 		printf("\r");
-		myosynWaitForClock();
 	}
 	
 	cout << "\nSampling complete! Press any key to wind down motors.\n";
 	getchar();
+	myosynWaitForClock();
 	for (i = 0; i < nMuscles; i++) {
 		m[i].windDown();
 	}

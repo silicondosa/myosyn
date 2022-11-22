@@ -5,6 +5,7 @@
 #include <myosyn.h>
 #include <math.h>
 #include <macrodef.h>
+#include <quickDAQ.h>
 
 using namespace std;
 
@@ -23,6 +24,12 @@ int main()
 	double mc[nMuscles];
 	myosyn *m = new myosyn[nMuscles];
 	
+	// Stuff for measuring joint angle sensor
+	double jtAngle;
+
+	//quickDAQinit();
+	//pinMode(5, ANALOG_IN, 31);
+
 	// Initialize myosyn library
 	myosynSetConfiguration(RING_OF_FIRE);
 	myosynSamplingRate(mySamplingRate);
@@ -30,7 +37,8 @@ int main()
 	for (i = 0; i < nMuscles; i++) {
 		new(&(m[i])) myosyn(muscleID[i]); // Based on https://stackoverflow.com/a/35089001/4028978
 	}
-	
+	pinMode(5, ANALOG_IN, 31);
+
 	cout << "Muscles initialized. Press any key to calibrate loadcells and wind up motor for each muscle...\n";
 	getchar();
 	for (i = 0; i < nMuscles; i++) {
@@ -61,20 +69,23 @@ int main()
 			}
 			// write motor command
 			//mc[j] = m[j].getMuscleToneTension() + (updateCount % 2 == 0) ? ((j % 2 == 0) ? (0.1 * (updateCount)) : 0) : ((j % 2 == 0) ? 0 : (0.1 * (updateCount)));
-			mc[j] = max(((j%2==0)?5:5) * cos(2 * 3.1416 * 0.5 * t + ((j%2==0)?0:3.1416)), 0);
+			mc[j] = max(((j%2==0)?5:5) * cos(2 * 3.1416 * 1 * t + ((j%2==0)?0:3.1416)), 0);
 			//cortexDrive[1] = max((cortexVoluntaryAmp - 0) * sin(2 * 3.1416 * cortexVoluntaryFreq * tick + 3.1416), 0);
 			m[j].setMotorCommand(mc[j]);
 		}
 
-		printf("%0.3lf : ", t);
 		m[0].executeControl();
 		myosynWaitForClock();
 		m[0].readMuscleTension();
 		m[0].readTendonExcursion();
 		
+		jtAngle = (double) getAnalogInPin(5, 31);
+		printf("%0.3lf: q1 %+06.2lf ", t, jtAngle);
+
+		
 		for (j = 0; j < myosynNumMuscles(); j++) {
 			// SCR: DO PRINTING HERE
-			printf("M(%d):: MC: %+06.2lf V, LC: %+06.2lf N, ENC: %+06.2lf mm ", \
+			printf("| M(%d): MC %+06.2lfV, MT %+06.2lfN, TE %+06.2lfmm ", \
 				(int)m[j].getChannelID(), \
 					 m[j].getMotorCommand(), \
 					 m[j].getMuscleTension(), \

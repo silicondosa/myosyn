@@ -3,18 +3,24 @@
 
 #include <iostream>
 #include <myosyn.h>
-unsigned nMuscles = 2;
-unsigned muscleID[] = { 3,2 };
+#include <math.h>
+#include <macrodef.h>
 
 using namespace std;
+
+const unsigned nMuscles = 2;
+unsigned muscleID[nMuscles] = { 3,2 };
+
+
 int main()
 {
 	std::cout << "Hello World!\n";
-	unsigned i, j;
+	unsigned i, j, updateCount;
 	double t;
 	double mySamplingRate = 1000.0; // Hz
 	double samplePeriod = 1 / mySamplingRate;
-	unsigned mySampleCount = 30000;
+	unsigned mySampleCount = 10000;
+	double mc[nMuscles];
 	myosyn *m = new myosyn[nMuscles];
 	
 	// Initialize myosyn library
@@ -46,17 +52,33 @@ int main()
 	getchar();
 	myosynWaitForClock();
 	cout << endl;
-	for (i = 0, t = 0.0; i < mySampleCount; i++, t+=samplePeriod) {
-		printf("%0.3lf : ", t);
+	for (i = 0, t = 0.0, updateCount = 0; i < mySampleCount; i++, t += samplePeriod) {
+		
+		// Changing motor command every second
 		for (j = 0; j < myosynNumMuscles(); j++) {
-			myosynWaitForClock();
-			m[j].readMuscleTension();
-			m[j].readTendonExcursion();
+			if (i == 0) {
+				m[j].startMuscleControl();
+			}
+			// write motor command
+			//mc[j] = m[j].getMuscleToneTension() + (updateCount % 2 == 0) ? ((j % 2 == 0) ? (0.1 * (updateCount)) : 0) : ((j % 2 == 0) ? 0 : (0.1 * (updateCount)));
+			mc[j] = max(((j%2==0)?5:5) * cos(2 * 3.1416 * 0.5 * t + ((j%2==0)?0:3.1416)), 0);
+			//cortexDrive[1] = max((cortexVoluntaryAmp - 0) * sin(2 * 3.1416 * cortexVoluntaryFreq * tick + 3.1416), 0);
+			m[j].setMotorCommand(mc[j]);
+		}
+
+		printf("%0.3lf : ", t);
+		m[0].executeControl();
+		myosynWaitForClock();
+		m[0].readMuscleTension();
+		m[0].readTendonExcursion();
+		
+		for (j = 0; j < myosynNumMuscles(); j++) {
 			// SCR: DO PRINTING HERE
-			printf("M(%d):: LC: %+0.3lf N, ENC: %+0.3lf mm ", \
+			printf("M(%d):: MC: %+06.2lf V, LC: %+06.2lf N, ENC: %+06.2lf mm ", \
 				(int)m[j].getChannelID(), \
-					m[j].getMuscleTension(), \
-						m[j].getTendonExcursion());
+					 m[j].getMotorCommand(), \
+					 m[j].getMuscleTension(), \
+					 m[j].getTendonExcursion());
 		}
 		printf("\r");
 	}

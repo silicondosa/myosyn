@@ -91,6 +91,9 @@ class myosyn {
 	double refMuscleTension;
 	double myMuscleTension;
 
+	// Controller variables
+	double motorCommand;
+
 public:
 	// Constructors and destructor
 	myosyn();
@@ -115,7 +118,7 @@ public:
 	double			getMuscleToneTension();
 	void			setMaxMuscleTension(double max_tension);
 	double			getMaxMuscleTension();
-		// Use these functions to set current closed-loop muscle tension refernce voltage in Newtons
+		// Use these functions to set current muscle tension reference value in Newtons
 	void			setReferenceTension(double myTension);
 	double			getReferenceTension();
 
@@ -129,6 +132,14 @@ public:
 	double			encoderAngle2Excursion(double encoderAngle);
 	void			readTendonExcursion();
 	double			getTendonExcursion();
+
+	// Functions for controller and output write ops
+	void			startMuscleControl();
+	double			getMotorCommand();
+	void			setMotorCommand(double newCommand);
+	void			(*controlRoutine)(unsigned numOutputs, double* outputs, unsigned numInputs, double* inputs);
+	void			executeControl();
+	void			stopMuscleControl();
 };
 
 class T5encoder {

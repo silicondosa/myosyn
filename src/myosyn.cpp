@@ -226,8 +226,9 @@ myosyn::myosyn(unsigned muscleChannel)
 	if (quickDAQgetStatus() == (int)STATUS_NASCENT) {
 		quickDAQinit();
 	}
-	startDAQ = &myosynStart;
-	stopDAQ  = &myosynStop;
+	startDAQ		= &myosynStart;
+	stopDAQ			= &myosynStop;
+	controlRoutine	= NULL;
 
 	// Acquire pin configurations based on DAQ arrangement
 	maxChannels_enc		= 0;
@@ -584,4 +585,59 @@ void myosyn::calibrateExcursion(double spoolDiameter/* = NAN*/) // diameter in m
 	return encoderAngle2Excursion((double)getCounterAngle(encoder_config[channelID][0], encoder_config[channelID][1]));
 }
 
+// Functions for controller and output write ops
+void myosyn::startMuscleControl()
+{
+	switch (getMuscleStatus()) {
+	case MYOSYN_READY_WINDDOWN:
+		windUp();
+	case MYOSYN_ENABLED_WINDUP:
+		setMuscleStatus(MYOSYN_CLOSEDLOOP);
+		break;
+	case MYOSYN_CLOSEDLOOP:
+		//do nothing except maybe print a message
+	default:
+		//print error/warning
+		break;
+	}
+}
+
+double myosyn::getMotorCommand()
+{
+	return this->motorCommand;
+}
+
+void myosyn::setMotorCommand(double newCommand)
+{
+
+	//write data into quickDAQ internal buffer
+	if (getMuscleStatus() != MYOSYN_CLOSEDLOOP) {
+		// print warning or error
+	}
+	else {
+		this->motorCommand = newCommand;
+		setAnalogOutPin(motor_value_config[channelID][0], motor_value_config[channelID][1], (float64)this->motorCommand);
+	}
+
+}
+
+void myosyn::executeControl()
+{
+	if (controlRoutine != NULL) {
+		//call control routine
+	}
+	if (myosynNumMuscles() > 0) {
+		writeAnalog_intBuf(motor_value_config[channelID][0]);
+	}
+}
+
+void myosyn::stopMuscleControl()
+{
+	if (getMuscleStatus() == MYOSYN_CLOSEDLOOP) {
+		setMuscleStatus(MYOSYN_ENABLED_WINDUP);
+	}
+	else {
+		//print error/warning
+	}
+}
 // End of file

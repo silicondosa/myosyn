@@ -1,0 +1,471 @@
+\hypertarget{classmyosyn}{}\doxysection{myosyn Class Reference}
+\label{classmyosyn}\index{myosyn@{myosyn}}
+
+
+This is the class object for each muscle channel.  
+
+
+
+
+{\ttfamily \#include $<$myosyn.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmyosyn_a53c064ce15595167c52b00f4443580fe}{myosyn}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor of the \mbox{\hyperlink{classmyosyn}{myosyn}} class. Auto-\/selects muscle channel when setting up a muscle channel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmyosyn_a104ac0efd09a49ecfd327950cc7b7a0c}{myosyn}} (unsigned muscle\+Channel)
+\begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{classmyosyn}{myosyn}} class. User provides the channel number to configure and if it is yet to be configured, the muscle channel is setup and the class object is initialized with the setting and channel ID number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmyosyn_a4f7e3cdb90d8bc3b95b67f26195665ac}{$\sim$myosyn}} ()
+\item 
+unsigned \mbox{\hyperlink{classmyosyn_add0d22f7fb81b603a3d62dd7129c1c39}{get\+Channel\+ID}} ()
+\begin{DoxyCompactList}\small\item\em Returns the channel ID number of the muscle channel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscle\+Status}} \mbox{\hyperlink{classmyosyn_a9b800afda40b957c6bbea4794e89a2b1}{get\+Muscle\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Returns the status of the muscle channel. The possible statuses are listed in the enum \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscle\+Status}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_a9181416b760b5a3ed5751c73e6bd38d4}{set\+Muscle\+Status}} (\mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscle\+Status}} new\+Status)
+\begin{DoxyCompactList}\small\item\em Function sets the status of the muscle channel object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_a068ddcda483e1de41cf8a5a1954195ed}{wind\+Up}} ()
+\begin{DoxyCompactList}\small\item\em Function starts/energizes the motor of the muscle channel to wind up the tendons to prevent slack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_ad3ca2f1bfb9cf9e0546a02230414569c}{wind\+Down}} ()
+\begin{DoxyCompactList}\small\item\em Function stops/deenergizes the motor of the muscle channel to wind down the tendons before system shutdown. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_a78984938b0b17198c76f0bc03b15e1b4}{set\+Muscle\+Tone\+Tension}} (double my\+Muscle\+Tone\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Sets the minimum tension held by the motor of a muscle channel. Corresponds to muscle tone and is the lower bound of possible muscle tension values. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classmyosyn_a37b2075db1fc9183f56fe0f7686834f3}{get\+Muscle\+Tone\+Tension}} ()
+\begin{DoxyCompactList}\small\item\em Returns the current muscle tone of the muscle channel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_ad6160bef03384a6bfbfe2330a3e9d942}{set\+Max\+Muscle\+Tension}} (double max\+\_\+tension)
+\begin{DoxyCompactList}\small\item\em Sets the upper limit to possible muscle tension of the motor of the muscle channel as a protection. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classmyosyn_a21d035c56e256fbac60e34de244cbbc3}{get\+Max\+Muscle\+Tension}} ()
+\begin{DoxyCompactList}\small\item\em Returns the upper limit of possible muscle tensions by the motor of the muscle channel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_a3c94e74103eff80a885ed031b7b9c8aa}{set\+Reference\+Tension}} (double my\+Tension)
+\begin{DoxyCompactList}\small\item\em The current reference/target muscle tension which the internal closed-\/loop controller will attempt to achieve on the motor. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classmyosyn_aa4cb0bd37afe5ee587853fe9ad6c3d61}{get\+Reference\+Tension}} ()
+\begin{DoxyCompactList}\small\item\em Returns the current reference/target muscle tension that the motor controller is trying to achieve/maintain. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_a6133bc6f02de779b7c7109a5861f04f7}{calibrate\+Tension}} (double load\+Cell\+Gain=NAN)
+\begin{DoxyCompactList}\small\item\em Sets the gain to calibrate the transformation of the loadcell voltage to force in newtons. Also winds up and reads the load cell\textquotesingle{}s initial bias voltage to tare the loadcell. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classmyosyn_a4916ea49e1658bd2d527b179677f8c00}{loadcell\+V2F}} (double LCvoltage)
+\begin{DoxyCompactList}\small\item\em Returns the force on the loadcell when supplied with the voltage based on the gain and bias set by \mbox{\hyperlink{classmyosyn_a6133bc6f02de779b7c7109a5861f04f7}{calibrate\+Tension}} . \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_a5d22a46b73b012b1fe1427f4a8f6b8e9}{read\+Muscle\+Tension}} ()
+\begin{DoxyCompactList}\small\item\em Uses the DAQ subsystem to read the muscle tension detected by the loadcell and puts it in the internal memory. Use \mbox{\hyperlink{classmyosyn_ac38b57ced8fd1f81b9a295fefb4615f9}{get\+Muscle\+Tension}} to read the value in the internal memory. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classmyosyn_ac38b57ced8fd1f81b9a295fefb4615f9}{get\+Muscle\+Tension}} ()
+\begin{DoxyCompactList}\small\item\em Returns the current muscle tension value (in newtons) in the internal memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_af4a40e78c17c0b3b2c8530f318ec89fb}{calibrate\+Excursion}} (double spool\+Diameter=NAN)
+\begin{DoxyCompactList}\small\item\em Calibrates the rotary incremental shaft encoder to zero degrees and set the conversion from angle to excursion. This is done by using the diameter of the shaft that spools the tendon. 360 degrees of rotation corresponds to one shaft circumference of excursion. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classmyosyn_a8cd47827761c6f47ccb3c169b5a121ee}{encoder\+Angle2\+Excursion}} (double encoder\+Angle)
+\begin{DoxyCompactList}\small\item\em Returns the tendon excursion given an encoder angle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_ad46386043f11221d25f3945f2c35b042}{read\+Tendon\+Excursion}} ()
+\begin{DoxyCompactList}\small\item\em Uses the DAQ subsystem to read the tendon excursion detected by the shaft encoder and puts it in the internal memory. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classmyosyn_ab53798aea3f900ad0958da3ec50b03f3}{get\+Tendon\+Excursion}} ()
+\begin{DoxyCompactList}\small\item\em Returns the current tendon excursion value (in mm) in the internal memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_a8026ffacb3e524e93488ff5b73af3a27}{start\+Muscle\+Control}} ()
+\begin{DoxyCompactList}\small\item\em Starts the force controller and update the status of the muscle channel. This function only needs to be called for one of the muscle channels. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classmyosyn_affa7c9cd1c261d8c7c80286856a33a6d}{get\+Motor\+Command}} ()
+\begin{DoxyCompactList}\small\item\em Returns the current motor command that is being commanded to the motor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_aefd3a64c23da2818c8a210d499850101}{set\+Motor\+Command}} (double new\+Command)
+\begin{DoxyCompactList}\small\item\em Sets the current motor command to be sent to the DC motor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_a9535f0da69d656ffa56393b2d7fc59f7}{execute\+Control}} ()
+\begin{DoxyCompactList}\small\item\em Executes the control law set by the \mbox{\hyperlink{classmyosyn_afcb87668d2fe31bfbeba3edcc1b07107}{control\+Routine}} function pointer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmyosyn_a1d84c786e2c2aff13c2fca51364f8609}{stop\+Muscle\+Control}} ()
+\begin{DoxyCompactList}\small\item\em Stops the force controller and update the status of the muscle channel. This function only needs to be called for one of the muscle channels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void($\ast$ \mbox{\hyperlink{classmyosyn_ac3f7729273ba171b28f9ed47ef4ac48e}{start\+DAQ}} )()
+\begin{DoxyCompactList}\small\item\em Function pointer to the global \mbox{\hyperlink{myosyn_8h_a75283dbd1a036bfa47049dcf498b40dd}{myosyn\+Start}} function to start data acquisition. Only need to call this for one of the class objects. \end{DoxyCompactList}\item 
+void($\ast$ \mbox{\hyperlink{classmyosyn_aabb17483617255b552a054a1d878fdae}{stop\+DAQ}} )()
+\begin{DoxyCompactList}\small\item\em Function pointer to the global \mbox{\hyperlink{myosyn_8h_aac01bf38d1e6f86c3a83788e8aede235}{myosyn\+Stop}} function to stop data acquisition. Only need to call this for one of the class objects. \end{DoxyCompactList}\item 
+void($\ast$ \mbox{\hyperlink{classmyosyn_afcb87668d2fe31bfbeba3edcc1b07107}{control\+Routine}} )(unsigned num\+Outputs, double $\ast$outputs, unsigned num\+Inputs, double $\ast$inputs)
+\begin{DoxyCompactList}\small\item\em \mbox{[}FOR FUTURE USE ONLY\mbox{]} Function pointer to any control law you might want the muscle channel to use. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the class object for each muscle channel. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmyosyn_a53c064ce15595167c52b00f4443580fe}\label{classmyosyn_a53c064ce15595167c52b00f4443580fe}} 
+\index{myosyn@{myosyn}!myosyn@{myosyn}}
+\index{myosyn@{myosyn}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{myosyn()}{myosyn()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily myosyn\+::myosyn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor of the \mbox{\hyperlink{classmyosyn}{myosyn}} class. Auto-\/selects muscle channel when setting up a muscle channel. 
+
+\mbox{\Hypertarget{classmyosyn_a104ac0efd09a49ecfd327950cc7b7a0c}\label{classmyosyn_a104ac0efd09a49ecfd327950cc7b7a0c}} 
+\index{myosyn@{myosyn}!myosyn@{myosyn}}
+\index{myosyn@{myosyn}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{myosyn()}{myosyn()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily myosyn\+::myosyn (\begin{DoxyParamCaption}\item[{unsigned}]{muscle\+Channel }\end{DoxyParamCaption})}
+
+
+
+Constructor for the \mbox{\hyperlink{classmyosyn}{myosyn}} class. User provides the channel number to configure and if it is yet to be configured, the muscle channel is setup and the class object is initialized with the setting and channel ID number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em muscle\+Channel} & The channel number/\+ID of the muscle channel that is to be configured. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmyosyn_a4f7e3cdb90d8bc3b95b67f26195665ac}\label{classmyosyn_a4f7e3cdb90d8bc3b95b67f26195665ac}} 
+\index{myosyn@{myosyn}!````~myosyn@{$\sim$myosyn}}
+\index{````~myosyn@{$\sim$myosyn}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{$\sim$myosyn()}{~myosyn()}}
+{\footnotesize\ttfamily myosyn\+::$\sim$myosyn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmyosyn_af4a40e78c17c0b3b2c8530f318ec89fb}\label{classmyosyn_af4a40e78c17c0b3b2c8530f318ec89fb}} 
+\index{myosyn@{myosyn}!calibrateExcursion@{calibrateExcursion}}
+\index{calibrateExcursion@{calibrateExcursion}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{calibrateExcursion()}{calibrateExcursion()}}
+{\footnotesize\ttfamily void myosyn\+::calibrate\+Excursion (\begin{DoxyParamCaption}\item[{double}]{spool\+Diameter = {\ttfamily NAN} }\end{DoxyParamCaption})}
+
+
+
+Calibrates the rotary incremental shaft encoder to zero degrees and set the conversion from angle to excursion. This is done by using the diameter of the shaft that spools the tendon. 360 degrees of rotation corresponds to one shaft circumference of excursion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spool\+Diameter} & The diameter of the shaft (in mm) that is used to spool the tendon. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmyosyn_a6133bc6f02de779b7c7109a5861f04f7}\label{classmyosyn_a6133bc6f02de779b7c7109a5861f04f7}} 
+\index{myosyn@{myosyn}!calibrateTension@{calibrateTension}}
+\index{calibrateTension@{calibrateTension}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{calibrateTension()}{calibrateTension()}}
+{\footnotesize\ttfamily void myosyn\+::calibrate\+Tension (\begin{DoxyParamCaption}\item[{double}]{load\+Cell\+Gain = {\ttfamily NAN} }\end{DoxyParamCaption})}
+
+
+
+Sets the gain to calibrate the transformation of the loadcell voltage to force in newtons. Also winds up and reads the load cell\textquotesingle{}s initial bias voltage to tare the loadcell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em load\+Cell\+Gain} & The gain value (units\+: N/V) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmyosyn_a8cd47827761c6f47ccb3c169b5a121ee}\label{classmyosyn_a8cd47827761c6f47ccb3c169b5a121ee}} 
+\index{myosyn@{myosyn}!encoderAngle2Excursion@{encoderAngle2Excursion}}
+\index{encoderAngle2Excursion@{encoderAngle2Excursion}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{encoderAngle2Excursion()}{encoderAngle2Excursion()}}
+{\footnotesize\ttfamily double myosyn\+::encoder\+Angle2\+Excursion (\begin{DoxyParamCaption}\item[{double}]{encoder\+Angle }\end{DoxyParamCaption})}
+
+
+
+Returns the tendon excursion given an encoder angle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em encoder\+Angle} & Encoder angle (in degrees). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tendon excursion (in mm). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmyosyn_a9535f0da69d656ffa56393b2d7fc59f7}\label{classmyosyn_a9535f0da69d656ffa56393b2d7fc59f7}} 
+\index{myosyn@{myosyn}!executeControl@{executeControl}}
+\index{executeControl@{executeControl}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{executeControl()}{executeControl()}}
+{\footnotesize\ttfamily void myosyn\+::execute\+Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Executes the control law set by the \mbox{\hyperlink{classmyosyn_afcb87668d2fe31bfbeba3edcc1b07107}{control\+Routine}} function pointer. 
+
+\mbox{\Hypertarget{classmyosyn_add0d22f7fb81b603a3d62dd7129c1c39}\label{classmyosyn_add0d22f7fb81b603a3d62dd7129c1c39}} 
+\index{myosyn@{myosyn}!getChannelID@{getChannelID}}
+\index{getChannelID@{getChannelID}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{getChannelID()}{getChannelID()}}
+{\footnotesize\ttfamily unsigned myosyn\+::get\+Channel\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the channel ID number of the muscle channel. 
+
+\begin{DoxyReturn}{Returns}
+The channel number of the muscle (values greater than or equal to 0 possible). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmyosyn_a21d035c56e256fbac60e34de244cbbc3}\label{classmyosyn_a21d035c56e256fbac60e34de244cbbc3}} 
+\index{myosyn@{myosyn}!getMaxMuscleTension@{getMaxMuscleTension}}
+\index{getMaxMuscleTension@{getMaxMuscleTension}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{getMaxMuscleTension()}{getMaxMuscleTension()}}
+{\footnotesize\ttfamily double myosyn\+::get\+Max\+Muscle\+Tension (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the upper limit of possible muscle tensions by the motor of the muscle channel. 
+
+\begin{DoxyReturn}{Returns}
+The upper limit (in newtons) of the motor of the muscle channel. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmyosyn_affa7c9cd1c261d8c7c80286856a33a6d}\label{classmyosyn_affa7c9cd1c261d8c7c80286856a33a6d}} 
+\index{myosyn@{myosyn}!getMotorCommand@{getMotorCommand}}
+\index{getMotorCommand@{getMotorCommand}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{getMotorCommand()}{getMotorCommand()}}
+{\footnotesize\ttfamily double myosyn\+::get\+Motor\+Command (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the current motor command that is being commanded to the motor. 
+
+\begin{DoxyReturn}{Returns}
+Current motor command by the motor controller (in volts) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmyosyn_a9b800afda40b957c6bbea4794e89a2b1}\label{classmyosyn_a9b800afda40b957c6bbea4794e89a2b1}} 
+\index{myosyn@{myosyn}!getMuscleStatus@{getMuscleStatus}}
+\index{getMuscleStatus@{getMuscleStatus}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{getMuscleStatus()}{getMuscleStatus()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscle\+Status}} myosyn\+::get\+Muscle\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the status of the muscle channel. The possible statuses are listed in the enum \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscle\+Status}}. 
+
+\begin{DoxyReturn}{Returns}
+Returns the muscle status as a \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscle\+Status}} type-\/defined enum. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmyosyn_ac38b57ced8fd1f81b9a295fefb4615f9}\label{classmyosyn_ac38b57ced8fd1f81b9a295fefb4615f9}} 
+\index{myosyn@{myosyn}!getMuscleTension@{getMuscleTension}}
+\index{getMuscleTension@{getMuscleTension}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{getMuscleTension()}{getMuscleTension()}}
+{\footnotesize\ttfamily double myosyn\+::get\+Muscle\+Tension (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the current muscle tension value (in newtons) in the internal memory. 
+
+\begin{DoxyReturn}{Returns}
+The current muscle tension value (in newtons) stored in the muscle channel object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmyosyn_a37b2075db1fc9183f56fe0f7686834f3}\label{classmyosyn_a37b2075db1fc9183f56fe0f7686834f3}} 
+\index{myosyn@{myosyn}!getMuscleToneTension@{getMuscleToneTension}}
+\index{getMuscleToneTension@{getMuscleToneTension}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{getMuscleToneTension()}{getMuscleToneTension()}}
+{\footnotesize\ttfamily double myosyn\+::get\+Muscle\+Tone\+Tension (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the current muscle tone of the muscle channel. 
+
+\begin{DoxyReturn}{Returns}
+The currently set muscle tone of the channel (in newtons). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmyosyn_aa4cb0bd37afe5ee587853fe9ad6c3d61}\label{classmyosyn_aa4cb0bd37afe5ee587853fe9ad6c3d61}} 
+\index{myosyn@{myosyn}!getReferenceTension@{getReferenceTension}}
+\index{getReferenceTension@{getReferenceTension}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{getReferenceTension()}{getReferenceTension()}}
+{\footnotesize\ttfamily double myosyn\+::get\+Reference\+Tension (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the current reference/target muscle tension that the motor controller is trying to achieve/maintain. 
+
+\begin{DoxyReturn}{Returns}
+The current reference/target muscle tension (in newtons) that the motor controller is trying to achieve/maintain. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmyosyn_ab53798aea3f900ad0958da3ec50b03f3}\label{classmyosyn_ab53798aea3f900ad0958da3ec50b03f3}} 
+\index{myosyn@{myosyn}!getTendonExcursion@{getTendonExcursion}}
+\index{getTendonExcursion@{getTendonExcursion}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{getTendonExcursion()}{getTendonExcursion()}}
+{\footnotesize\ttfamily double myosyn\+::get\+Tendon\+Excursion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the current tendon excursion value (in mm) in the internal memory. 
+
+\begin{DoxyReturn}{Returns}
+The current tendon excursion value (in mm) stored in the muscle channel object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmyosyn_a4916ea49e1658bd2d527b179677f8c00}\label{classmyosyn_a4916ea49e1658bd2d527b179677f8c00}} 
+\index{myosyn@{myosyn}!loadcellV2F@{loadcellV2F}}
+\index{loadcellV2F@{loadcellV2F}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{loadcellV2F()}{loadcellV2F()}}
+{\footnotesize\ttfamily double myosyn\+::loadcell\+V2F (\begin{DoxyParamCaption}\item[{double}]{LCvoltage }\end{DoxyParamCaption})}
+
+
+
+Returns the force on the loadcell when supplied with the voltage based on the gain and bias set by \mbox{\hyperlink{classmyosyn_a6133bc6f02de779b7c7109a5861f04f7}{calibrate\+Tension}} . 
+
+
+\begin{DoxyParams}{Parameters}
+{\em LCvoltage} & The voltage value to be converted to newtons. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The force/tension (in newtons) corresponding to the voltage supplied. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmyosyn_a5d22a46b73b012b1fe1427f4a8f6b8e9}\label{classmyosyn_a5d22a46b73b012b1fe1427f4a8f6b8e9}} 
+\index{myosyn@{myosyn}!readMuscleTension@{readMuscleTension}}
+\index{readMuscleTension@{readMuscleTension}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{readMuscleTension()}{readMuscleTension()}}
+{\footnotesize\ttfamily void myosyn\+::read\+Muscle\+Tension (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Uses the DAQ subsystem to read the muscle tension detected by the loadcell and puts it in the internal memory. Use \mbox{\hyperlink{classmyosyn_ac38b57ced8fd1f81b9a295fefb4615f9}{get\+Muscle\+Tension}} to read the value in the internal memory. 
+
+\mbox{\Hypertarget{classmyosyn_ad46386043f11221d25f3945f2c35b042}\label{classmyosyn_ad46386043f11221d25f3945f2c35b042}} 
+\index{myosyn@{myosyn}!readTendonExcursion@{readTendonExcursion}}
+\index{readTendonExcursion@{readTendonExcursion}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{readTendonExcursion()}{readTendonExcursion()}}
+{\footnotesize\ttfamily void myosyn\+::read\+Tendon\+Excursion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Uses the DAQ subsystem to read the tendon excursion detected by the shaft encoder and puts it in the internal memory. 
+
+\mbox{\Hypertarget{classmyosyn_ad6160bef03384a6bfbfe2330a3e9d942}\label{classmyosyn_ad6160bef03384a6bfbfe2330a3e9d942}} 
+\index{myosyn@{myosyn}!setMaxMuscleTension@{setMaxMuscleTension}}
+\index{setMaxMuscleTension@{setMaxMuscleTension}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{setMaxMuscleTension()}{setMaxMuscleTension()}}
+{\footnotesize\ttfamily void myosyn\+::set\+Max\+Muscle\+Tension (\begin{DoxyParamCaption}\item[{double}]{max\+\_\+tension }\end{DoxyParamCaption})}
+
+
+
+Sets the upper limit to possible muscle tension of the motor of the muscle channel as a protection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+\_\+tension} & The upper limit (in newtons) of the muscle tension of the motor. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmyosyn_aefd3a64c23da2818c8a210d499850101}\label{classmyosyn_aefd3a64c23da2818c8a210d499850101}} 
+\index{myosyn@{myosyn}!setMotorCommand@{setMotorCommand}}
+\index{setMotorCommand@{setMotorCommand}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{setMotorCommand()}{setMotorCommand()}}
+{\footnotesize\ttfamily void myosyn\+::set\+Motor\+Command (\begin{DoxyParamCaption}\item[{double}]{new\+Command }\end{DoxyParamCaption})}
+
+
+
+Sets the current motor command to be sent to the DC motor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Command} & The new motor command (in volts) to be send to the motor. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmyosyn_a9181416b760b5a3ed5751c73e6bd38d4}\label{classmyosyn_a9181416b760b5a3ed5751c73e6bd38d4}} 
+\index{myosyn@{myosyn}!setMuscleStatus@{setMuscleStatus}}
+\index{setMuscleStatus@{setMuscleStatus}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{setMuscleStatus()}{setMuscleStatus()}}
+{\footnotesize\ttfamily void myosyn\+::set\+Muscle\+Status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscle\+Status}}}]{new\+Status }\end{DoxyParamCaption})}
+
+
+
+Function sets the status of the muscle channel object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Status} & The new status of the object of type \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscle\+Status}} . \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmyosyn_a78984938b0b17198c76f0bc03b15e1b4}\label{classmyosyn_a78984938b0b17198c76f0bc03b15e1b4}} 
+\index{myosyn@{myosyn}!setMuscleToneTension@{setMuscleToneTension}}
+\index{setMuscleToneTension@{setMuscleToneTension}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{setMuscleToneTension()}{setMuscleToneTension()}}
+{\footnotesize\ttfamily void myosyn\+::set\+Muscle\+Tone\+Tension (\begin{DoxyParamCaption}\item[{double}]{my\+Muscle\+Tone\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Sets the minimum tension held by the motor of a muscle channel. Corresponds to muscle tone and is the lower bound of possible muscle tension values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em my\+Muscle\+Tone\+\_\+value} & Muscle tone and minimum muscle tension allowed (in newtons). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmyosyn_a3c94e74103eff80a885ed031b7b9c8aa}\label{classmyosyn_a3c94e74103eff80a885ed031b7b9c8aa}} 
+\index{myosyn@{myosyn}!setReferenceTension@{setReferenceTension}}
+\index{setReferenceTension@{setReferenceTension}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{setReferenceTension()}{setReferenceTension()}}
+{\footnotesize\ttfamily void myosyn\+::set\+Reference\+Tension (\begin{DoxyParamCaption}\item[{double}]{my\+Tension }\end{DoxyParamCaption})}
+
+
+
+The current reference/target muscle tension which the internal closed-\/loop controller will attempt to achieve on the motor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em my\+Tension} & The reference/target muscle tension (in newtons) which the motor controller should try to achieve. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmyosyn_a8026ffacb3e524e93488ff5b73af3a27}\label{classmyosyn_a8026ffacb3e524e93488ff5b73af3a27}} 
+\index{myosyn@{myosyn}!startMuscleControl@{startMuscleControl}}
+\index{startMuscleControl@{startMuscleControl}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{startMuscleControl()}{startMuscleControl()}}
+{\footnotesize\ttfamily void myosyn\+::start\+Muscle\+Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Starts the force controller and update the status of the muscle channel. This function only needs to be called for one of the muscle channels. 
+
+\mbox{\Hypertarget{classmyosyn_a1d84c786e2c2aff13c2fca51364f8609}\label{classmyosyn_a1d84c786e2c2aff13c2fca51364f8609}} 
+\index{myosyn@{myosyn}!stopMuscleControl@{stopMuscleControl}}
+\index{stopMuscleControl@{stopMuscleControl}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{stopMuscleControl()}{stopMuscleControl()}}
+{\footnotesize\ttfamily void myosyn\+::stop\+Muscle\+Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Stops the force controller and update the status of the muscle channel. This function only needs to be called for one of the muscle channels. 
+
+\mbox{\Hypertarget{classmyosyn_ad3ca2f1bfb9cf9e0546a02230414569c}\label{classmyosyn_ad3ca2f1bfb9cf9e0546a02230414569c}} 
+\index{myosyn@{myosyn}!windDown@{windDown}}
+\index{windDown@{windDown}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{windDown()}{windDown()}}
+{\footnotesize\ttfamily void myosyn\+::wind\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function stops/deenergizes the motor of the muscle channel to wind down the tendons before system shutdown. 
+
+\mbox{\Hypertarget{classmyosyn_a068ddcda483e1de41cf8a5a1954195ed}\label{classmyosyn_a068ddcda483e1de41cf8a5a1954195ed}} 
+\index{myosyn@{myosyn}!windUp@{windUp}}
+\index{windUp@{windUp}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{windUp()}{windUp()}}
+{\footnotesize\ttfamily void myosyn\+::wind\+Up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function starts/energizes the motor of the muscle channel to wind up the tendons to prevent slack. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classmyosyn_afcb87668d2fe31bfbeba3edcc1b07107}\label{classmyosyn_afcb87668d2fe31bfbeba3edcc1b07107}} 
+\index{myosyn@{myosyn}!controlRoutine@{controlRoutine}}
+\index{controlRoutine@{controlRoutine}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{controlRoutine}{controlRoutine}}
+{\footnotesize\ttfamily void($\ast$ myosyn\+::control\+Routine) (unsigned num\+Outputs, double $\ast$outputs, unsigned num\+Inputs, double $\ast$inputs)}
+
+
+
+\mbox{[}FOR FUTURE USE ONLY\mbox{]} Function pointer to any control law you might want the muscle channel to use. 
+
+\mbox{\Hypertarget{classmyosyn_ac3f7729273ba171b28f9ed47ef4ac48e}\label{classmyosyn_ac3f7729273ba171b28f9ed47ef4ac48e}} 
+\index{myosyn@{myosyn}!startDAQ@{startDAQ}}
+\index{startDAQ@{startDAQ}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{startDAQ}{startDAQ}}
+{\footnotesize\ttfamily void($\ast$ myosyn\+::start\+DAQ) ()}
+
+
+
+Function pointer to the global \mbox{\hyperlink{myosyn_8h_a75283dbd1a036bfa47049dcf498b40dd}{myosyn\+Start}} function to start data acquisition. Only need to call this for one of the class objects. 
+
+\mbox{\Hypertarget{classmyosyn_aabb17483617255b552a054a1d878fdae}\label{classmyosyn_aabb17483617255b552a054a1d878fdae}} 
+\index{myosyn@{myosyn}!stopDAQ@{stopDAQ}}
+\index{stopDAQ@{stopDAQ}!myosyn@{myosyn}}
+\doxysubsubsection{\texorpdfstring{stopDAQ}{stopDAQ}}
+{\footnotesize\ttfamily void($\ast$ myosyn\+::stop\+DAQ) ()}
+
+
+
+Function pointer to the global \mbox{\hyperlink{myosyn_8h_aac01bf38d1e6f86c3a83788e8aede235}{myosyn\+Stop}} function to stop data acquisition. Only need to call this for one of the class objects. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/tyros/codebase/myosyn/include/\mbox{\hyperlink{myosyn_8h}{myosyn.\+h}}\item 
+C\+:/\+Users/tyros/codebase/myosyn/src/\mbox{\hyperlink{myosyn_8cpp}{myosyn.\+cpp}}\end{DoxyCompactItemize}

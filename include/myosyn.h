@@ -58,6 +58,7 @@ extern double	mtr_trque_calib	[16][2]; // gain, bias for each of 8 load cells
 // Global myosyn functions
 
 /**
+ * \fn unsigned myosynNumMuscles()
  * @brief Returns the number of muscles configured by the library.
  * @return Unsigned integer number of muscles.
 */

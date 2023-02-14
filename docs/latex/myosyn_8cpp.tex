@@ -1,0 +1,415 @@
+\hypertarget{myosyn_8cpp}{}\doxysection{C\+:/\+Users/tyros/codebase/myosyn/src/myosyn.cpp File Reference}
+\label{myosyn_8cpp}\index{C:/Users/tyros/codebase/myosyn/src/myosyn.cpp@{C:/Users/tyros/codebase/myosyn/src/myosyn.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$quick\+DAQ.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}..\textbackslash{}include\textbackslash{}myosyn.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{myosyn_8cpp_a525335710b53cb064ca56b936120431e}{\+\_\+\+USE\+\_\+\+MATH\+\_\+\+DEFINES}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{myosyn_8cpp_a0bc01c8405a05d3791f2b153f6a82f9c}{myosyn\+Num\+Muscles}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of muscles configured by the library. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}} \mbox{\hyperlink{myosyn_8cpp_a63f4f3b4be9270571ee3e82cd12d9816}{myosyn\+Get\+Configuration}} ()
+\item 
+void \mbox{\hyperlink{myosyn_8cpp_ad492e40407daefd5eaa813aeee02dd9c}{myosyn\+Set\+Configuration}} (\mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}} DAQconfiguration)
+\begin{DoxyCompactList}\small\item\em Set the muscle configuration/arrangement type of the library. List of possibilities in the \mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}} enum. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{myosyn_8cpp_a1cb7e635cf99d9dfa32843c300e975cb}{myosyn\+Sampling\+Rate}} (double new\+Sampling\+Rate)
+\begin{DoxyCompactList}\small\item\em Sets the sampling rate of the data acquisition and controller of all the muscle channels. The default rate is 1000Hz. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{myosyn_8cpp_a75283dbd1a036bfa47049dcf498b40dd}{myosyn\+Start}} ()
+\begin{DoxyCompactList}\small\item\em This routine starts the data acquisition on all muscle channels that haven\textquotesingle{}t already been started so long as at least one channel has been configured. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{myosyn_8cpp_aac01bf38d1e6f86c3a83788e8aede235}{myosyn\+Stop}} ()
+\begin{DoxyCompactList}\small\item\em This function sops the data acquisition of all muscle channels that were started (ie. active). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{myosyn_8cpp_a7046e404320debe09c4b49d454a8990d}{myosyn\+Get\+Leader\+Channel}} ()
+\begin{DoxyCompactList}\small\item\em Returns the leader muscle channel which governs/triggers data acquisition on all other muscles. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{myosyn_8cpp_af7575140fea4a7c1ffbb9780921376c5}{myosyn\+Set\+Leader\+Channel}} (int new\+Leader)
+\begin{DoxyCompactList}\small\item\em Sets the leader/master muscle channel which governs/triggers data acquisition on all other muscles. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{myosyn_8cpp_aa84d43814c9d938cce4905c2605d19a5}{myosyn\+Read\+Inputs}} ()
+\begin{DoxyCompactList}\small\item\em Global function to read all DAQ inputs in a synchronized manner. The results are put into the class objects of each muscle channel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{myosyn_8cpp_a9b4ab052b1515776dfacdcdd9dd39ce7}{myosyn\+Write\+Outputs}} ()
+\begin{DoxyCompactList}\small\item\em Global function to write all DAQ outputs in a synchronized manner. The results are put into the class objects of each muscle channel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{myosyn_8cpp_a9dc655ef449cbc431f8c364f33d5cce4}{myosyn\+Wait\+For\+Clock}} ()
+\begin{DoxyCompactList}\small\item\em This blocking function waits for the clock period to finish between two function calls. So, if the sampling period is 1ms, the second call of this function will block until 1ms has passed betwen two function calls. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{myosyn_8cpp_ae759599401f65200042c0d246521ae59}{muscle\+\_\+mtr\+\_\+val}} \mbox{[}16\mbox{]}\mbox{[}2\mbox{]}
+\item 
+unsigned \mbox{\hyperlink{myosyn_8cpp_a24edb54cbc9295d912cfb6ac6c0a5fad}{muscle\+\_\+mtr\+\_\+en}} \mbox{[}16\mbox{]}\mbox{[}2\mbox{]}
+\item 
+unsigned \mbox{\hyperlink{myosyn_8cpp_a83ad07c834a9b5b4ebf8b2ef0b29d2a8}{muscle\+\_\+enc\+\_\+ring}} \mbox{[}8\mbox{]}\mbox{[}2\mbox{]}
+\item 
+unsigned \mbox{\hyperlink{myosyn_8cpp_a3b9629e135a5d97122b53b952456d38f}{muscle\+\_\+enc\+\_\+kleo}} \mbox{[}8\mbox{]}\mbox{[}2\mbox{]}
+\item 
+unsigned \mbox{\hyperlink{myosyn_8cpp_af27dab6ae7532fbc52b411f9983f5a7a}{muscle\+\_\+enc\+\_\+mtr}} \mbox{[}12\mbox{]}\mbox{[}2\mbox{]}
+\item 
+unsigned \mbox{\hyperlink{myosyn_8cpp_accbf95ef738ffce03a2aceb1ec68bf49}{muscle\+\_\+enc\+\_\+spl}} \mbox{[}12\mbox{]}\mbox{[}2\mbox{]}
+\item 
+unsigned \mbox{\hyperlink{myosyn_8cpp_a15f762c875ad245baeb6d9bf94f53798}{muscle\+\_\+ld\+\_\+cell}} \mbox{[}8\mbox{]}\mbox{[}2\mbox{]}
+\item 
+double \mbox{\hyperlink{myosyn_8cpp_a797404e664f40bc1921ddd8fd14b7e1e}{loadcell\+\_\+calib}} \mbox{[}8\mbox{]}\mbox{[}2\mbox{]}
+\item 
+unsigned \mbox{\hyperlink{myosyn_8cpp_afece8adb65c446dec7f2596d4371ae61}{channel\+\_\+limits}} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\item 
+\mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}} \mbox{\hyperlink{myosyn_8cpp_acfb3b309afa453bb32011f54d2a5e364}{myosyn\+Configuration}} = \mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57ca18f070aae02568c53d8c81a728411a12}{RING\+\_\+\+OF\+\_\+\+FIRE}}
+\item 
+unsigned \mbox{\hyperlink{myosyn_8cpp_aa470ea873cc1d84fe63cf41a1329e105}{num\+Configured\+Muscles}} = 0
+\item 
+int \mbox{\hyperlink{myosyn_8cpp_ae4549e1b2c0fb6f7dd703628b7377391}{myosyn\+Leader}} = -\/1
+\item 
+double \mbox{\hyperlink{myosyn_8cpp_aae31cd79367699ad99478ea2432b7942}{myosyn\+\_\+sampling\+Rate\+\_\+global}} = 1000.\+0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{myosyn_8cpp_a525335710b53cb064ca56b936120431e}\label{myosyn_8cpp_a525335710b53cb064ca56b936120431e}} 
+\index{myosyn.cpp@{myosyn.cpp}!\_USE\_MATH\_DEFINES@{\_USE\_MATH\_DEFINES}}
+\index{\_USE\_MATH\_DEFINES@{\_USE\_MATH\_DEFINES}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{\_USE\_MATH\_DEFINES}{\_USE\_MATH\_DEFINES}}
+{\footnotesize\ttfamily \#define \+\_\+\+USE\+\_\+\+MATH\+\_\+\+DEFINES}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{myosyn_8cpp_a63f4f3b4be9270571ee3e82cd12d9816}\label{myosyn_8cpp_a63f4f3b4be9270571ee3e82cd12d9816}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynGetConfiguration@{myosynGetConfiguration}}
+\index{myosynGetConfiguration@{myosynGetConfiguration}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynGetConfiguration()}{myosynGetConfiguration()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}} myosyn\+Get\+Configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{myosyn_8cpp_a7046e404320debe09c4b49d454a8990d}\label{myosyn_8cpp_a7046e404320debe09c4b49d454a8990d}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynGetLeaderChannel@{myosynGetLeaderChannel}}
+\index{myosynGetLeaderChannel@{myosynGetLeaderChannel}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynGetLeaderChannel()}{myosynGetLeaderChannel()}}
+{\footnotesize\ttfamily int myosyn\+Get\+Leader\+Channel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the leader muscle channel which governs/triggers data acquisition on all other muscles. 
+
+\begin{DoxyReturn}{Returns}
+If successful, the postive/zero leader muscle channel number. Otherwise, a negative error code. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{myosyn_8cpp_a0bc01c8405a05d3791f2b153f6a82f9c}\label{myosyn_8cpp_a0bc01c8405a05d3791f2b153f6a82f9c}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynNumMuscles@{myosynNumMuscles}}
+\index{myosynNumMuscles@{myosynNumMuscles}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynNumMuscles()}{myosynNumMuscles()}}
+{\footnotesize\ttfamily unsigned myosyn\+Num\+Muscles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the number of muscles configured by the library. 
+
+\begin{DoxyReturn}{Returns}
+Unsigned integer number of muscles. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{myosyn_8cpp_aa84d43814c9d938cce4905c2605d19a5}\label{myosyn_8cpp_aa84d43814c9d938cce4905c2605d19a5}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynReadInputs@{myosynReadInputs}}
+\index{myosynReadInputs@{myosynReadInputs}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynReadInputs()}{myosynReadInputs()}}
+{\footnotesize\ttfamily void myosyn\+Read\+Inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Global function to read all DAQ inputs in a synchronized manner. The results are put into the class objects of each muscle channel. 
+
+\mbox{\Hypertarget{myosyn_8cpp_a1cb7e635cf99d9dfa32843c300e975cb}\label{myosyn_8cpp_a1cb7e635cf99d9dfa32843c300e975cb}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynSamplingRate@{myosynSamplingRate}}
+\index{myosynSamplingRate@{myosynSamplingRate}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynSamplingRate()}{myosynSamplingRate()}}
+{\footnotesize\ttfamily double myosyn\+Sampling\+Rate (\begin{DoxyParamCaption}\item[{double}]{new\+Sampling\+Rate = {\ttfamily \mbox{\hyperlink{myosyn_8h_aae31cd79367699ad99478ea2432b7942}{myosyn\+\_\+sampling\+Rate\+\_\+global}}} }\end{DoxyParamCaption})}
+
+
+
+Sets the sampling rate of the data acquisition and controller of all the muscle channels. The default rate is 1000Hz. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Sampling\+Rate} & The global sampling rate of the DAQ subsystem. Cannot be overriden. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If successful, returns the positive sampling rate that was set. Otherwise, it returns a negative error code. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{myosyn_8cpp_ad492e40407daefd5eaa813aeee02dd9c}\label{myosyn_8cpp_ad492e40407daefd5eaa813aeee02dd9c}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynSetConfiguration@{myosynSetConfiguration}}
+\index{myosynSetConfiguration@{myosynSetConfiguration}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynSetConfiguration()}{myosynSetConfiguration()}}
+{\footnotesize\ttfamily void myosyn\+Set\+Configuration (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}}}]{DAQconfiguration }\end{DoxyParamCaption})}
+
+
+
+Set the muscle configuration/arrangement type of the library. List of possibilities in the \mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}} enum. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em DAQconfiguration} & The muscle configuration type (from the \mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}} enum) to which the library muscle be set. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{myosyn_8cpp_af7575140fea4a7c1ffbb9780921376c5}\label{myosyn_8cpp_af7575140fea4a7c1ffbb9780921376c5}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynSetLeaderChannel@{myosynSetLeaderChannel}}
+\index{myosynSetLeaderChannel@{myosynSetLeaderChannel}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynSetLeaderChannel()}{myosynSetLeaderChannel()}}
+{\footnotesize\ttfamily void myosyn\+Set\+Leader\+Channel (\begin{DoxyParamCaption}\item[{int}]{new\+Leader }\end{DoxyParamCaption})}
+
+
+
+Sets the leader/master muscle channel which governs/triggers data acquisition on all other muscles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Leader} & The muscle channel which needs to be set as a leader. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{myosyn_8cpp_a75283dbd1a036bfa47049dcf498b40dd}\label{myosyn_8cpp_a75283dbd1a036bfa47049dcf498b40dd}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynStart@{myosynStart}}
+\index{myosynStart@{myosynStart}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynStart()}{myosynStart()}}
+{\footnotesize\ttfamily void myosyn\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This routine starts the data acquisition on all muscle channels that haven\textquotesingle{}t already been started so long as at least one channel has been configured. 
+
+\mbox{\Hypertarget{myosyn_8cpp_aac01bf38d1e6f86c3a83788e8aede235}\label{myosyn_8cpp_aac01bf38d1e6f86c3a83788e8aede235}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynStop@{myosynStop}}
+\index{myosynStop@{myosynStop}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynStop()}{myosynStop()}}
+{\footnotesize\ttfamily void myosyn\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function sops the data acquisition of all muscle channels that were started (ie. active). 
+
+\mbox{\Hypertarget{myosyn_8cpp_a9dc655ef449cbc431f8c364f33d5cce4}\label{myosyn_8cpp_a9dc655ef449cbc431f8c364f33d5cce4}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynWaitForClock@{myosynWaitForClock}}
+\index{myosynWaitForClock@{myosynWaitForClock}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynWaitForClock()}{myosynWaitForClock()}}
+{\footnotesize\ttfamily void myosyn\+Wait\+For\+Clock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This blocking function waits for the clock period to finish between two function calls. So, if the sampling period is 1ms, the second call of this function will block until 1ms has passed betwen two function calls. 
+
+\mbox{\Hypertarget{myosyn_8cpp_a9b4ab052b1515776dfacdcdd9dd39ce7}\label{myosyn_8cpp_a9b4ab052b1515776dfacdcdd9dd39ce7}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynWriteOutputs@{myosynWriteOutputs}}
+\index{myosynWriteOutputs@{myosynWriteOutputs}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynWriteOutputs()}{myosynWriteOutputs()}}
+{\footnotesize\ttfamily void myosyn\+Write\+Outputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Global function to write all DAQ outputs in a synchronized manner. The results are put into the class objects of each muscle channel. 
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{myosyn_8cpp_afece8adb65c446dec7f2596d4371ae61}\label{myosyn_8cpp_afece8adb65c446dec7f2596d4371ae61}} 
+\index{myosyn.cpp@{myosyn.cpp}!channel\_limits@{channel\_limits}}
+\index{channel\_limits@{channel\_limits}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{channel\_limits}{channel\_limits}}
+{\footnotesize\ttfamily unsigned channel\+\_\+limits\mbox{[}3\mbox{]}\mbox{[}2\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \ \ \ \ \ \ \ \ \{\{\ 7,\ 7\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{12,\ 0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{12,12\}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{myosyn_8cpp_a797404e664f40bc1921ddd8fd14b7e1e}\label{myosyn_8cpp_a797404e664f40bc1921ddd8fd14b7e1e}} 
+\index{myosyn.cpp@{myosyn.cpp}!loadcell\_calib@{loadcell\_calib}}
+\index{loadcell\_calib@{loadcell\_calib}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{loadcell\_calib}{loadcell\_calib}}
+{\footnotesize\ttfamily double loadcell\+\_\+calib\mbox{[}8\mbox{]}\mbox{[}2\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \ \ \ \ \ \ \ \ \{\{1,\ 0\},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{1,\ 0\},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{1/0.020997,\ 0.138763\},\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{1/0.019916,-\/0.062009\},\ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{1,\ 0\},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{1,\ 0\},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{1,\ 0\},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0,\ 0\}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{myosyn_8cpp_a3b9629e135a5d97122b53b952456d38f}\label{myosyn_8cpp_a3b9629e135a5d97122b53b952456d38f}} 
+\index{myosyn.cpp@{myosyn.cpp}!muscle\_enc\_kleo@{muscle\_enc\_kleo}}
+\index{muscle\_enc\_kleo@{muscle\_enc\_kleo}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{muscle\_enc\_kleo}{muscle\_enc\_kleo}}
+{\footnotesize\ttfamily unsigned muscle\+\_\+enc\+\_\+kleo\mbox{[}8\mbox{]}\mbox{[}2\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{\{7,\ 0\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 1\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 2\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 3\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 4\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 5\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 6\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 7\}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{myosyn_8cpp_af27dab6ae7532fbc52b411f9983f5a7a}\label{myosyn_8cpp_af27dab6ae7532fbc52b411f9983f5a7a}} 
+\index{myosyn.cpp@{myosyn.cpp}!muscle\_enc\_mtr@{muscle\_enc\_mtr}}
+\index{muscle\_enc\_mtr@{muscle\_enc\_mtr}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{muscle\_enc\_mtr}{muscle\_enc\_mtr}}
+{\footnotesize\ttfamily unsigned muscle\+\_\+enc\+\_\+mtr\mbox{[}12\mbox{]}\mbox{[}2\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{\{3,\ 0\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 2\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 4\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 6\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 0\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 2\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 4\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 6\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{8,\ 0\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{8,\ 2\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{8,\ 4\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{8,\ 6\}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{myosyn_8cpp_a83ad07c834a9b5b4ebf8b2ef0b29d2a8}\label{myosyn_8cpp_a83ad07c834a9b5b4ebf8b2ef0b29d2a8}} 
+\index{myosyn.cpp@{myosyn.cpp}!muscle\_enc\_ring@{muscle\_enc\_ring}}
+\index{muscle\_enc\_ring@{muscle\_enc\_ring}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{muscle\_enc\_ring}{muscle\_enc\_ring}}
+{\footnotesize\ttfamily unsigned muscle\+\_\+enc\+\_\+ring\mbox{[}8\mbox{]}\mbox{[}2\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{\{3,\ 0\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 1\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 2\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 3\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 4\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 5\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 6\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 7\}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{myosyn_8cpp_accbf95ef738ffce03a2aceb1ec68bf49}\label{myosyn_8cpp_accbf95ef738ffce03a2aceb1ec68bf49}} 
+\index{myosyn.cpp@{myosyn.cpp}!muscle\_enc\_spl@{muscle\_enc\_spl}}
+\index{muscle\_enc\_spl@{muscle\_enc\_spl}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{muscle\_enc\_spl}{muscle\_enc\_spl}}
+{\footnotesize\ttfamily unsigned muscle\+\_\+enc\+\_\+spl\mbox{[}12\mbox{]}\mbox{[}2\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{\{3,\ 1\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 3\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 5\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 7\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 1\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 3\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 5\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 7\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{8,\ 1\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{8,\ 3\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{8,\ 5\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{8,\ 7\}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{myosyn_8cpp_a15f762c875ad245baeb6d9bf94f53798}\label{myosyn_8cpp_a15f762c875ad245baeb6d9bf94f53798}} 
+\index{myosyn.cpp@{myosyn.cpp}!muscle\_ld\_cell@{muscle\_ld\_cell}}
+\index{muscle\_ld\_cell@{muscle\_ld\_cell}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{muscle\_ld\_cell}{muscle\_ld\_cell}}
+{\footnotesize\ttfamily unsigned muscle\+\_\+ld\+\_\+cell\mbox{[}8\mbox{]}\mbox{[}2\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{\{5,\ 0\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{5,\ 8\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{5,\ 1\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{5,\ 9\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{5,\ 2\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{5,10\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{5,11\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{5,\ 3\}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{myosyn_8cpp_a24edb54cbc9295d912cfb6ac6c0a5fad}\label{myosyn_8cpp_a24edb54cbc9295d912cfb6ac6c0a5fad}} 
+\index{myosyn.cpp@{myosyn.cpp}!muscle\_mtr\_en@{muscle\_mtr\_en}}
+\index{muscle\_mtr\_en@{muscle\_mtr\_en}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{muscle\_mtr\_en}{muscle\_mtr\_en}}
+{\footnotesize\ttfamily unsigned muscle\+\_\+mtr\+\_\+en\mbox{[}16\mbox{]}\mbox{[}2\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{\{2,\ 0\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 1\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 2\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 3\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 4\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 5\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 6\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 7\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,16\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,17\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,18\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,19\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,20\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,21\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,22\},\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,23\}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{myosyn_8cpp_ae759599401f65200042c0d246521ae59}\label{myosyn_8cpp_ae759599401f65200042c0d246521ae59}} 
+\index{myosyn.cpp@{myosyn.cpp}!muscle\_mtr\_val@{muscle\_mtr\_val}}
+\index{muscle\_mtr\_val@{muscle\_mtr\_val}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{muscle\_mtr\_val}{muscle\_mtr\_val}}
+{\footnotesize\ttfamily unsigned muscle\+\_\+mtr\+\_\+val\mbox{[}16\mbox{]}\mbox{[}2\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{\{2,\ 0\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 1\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 2\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 3\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 4\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 5\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 6\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 7\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 8\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,\ 9\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,10\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,11\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,12\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,13\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,14\},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2,15\}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{myosyn_8cpp_aae31cd79367699ad99478ea2432b7942}\label{myosyn_8cpp_aae31cd79367699ad99478ea2432b7942}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosyn\_samplingRate\_global@{myosyn\_samplingRate\_global}}
+\index{myosyn\_samplingRate\_global@{myosyn\_samplingRate\_global}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosyn\_samplingRate\_global}{myosyn\_samplingRate\_global}}
+{\footnotesize\ttfamily double myosyn\+\_\+sampling\+Rate\+\_\+global = 1000.\+0}
+
+\mbox{\Hypertarget{myosyn_8cpp_acfb3b309afa453bb32011f54d2a5e364}\label{myosyn_8cpp_acfb3b309afa453bb32011f54d2a5e364}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynConfiguration@{myosynConfiguration}}
+\index{myosynConfiguration@{myosynConfiguration}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynConfiguration}{myosynConfiguration}}
+{\footnotesize\ttfamily \mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}} myosyn\+Configuration = \mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57ca18f070aae02568c53d8c81a728411a12}{RING\+\_\+\+OF\+\_\+\+FIRE}}}
+
+\mbox{\Hypertarget{myosyn_8cpp_ae4549e1b2c0fb6f7dd703628b7377391}\label{myosyn_8cpp_ae4549e1b2c0fb6f7dd703628b7377391}} 
+\index{myosyn.cpp@{myosyn.cpp}!myosynLeader@{myosynLeader}}
+\index{myosynLeader@{myosynLeader}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{myosynLeader}{myosynLeader}}
+{\footnotesize\ttfamily int myosyn\+Leader = -\/1}
+
+\mbox{\Hypertarget{myosyn_8cpp_aa470ea873cc1d84fe63cf41a1329e105}\label{myosyn_8cpp_aa470ea873cc1d84fe63cf41a1329e105}} 
+\index{myosyn.cpp@{myosyn.cpp}!numConfiguredMuscles@{numConfiguredMuscles}}
+\index{numConfiguredMuscles@{numConfiguredMuscles}!myosyn.cpp@{myosyn.cpp}}
+\doxysubsubsection{\texorpdfstring{numConfiguredMuscles}{numConfiguredMuscles}}
+{\footnotesize\ttfamily unsigned num\+Configured\+Muscles = 0}
+

@@ -20,7 +20,7 @@ int main()
 	double t;
 	double mySamplingRate = 1000.0; // Hz
 	double samplePeriod = 1 / mySamplingRate;
-	unsigned mySampleCount = 10000;
+	unsigned mySampleCount = 30000;
 	double mc[nMuscles];
 	myosyn *m = new myosyn[nMuscles];
 	
@@ -69,7 +69,7 @@ int main()
 			}
 			// write motor command
 			//mc[j] = m[j].getMuscleToneTension() + (updateCount % 2 == 0) ? ((j % 2 == 0) ? (0.1 * (updateCount)) : 0) : ((j % 2 == 0) ? 0 : (0.1 * (updateCount)));
-			mc[j] = max(((j%2==0)?5:5) * cos(2 * 3.1416 * 1 * t + ((j%2==0)?0:3.1416)), 0);
+			mc[j] = max(((j%2==0)?4:4) * cos(2 * 3.1416 * 1 * t + ((j%2==0)?0:3.1416)), 0);
 			//cortexDrive[1] = max((cortexVoluntaryAmp - 0) * sin(2 * 3.1416 * cortexVoluntaryFreq * tick + 3.1416), 0);
 			m[j].setMotorCommand(mc[j]);
 		}

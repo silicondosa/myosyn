@@ -5,7 +5,7 @@ A control API for a novel modular synthetic muscle, MyoSyn is a portmanteau of S
 ## Dependencies
 
 MyoSyn requires the following libraries:
-- NI-DAQmx: 
+- NI-DAQmx: National Instruments' data acquisition API. It is available at [their website](https://www.ni.com/en-us/support/downloads/drivers/download.ni-daq-mx.html) for Windows and Linux.
 - QuickDAQ: A custom data acquisition library able to utilize National Instruments DAQ hardware (included as submodule)
 - MiniPID: A PID control and tuning library (included as submodule)
 - cLinkedList: A small C library that implements a simple double linked list (included as submodule)

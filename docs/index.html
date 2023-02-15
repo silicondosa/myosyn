@@ -96,16 +96,22 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="textblock"><p><a class="anchor" id="md_C__Users_tyros_codebase_myosyn_README"></a> A control API for a novel modular synthetic muscle, MyoSyn is a portmanteau of Synthetic (as in man-made) and Myosin (a protein fundamental to muscle function, which is also how you pronounce MyoSyn). This C++ API allows us to actuate this muscle with closed-loop control using our custom QuickDAQ software.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Dependencies</h1>
-<p>MyoSyn requires the following libraries:</p>
-<ul>
-<li>QuickDAQ: A custom data acquisition library able to utilize National Instruments DAQ hardware</li>
-<li>MiniPID: A PID control and tuning library</li>
-<li>cLinkedList: A small C library that implements a simple double linked list</li>
+<p>MyoSyn requires the following libraries:</p><ul>
+<li>NI-DAQmx:</li>
+<li>QuickDAQ: A custom data acquisition library able to utilize National Instruments DAQ hardware (included as submodule)</li>
+<li>MiniPID: A PID control and tuning library (included as submodule)</li>
+<li>cLinkedList: A small C library that implements a simple double linked list (included as submodule)</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Installation</h1>
 <p>In addition to the API, the dependencies are also included in this repo as git submodules.</p>
-<p>To clone this repo, use the <code>git clone --recursive</code> command. </p>
+<p>To clone this repo, use the <code>git clone --recursive-submodules</code> command.</p>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Documentation</h1>
+<p>You can find the DoxyGen-generated documentation <a href="https://solaremperor.github.io/myosyn/">here</a>, complete with an example.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+LICENSE</h1>
+<p>This library is distributed under the GNU Lesser GPL v3. The license file is located in the root directory of this repo. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

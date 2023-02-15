@@ -2,200 +2,200 @@
 \label{myosyn_8h_source}\index{C:/Users/tyros/codebase/myosyn/include/myosyn.h@{C:/Users/tyros/codebase/myosyn/include/myosyn.h}}
 \mbox{\hyperlink{myosyn_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ MYOSYN\_H}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ MYOSYN\_H}}
-\DoxyCodeLine{00004\ }
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <quickDAQ.h>}}
-\DoxyCodeLine{00007\ }
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ eprintf(\_STR,\ ...)\ fprintf(ERRSTREAM,\ \_STR,\ \_\_VA\_ARGS\_\_)}}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ DIGITAL\_HIGH\_VOLTS\ \ 5.0}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ DIGITAL\_LOW\_VOLTS\ \ \ 0.0}}
-\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ WIND\_UP\_VOLTS\ \ \ \ \ \ \ 0.8}}
-\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ WIND\_DOWN\_VOLTS\ \ \ \ \ 0.0}}
-\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ DEFAULT\_MUSCLE\_TONE\ 1.0\ \ \ \ \ }\textcolor{comment}{//\ Newtons}}
-\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ MAX\_MUSCLE\_TENSION\ \ 30.0\ \ \ \ }\textcolor{comment}{//\ Newtons}}
-\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ MOTOR\_SHAFT\_DIAMTR\ \ 6\ \ \ \ \ \ \ }\textcolor{comment}{//\ millimeters}}
-\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ LOADCELL\_TARE\_NSAMP\ 100}}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00022\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57c}{\_DAQarrangement}}}
-\DoxyCodeLine{00023\ \{}
-\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57ca18f070aae02568c53d8c81a728411a12}{RING\_OF\_FIRE}}\ \ \ \ =\ 0,}
-\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57ca07452aebb53a803a8bd275d1ca8d4809}{QUADRUPED}}\ \ \ \ \ \ =\ 1,}
-\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57ca3ee2baf72f71dfee5f6d962521d77722}{MUSCLE\_MODULE}}\ \ =\ 2}
-\DoxyCodeLine{00027\ \}\mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}};}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00032\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849d}{\_muscleStatus}}}
-\DoxyCodeLine{00033\ \{}
-\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849da0bc2033e857c535a8b76b56c22641475}{MYOSYN\_DISABLED}}\ \ \ \ \ \ \ \ \ \ =\ 0,}
-\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849dacd267ed3f80f1a8a93ba9e6570860625}{MYOSYN\_READY\_WINDDOWN}}\ \ =\ 1,}
-\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849dabb38907eedbfd03709df6e286a11558d}{MYOSYN\_ENABLED\_WINDUP}}\ \ =\ 2,}
-\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849da2ff7b35feb0bf53d58d3a0bd70003b9d}{MYOSYN\_CLOSEDLOOP}}\ \ \ \ \ \ =\ 3}
-\DoxyCodeLine{00038\ \}\ \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscleStatus}};}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \textcolor{comment}{//\ myosyn\ global\ variables}}
-\DoxyCodeLine{00041\ \textcolor{comment}{//extern\ int\ T5\_quickDAQstatus;}}
-\DoxyCodeLine{00042\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}}\ \mbox{\hyperlink{myosyn_8h_acfb3b309afa453bb32011f54d2a5e364}{myosynConfiguration}};}
-\DoxyCodeLine{00043\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_aa470ea873cc1d84fe63cf41a1329e105}{numConfiguredMuscles}};}
-\DoxyCodeLine{00044\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{myosyn_8h_ae4549e1b2c0fb6f7dd703628b7377391}{myosynLeader}};}
-\DoxyCodeLine{00045\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{myosyn_8h_aae31cd79367699ad99478ea2432b7942}{myosyn\_samplingRate\_global}};}
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \textcolor{comment}{//\ Some\ global\ reconfigurable\ DAQ\ configuration/pin\ mapping\ variables}}
-\DoxyCodeLine{00048\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_ae759599401f65200042c0d246521ae59}{muscle\_mtr\_val}}\ \ \ \ [16][2];}
-\DoxyCodeLine{00049\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_a24edb54cbc9295d912cfb6ac6c0a5fad}{muscle\_mtr\_en}}\ \ [16][2];}
-\DoxyCodeLine{00050\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_a83ad07c834a9b5b4ebf8b2ef0b29d2a8}{muscle\_enc\_ring}}\ \ [\ 8][2];}
-\DoxyCodeLine{00051\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_a3b9629e135a5d97122b53b952456d38f}{muscle\_enc\_kleo}}\ \ [\ 8][2];}
-\DoxyCodeLine{00052\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_af27dab6ae7532fbc52b411f9983f5a7a}{muscle\_enc\_mtr}}\ \ \ \ [12][2];}
-\DoxyCodeLine{00053\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_accbf95ef738ffce03a2aceb1ec68bf49}{muscle\_enc\_spl}}\ \ \ \ [12][2];}
-\DoxyCodeLine{00054\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_a15f762c875ad245baeb6d9bf94f53798}{muscle\_ld\_cell}}\ \ \ \ [\ 8][2];}
-\DoxyCodeLine{00055\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{double}\ \ \ \mbox{\hyperlink{myosyn_8h_a797404e664f40bc1921ddd8fd14b7e1e}{loadcell\_calib}}\ \ \ \ [\ 8][2];\ \textcolor{comment}{//\ gain,\ bias\ for\ each\ of\ 8\ load\ cells}}
-\DoxyCodeLine{00056\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{double}\ \ \ \mbox{\hyperlink{myosyn_8h_a26d52e1e8f6a7665322578cd69da33d1}{mtr\_trque\_calib}}\ \ [16][2];\ \textcolor{comment}{//\ gain,\ bias\ for\ each\ of\ 8\ load\ cells}}
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \textcolor{comment}{//\ Global\ myosyn\ functions}}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00065\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_a0bc01c8405a05d3791f2b153f6a82f9c}{myosynNumMuscles}}();}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00071\ \mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}}\ \mbox{\hyperlink{myosyn_8h_a63f4f3b4be9270571ee3e82cd12d9816}{myosynGetConfiguration}}();}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00077\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_ad492e40407daefd5eaa813aeee02dd9c}{myosynSetConfiguration}}(\mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}}\ DAQconfiguration);}
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00084\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{myosyn_8h_a3aacfdc80e33218f8b6ffffb6a8b0c42}{myosynSamplingRate}}(\textcolor{keywordtype}{double}\ newSamplingRate\ =\ \mbox{\hyperlink{myosyn_8h_aae31cd79367699ad99478ea2432b7942}{myosyn\_samplingRate\_global}});}
-\DoxyCodeLine{00085\ }
-\DoxyCodeLine{00089\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_a75283dbd1a036bfa47049dcf498b40dd}{myosynStart}}();}
-\DoxyCodeLine{00090\ }
-\DoxyCodeLine{00094\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_aac01bf38d1e6f86c3a83788e8aede235}{myosynStop}}();}
-\DoxyCodeLine{00095\ }
-\DoxyCodeLine{00100\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_af7575140fea4a7c1ffbb9780921376c5}{myosynSetLeaderChannel}}(\textcolor{keywordtype}{int}\ newLeader);}
-\DoxyCodeLine{00101\ }
-\DoxyCodeLine{00106\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{myosyn_8h_a7046e404320debe09c4b49d454a8990d}{myosynGetLeaderChannel}}();}
-\DoxyCodeLine{00107\ }
-\DoxyCodeLine{00111\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_aa84d43814c9d938cce4905c2605d19a5}{myosynReadInputs}}();}
-\DoxyCodeLine{00112\ }
-\DoxyCodeLine{00116\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_a9b4ab052b1515776dfacdcdd9dd39ce7}{myosynWriteOutputs}}();}
-\DoxyCodeLine{00117\ }
-\DoxyCodeLine{00122\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_a9dc655ef449cbc431f8c364f33d5cce4}{myosynWaitForClock}}();}
-\DoxyCodeLine{00123\ }
-\DoxyCodeLine{00124\ \textcolor{comment}{//\ MyoSyn\ class}}
-\DoxyCodeLine{00125\ }
-\DoxyCodeLine{00129\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmyosyn}{myosyn}}\ \{}
-\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ channelID;}
-\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}}*\ myDAQarrangement;}
-\DoxyCodeLine{00132\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscleStatus}}\ status;}
-\DoxyCodeLine{00133\ }
-\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ maxChannels\_mtr,\ maxChannels\_enc;}
-\DoxyCodeLine{00135\ }
-\DoxyCodeLine{00136\ \ \ \ \ unsigned\ (*motor\_enable\_config)[2];}
-\DoxyCodeLine{00137\ \ \ \ \ unsigned\ (*motor\_value\_config)[2];}
-\DoxyCodeLine{00138\ \ \ \ \ unsigned\ (*encoder\_config)[2];}
-\DoxyCodeLine{00139\ \ \ \ \ unsigned\ (*encoder\_opt\_config)[2];}
-\DoxyCodeLine{00140\ \ \ \ \ unsigned\ (*loadcell\_config)[2];}
-\DoxyCodeLine{00141\ }
-\DoxyCodeLine{00142\ \ \ \ \ \textcolor{comment}{//\ Muscle\ constant\ parameters\ for\ closed-\/loop\ control}}
-\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{double}\ muscleToneTension;}
-\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{double}\ maxMuscleTension;}
-\DoxyCodeLine{00145\ }
-\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{//Sensor\ and\ motor\ calibration\ parameters}}
-\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{double}\ loadcell\_offset,\ loadcell\_gain;\ \textcolor{comment}{//\ Voltage\ to\ force\ calibration\ for\ loadcell}}
-\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{double}\ encoder\_offset\_angle;\ \textcolor{comment}{//\ zero\ out\ encoder\ angle\ after\ windup}}
-\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{double}\ encoder\_angle\_to\_excursion\_ratio;\ \textcolor{comment}{//\ Angle\ to\ tendon\ excursion\ calibration\ for\ encoder}}
-\DoxyCodeLine{00150\ }
-\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{double}\ mtrTension\_offset,\ mtrTension\_gain;\ \textcolor{comment}{//\ Voltage\ to\ motor\ Tension}}
-\DoxyCodeLine{00152\ }
-\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{//\ Live\ update\ variables}}
-\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{double}\ refMuscleTension;}
-\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{double}\ myMuscleTension;}
-\DoxyCodeLine{00156\ }
-\DoxyCodeLine{00157\ \ \ \ \ \textcolor{comment}{//\ Controller\ variables}}
-\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{double}\ motorCommand;}
-\DoxyCodeLine{00159\ }
-\DoxyCodeLine{00160\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{//\ Constructors\ and\ destructor}}
-\DoxyCodeLine{00162\ }
-\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{classmyosyn_a53c064ce15595167c52b00f4443580fe}{myosyn}}();}
-\DoxyCodeLine{00167\ \ \ \ \ }
-\DoxyCodeLine{00174\ \ \ \ \ \mbox{\hyperlink{classmyosyn_a53c064ce15595167c52b00f4443580fe}{myosyn}}(\textcolor{keywordtype}{unsigned}\ muscleChannel);}
-\DoxyCodeLine{00175\ }
-\DoxyCodeLine{00176\ \ \ \ \ \mbox{\hyperlink{classmyosyn_a4f7e3cdb90d8bc3b95b67f26195665ac}{\string~myosyn}}();}
-\DoxyCodeLine{00177\ \ \ \ \ }
-\DoxyCodeLine{00178\ \ \ \ \ \textcolor{comment}{//\ myosyn\ support\ functions}}
-\DoxyCodeLine{00179\ }
-\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_add0d22f7fb81b603a3d62dd7129c1c39}{getChannelID}}();}
-\DoxyCodeLine{00185\ \ \ \ \ }
-\DoxyCodeLine{00190\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscleStatus}}\ \ \ \ \mbox{\hyperlink{classmyosyn_a9b800afda40b957c6bbea4794e89a2b1}{getMuscleStatus}}();}
-\DoxyCodeLine{00191\ }
-\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a9181416b760b5a3ed5751c73e6bd38d4}{setMuscleStatus}}(\mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscleStatus}}\ newStatus);}
-\DoxyCodeLine{00197\ }
-\DoxyCodeLine{00198\ \ \ \ \ \textcolor{comment}{//\ DAQ\ support\ functions\ and\ function\ pointers}}
-\DoxyCodeLine{00199\ }
-\DoxyCodeLine{00204\ \ \ \ \ void\ \ \ \ \ \ \ \ \ \ \ \ (*\mbox{\hyperlink{classmyosyn_ac3f7729273ba171b28f9ed47ef4ac48e}{startDAQ}})();}
-\DoxyCodeLine{00205\ \ \ \ \ }
-\DoxyCodeLine{00210\ \ \ \ \ void\ \ \ \ \ \ \ \ \ \ \ \ (*\mbox{\hyperlink{classmyosyn_aabb17483617255b552a054a1d878fdae}{stopDAQ}})();}
-\DoxyCodeLine{00211\ }
-\DoxyCodeLine{00212\ \ \ \ \ \textcolor{comment}{//\ Muscle\ open-\/loop\ operations}}
-\DoxyCodeLine{00213\ \ \ \ \ }
-\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a068ddcda483e1de41cf8a5a1954195ed}{windUp}}();}
-\DoxyCodeLine{00218\ }
-\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_ad3ca2f1bfb9cf9e0546a02230414569c}{windDown}}();}
-\DoxyCodeLine{00223\ }
-\DoxyCodeLine{00224\ \ \ \ \ \textcolor{comment}{//\ Functions\ for\ muscle\ closed-\/loop\ parameter\ settings}}
-\DoxyCodeLine{00225\ \ \ \ \ }
-\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a78984938b0b17198c76f0bc03b15e1b4}{setMuscleToneTension}}(\textcolor{keywordtype}{double}\ myMuscleTone\_value);}
-\DoxyCodeLine{00232\ }
-\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a37b2075db1fc9183f56fe0f7686834f3}{getMuscleToneTension}}();}
-\DoxyCodeLine{00238\ }
-\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_ad6160bef03384a6bfbfe2330a3e9d942}{setMaxMuscleTension}}(\textcolor{keywordtype}{double}\ max\_tension);}
-\DoxyCodeLine{00244\ }
-\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a21d035c56e256fbac60e34de244cbbc3}{getMaxMuscleTension}}();}
-\DoxyCodeLine{00250\ }
-\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a3c94e74103eff80a885ed031b7b9c8aa}{setReferenceTension}}(\textcolor{keywordtype}{double}\ myTension);}
-\DoxyCodeLine{00256\ }
-\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_aa4cb0bd37afe5ee587853fe9ad6c3d61}{getReferenceTension}}();}
-\DoxyCodeLine{00263\ }
-\DoxyCodeLine{00264\ \ \ \ \ \textcolor{comment}{//\ Functions\ to\ read\ and\ scale\ sensor\ data}}
-\DoxyCodeLine{00265\ }
-\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a6133bc6f02de779b7c7109a5861f04f7}{calibrateTension}}(\textcolor{keywordtype}{double}\ loadCellGain\ =\ NAN);}
-\DoxyCodeLine{00272\ }
-\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a4916ea49e1658bd2d527b179677f8c00}{loadcellV2F}}(\textcolor{keywordtype}{double}\ LCvoltage);}
-\DoxyCodeLine{00279\ }
-\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a5d22a46b73b012b1fe1427f4a8f6b8e9}{readMuscleTension}}();}
-\DoxyCodeLine{00285\ }
-\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_ac38b57ced8fd1f81b9a295fefb4615f9}{getMuscleTension}}();}
-\DoxyCodeLine{00291\ }
-\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_af4a40e78c17c0b3b2c8530f318ec89fb}{calibrateExcursion}}(\textcolor{keywordtype}{double}\ spoolDiameter\ =\ NAN);}
-\DoxyCodeLine{00298\ }
-\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a8cd47827761c6f47ccb3c169b5a121ee}{encoderAngle2Excursion}}(\textcolor{keywordtype}{double}\ encoderAngle);}
-\DoxyCodeLine{00305\ }
-\DoxyCodeLine{00310\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_ad46386043f11221d25f3945f2c35b042}{readTendonExcursion}}();}
-\DoxyCodeLine{00311\ \ \ \ \ }
-\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_ab53798aea3f900ad0958da3ec50b03f3}{getTendonExcursion}}();}
-\DoxyCodeLine{00317\ }
-\DoxyCodeLine{00318\ \ \ \ \ \textcolor{comment}{//\ Functions\ for\ controller\ and\ output\ write\ ops}}
-\DoxyCodeLine{00319\ }
-\DoxyCodeLine{00324\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a8026ffacb3e524e93488ff5b73af3a27}{startMuscleControl}}();}
-\DoxyCodeLine{00325\ }
-\DoxyCodeLine{00330\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_affa7c9cd1c261d8c7c80286856a33a6d}{getMotorCommand}}();}
-\DoxyCodeLine{00331\ }
-\DoxyCodeLine{00336\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_aefd3a64c23da2818c8a210d499850101}{setMotorCommand}}(\textcolor{keywordtype}{double}\ newCommand);}
-\DoxyCodeLine{00337\ }
-\DoxyCodeLine{00341\ \ \ \ \ void\ \ \ \ \ \ \ \ \ \ \ \ (*\mbox{\hyperlink{classmyosyn_afcb87668d2fe31bfbeba3edcc1b07107}{controlRoutine}})(\textcolor{keywordtype}{unsigned}\ numOutputs,\ \textcolor{keywordtype}{double}*\ outputs,\ \textcolor{keywordtype}{unsigned}\ numInputs,\ \textcolor{keywordtype}{double}*\ inputs);}
-\DoxyCodeLine{00342\ }
-\DoxyCodeLine{00346\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a9535f0da69d656ffa56393b2d7fc59f7}{executeControl}}();}
-\DoxyCodeLine{00347\ }
-\DoxyCodeLine{00352\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a1d84c786e2c2aff13c2fca51364f8609}{stopMuscleControl}}();}
-\DoxyCodeLine{00353\ \};}
-\DoxyCodeLine{00354\ }
-\DoxyCodeLine{00355\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_t5encoder}{T5encoder}}\ \{}
-\DoxyCodeLine{00356\ \ \ \ \ \mbox{\hyperlink{class_t5encoder}{T5encoder}}();}
-\DoxyCodeLine{00357\ \};}
-\DoxyCodeLine{00358\ }
-\DoxyCodeLine{00359\ }
-\DoxyCodeLine{00360\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_t5control}{T5control}}\ \{}
-\DoxyCodeLine{00361\ \ \ \ \ \mbox{\hyperlink{class_t5control}{T5control}}();}
-\DoxyCodeLine{00362\ \};}
-\DoxyCodeLine{00363\ }
-\DoxyCodeLine{00364\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ !MYOSYN\_H}}
-\DoxyCodeLine{00365\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00002}00002\ \textcolor{preprocessor}{\#ifndef\ MYOSYN\_H}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00003}\mbox{\hyperlink{myosyn_8h_a8ce92e6284f2e4fcac8e9d4b1ea8c465}{00003}}\ \textcolor{preprocessor}{\#define\ MYOSYN\_H}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <quickDAQ.h>}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00008}\mbox{\hyperlink{myosyn_8h_a290dd4f4f650c840ed50147ddfd41cd7}{00008}}\ \textcolor{preprocessor}{\#define\ eprintf(\_STR,\ ...)\ fprintf(ERRSTREAM,\ \_STR,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00010}\mbox{\hyperlink{myosyn_8h_afb985dccc63b9b207b66d238a7fd7bf7}{00010}}\ \textcolor{preprocessor}{\#define\ DIGITAL\_HIGH\_VOLTS\ \ 5.0}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00011}\mbox{\hyperlink{myosyn_8h_a1586df1c0af8b2cc82d8a6c4acea9240}{00011}}\ \textcolor{preprocessor}{\#define\ DIGITAL\_LOW\_VOLTS\ \ \ 0.0}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00012}\mbox{\hyperlink{myosyn_8h_a90772de52ddd59260022dcc026b4c26f}{00012}}\ \textcolor{preprocessor}{\#define\ WIND\_UP\_VOLTS\ \ \ \ \ \ \ 0.8}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00013}\mbox{\hyperlink{myosyn_8h_a24efcccb7fc5682790d45954d52c1050}{00013}}\ \textcolor{preprocessor}{\#define\ WIND\_DOWN\_VOLTS\ \ \ \ \ 0.0}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00014}\mbox{\hyperlink{myosyn_8h_adfb0edf4bbd447988be48772e48186df}{00014}}\ \textcolor{preprocessor}{\#define\ DEFAULT\_MUSCLE\_TONE\ 1.0\ \ \ \ \ }\textcolor{comment}{//\ Newtons}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00015}\mbox{\hyperlink{myosyn_8h_ab8b1a97f8f799e3f9898b16fb7bd53ea}{00015}}\ \textcolor{preprocessor}{\#define\ MAX\_MUSCLE\_TENSION\ \ 30.0\ \ \ \ }\textcolor{comment}{//\ Newtons}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00016}\mbox{\hyperlink{myosyn_8h_ab9bf5bd8aac41d03b973ec314a67fb66}{00016}}\ \textcolor{preprocessor}{\#define\ MOTOR\_SHAFT\_DIAMTR\ \ 6\ \ \ \ \ \ \ }\textcolor{comment}{//\ millimeters}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00017}\mbox{\hyperlink{myosyn_8h_acfbe7fda6cd500eea7ee1b4eabe40357}{00017}}\ \textcolor{preprocessor}{\#define\ LOADCELL\_TARE\_NSAMP\ 100}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00022}\mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57c}{00022}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57c}{\_DAQarrangement}}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00023}00023\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00024}\mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57ca18f070aae02568c53d8c81a728411a12}{00024}}\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57ca18f070aae02568c53d8c81a728411a12}{RING\_OF\_FIRE}}\ \ \ \ =\ 0,}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00025}\mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57ca07452aebb53a803a8bd275d1ca8d4809}{00025}}\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57ca07452aebb53a803a8bd275d1ca8d4809}{QUADRUPED}}\ \ \ \ \ \ =\ 1,}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00026}00026\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57ca3ee2baf72f71dfee5f6d962521d77722}{MUSCLE\_MODULE}}\ \ =\ 2}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00027}\mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{00027}}\ \}\mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}};}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00032}\mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849d}{00032}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849d}{\_muscleStatus}}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00034}\mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849da0bc2033e857c535a8b76b56c22641475}{00034}}\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849da0bc2033e857c535a8b76b56c22641475}{MYOSYN\_DISABLED}}\ \ \ \ \ \ \ \ \ \ =\ 0,}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00035}\mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849dacd267ed3f80f1a8a93ba9e6570860625}{00035}}\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849dacd267ed3f80f1a8a93ba9e6570860625}{MYOSYN\_READY\_WINDDOWN}}\ \ =\ 1,}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00036}\mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849dabb38907eedbfd03709df6e286a11558d}{00036}}\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849dabb38907eedbfd03709df6e286a11558d}{MYOSYN\_ENABLED\_WINDUP}}\ \ =\ 2,}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00037}00037\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a6dd9d70ea25a4ff9a2497f0ab96c849da2ff7b35feb0bf53d58d3a0bd70003b9d}{MYOSYN\_CLOSEDLOOP}}\ \ \ \ \ \ =\ 3}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00038}\mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{00038}}\ \}\ \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscleStatus}};}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00040}00040\ \textcolor{comment}{//\ myosyn\ global\ variables}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00041}00041\ \textcolor{comment}{//extern\ int\ T5\_quickDAQstatus;}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00042}00042\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}}\ \mbox{\hyperlink{myosyn_8h_acfb3b309afa453bb32011f54d2a5e364}{myosynConfiguration}};}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00043}00043\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_aa470ea873cc1d84fe63cf41a1329e105}{numConfiguredMuscles}};}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00044}00044\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{myosyn_8h_ae4549e1b2c0fb6f7dd703628b7377391}{myosynLeader}};}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00045}00045\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{myosyn_8h_aae31cd79367699ad99478ea2432b7942}{myosyn\_samplingRate\_global}};}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00047}00047\ \textcolor{comment}{//\ Some\ global\ reconfigurable\ DAQ\ configuration/pin\ mapping\ variables}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00048}00048\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_ae759599401f65200042c0d246521ae59}{muscle\_mtr\_val}}\ \ \ \ [16][2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00049}00049\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_a24edb54cbc9295d912cfb6ac6c0a5fad}{muscle\_mtr\_en}}\ \ [16][2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00050}00050\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_a83ad07c834a9b5b4ebf8b2ef0b29d2a8}{muscle\_enc\_ring}}\ \ [\ 8][2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00051}00051\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_a3b9629e135a5d97122b53b952456d38f}{muscle\_enc\_kleo}}\ \ [\ 8][2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00052}00052\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_af27dab6ae7532fbc52b411f9983f5a7a}{muscle\_enc\_mtr}}\ \ \ \ [12][2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00053}00053\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_accbf95ef738ffce03a2aceb1ec68bf49}{muscle\_enc\_spl}}\ \ \ \ [12][2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00054}00054\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_a15f762c875ad245baeb6d9bf94f53798}{muscle\_ld\_cell}}\ \ \ \ [\ 8][2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00055}00055\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{double}\ \ \ \mbox{\hyperlink{myosyn_8h_a797404e664f40bc1921ddd8fd14b7e1e}{loadcell\_calib}}\ \ \ \ [\ 8][2];\ \textcolor{comment}{//\ gain,\ bias\ for\ each\ of\ 8\ load\ cells}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00056}00056\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{double}\ \ \ \mbox{\hyperlink{myosyn_8h_a26d52e1e8f6a7665322578cd69da33d1}{mtr\_trque\_calib}}\ \ [16][2];\ \textcolor{comment}{//\ gain,\ bias\ for\ each\ of\ 8\ load\ cells}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00058}00058\ \textcolor{comment}{//\ Global\ myosyn\ functions}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00065}00065\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn_8h_a0bc01c8405a05d3791f2b153f6a82f9c}{myosynNumMuscles}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00071}00071\ \mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}}\ \mbox{\hyperlink{myosyn_8h_a63f4f3b4be9270571ee3e82cd12d9816}{myosynGetConfiguration}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00077}00077\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_ad492e40407daefd5eaa813aeee02dd9c}{myosynSetConfiguration}}(\mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}}\ DAQconfiguration);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00084}00084\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{myosyn_8h_a3aacfdc80e33218f8b6ffffb6a8b0c42}{myosynSamplingRate}}(\textcolor{keywordtype}{double}\ newSamplingRate\ =\ \mbox{\hyperlink{myosyn_8h_aae31cd79367699ad99478ea2432b7942}{myosyn\_samplingRate\_global}});}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00089}00089\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_a75283dbd1a036bfa47049dcf498b40dd}{myosynStart}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00094}00094\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_aac01bf38d1e6f86c3a83788e8aede235}{myosynStop}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00100}00100\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_af7575140fea4a7c1ffbb9780921376c5}{myosynSetLeaderChannel}}(\textcolor{keywordtype}{int}\ newLeader);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00106}00106\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{myosyn_8h_a7046e404320debe09c4b49d454a8990d}{myosynGetLeaderChannel}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00111}00111\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_aa84d43814c9d938cce4905c2605d19a5}{myosynReadInputs}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00116}00116\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_a9b4ab052b1515776dfacdcdd9dd39ce7}{myosynWriteOutputs}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00122}00122\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{myosyn_8h_a9dc655ef449cbc431f8c364f33d5cce4}{myosynWaitForClock}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00124}00124\ \textcolor{comment}{//\ MyoSyn\ class}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00129}\mbox{\hyperlink{classmyosyn}{00129}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmyosyn}{myosyn}}\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00130}00130\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ channelID;}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00131}00131\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_abc7cd9df13e2b2c30cbeb1a8d0431563}{DAQarrangement}}*\ myDAQarrangement;}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00132}00132\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscleStatus}}\ status;}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00134}00134\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ maxChannels\_mtr,\ maxChannels\_enc;}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00136}00136\ \ \ \ \ unsigned\ (*motor\_enable\_config)[2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00137}00137\ \ \ \ \ unsigned\ (*motor\_value\_config)[2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00138}00138\ \ \ \ \ unsigned\ (*encoder\_config)[2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00139}00139\ \ \ \ \ unsigned\ (*encoder\_opt\_config)[2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00140}00140\ \ \ \ \ unsigned\ (*loadcell\_config)[2];}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00142}00142\ \ \ \ \ \textcolor{comment}{//\ Muscle\ constant\ parameters\ for\ closed-\/loop\ control}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00143}00143\ \ \ \ \ \textcolor{keywordtype}{double}\ muscleToneTension;}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00144}00144\ \ \ \ \ \textcolor{keywordtype}{double}\ maxMuscleTension;}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00146}00146\ \ \ \ \ \textcolor{comment}{//Sensor\ and\ motor\ calibration\ parameters}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00147}00147\ \ \ \ \ \textcolor{keywordtype}{double}\ loadcell\_offset,\ loadcell\_gain;\ \textcolor{comment}{//\ Voltage\ to\ force\ calibration\ for\ loadcell}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00148}00148\ \ \ \ \ \textcolor{keywordtype}{double}\ encoder\_offset\_angle;\ \textcolor{comment}{//\ zero\ out\ encoder\ angle\ after\ windup}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00149}00149\ \ \ \ \ \textcolor{keywordtype}{double}\ encoder\_angle\_to\_excursion\_ratio;\ \textcolor{comment}{//\ Angle\ to\ tendon\ excursion\ calibration\ for\ encoder}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00151}00151\ \ \ \ \ \textcolor{keywordtype}{double}\ mtrTension\_offset,\ mtrTension\_gain;\ \textcolor{comment}{//\ Voltage\ to\ motor\ Tension}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00153}00153\ \ \ \ \ \textcolor{comment}{//\ Live\ update\ variables}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00154}00154\ \ \ \ \ \textcolor{keywordtype}{double}\ refMuscleTension;}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00155}00155\ \ \ \ \ \textcolor{keywordtype}{double}\ myMuscleTension;}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00157}00157\ \ \ \ \ \textcolor{comment}{//\ Controller\ variables}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00158}00158\ \ \ \ \ \textcolor{keywordtype}{double}\ motorCommand;}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00160}00160\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00161}00161\ \ \ \ \ \textcolor{comment}{//\ Constructors\ and\ destructor}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00166}00166\ \ \ \ \ \mbox{\hyperlink{classmyosyn_a53c064ce15595167c52b00f4443580fe}{myosyn}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00167}00167\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00174}00174\ \ \ \ \ \mbox{\hyperlink{classmyosyn_a53c064ce15595167c52b00f4443580fe}{myosyn}}(\textcolor{keywordtype}{unsigned}\ muscleChannel);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00176}00176\ \ \ \ \ \mbox{\hyperlink{classmyosyn_a4f7e3cdb90d8bc3b95b67f26195665ac}{\string~myosyn}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00177}00177\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00178}00178\ \ \ \ \ \textcolor{comment}{//\ myosyn\ support\ functions}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00184}00184\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_add0d22f7fb81b603a3d62dd7129c1c39}{getChannelID}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00185}00185\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00190}00190\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscleStatus}}\ \ \ \ \mbox{\hyperlink{classmyosyn_a9b800afda40b957c6bbea4794e89a2b1}{getMuscleStatus}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00196}00196\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a9181416b760b5a3ed5751c73e6bd38d4}{setMuscleStatus}}(\mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscleStatus}}\ newStatus);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00198}00198\ \ \ \ \ \textcolor{comment}{//\ DAQ\ support\ functions\ and\ function\ pointers}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00204}\mbox{\hyperlink{classmyosyn_ac3f7729273ba171b28f9ed47ef4ac48e}{00204}}\ \ \ \ \ void\ \ \ \ \ \ \ \ \ \ \ \ (*\mbox{\hyperlink{classmyosyn_ac3f7729273ba171b28f9ed47ef4ac48e}{startDAQ}})();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00205}00205\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00210}\mbox{\hyperlink{classmyosyn_aabb17483617255b552a054a1d878fdae}{00210}}\ \ \ \ \ void\ \ \ \ \ \ \ \ \ \ \ \ (*\mbox{\hyperlink{classmyosyn_aabb17483617255b552a054a1d878fdae}{stopDAQ}})();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00212}00212\ \ \ \ \ \textcolor{comment}{//\ Muscle\ open-\/loop\ operations}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00213}00213\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00217}00217\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a068ddcda483e1de41cf8a5a1954195ed}{windUp}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00222}00222\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_ad3ca2f1bfb9cf9e0546a02230414569c}{windDown}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00224}00224\ \ \ \ \ \textcolor{comment}{//\ Functions\ for\ muscle\ closed-\/loop\ parameter\ settings}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00225}00225\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00231}00231\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a78984938b0b17198c76f0bc03b15e1b4}{setMuscleToneTension}}(\textcolor{keywordtype}{double}\ myMuscleTone\_value);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00237}00237\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a37b2075db1fc9183f56fe0f7686834f3}{getMuscleToneTension}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00243}00243\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_ad6160bef03384a6bfbfe2330a3e9d942}{setMaxMuscleTension}}(\textcolor{keywordtype}{double}\ max\_tension);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00249}00249\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a21d035c56e256fbac60e34de244cbbc3}{getMaxMuscleTension}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00255}00255\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a3c94e74103eff80a885ed031b7b9c8aa}{setReferenceTension}}(\textcolor{keywordtype}{double}\ myTension);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00262}00262\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_aa4cb0bd37afe5ee587853fe9ad6c3d61}{getReferenceTension}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00263}00263\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00264}00264\ \ \ \ \ \textcolor{comment}{//\ Functions\ to\ read\ and\ scale\ sensor\ data}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00271}00271\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a6133bc6f02de779b7c7109a5861f04f7}{calibrateTension}}(\textcolor{keywordtype}{double}\ loadCellGain\ =\ NAN);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00278}00278\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a4916ea49e1658bd2d527b179677f8c00}{loadcellV2F}}(\textcolor{keywordtype}{double}\ LCvoltage);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00284}00284\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a5d22a46b73b012b1fe1427f4a8f6b8e9}{readMuscleTension}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00290}00290\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_ac38b57ced8fd1f81b9a295fefb4615f9}{getMuscleTension}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00297}00297\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_af4a40e78c17c0b3b2c8530f318ec89fb}{calibrateExcursion}}(\textcolor{keywordtype}{double}\ spoolDiameter\ =\ NAN);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00304}00304\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a8cd47827761c6f47ccb3c169b5a121ee}{encoderAngle2Excursion}}(\textcolor{keywordtype}{double}\ encoderAngle);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00305}00305\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00310}00310\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_ad46386043f11221d25f3945f2c35b042}{readTendonExcursion}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00311}00311\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00316}00316\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_ab53798aea3f900ad0958da3ec50b03f3}{getTendonExcursion}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00318}00318\ \ \ \ \ \textcolor{comment}{//\ Functions\ for\ controller\ and\ output\ write\ ops}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00324}00324\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a8026ffacb3e524e93488ff5b73af3a27}{startMuscleControl}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00330}00330\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_affa7c9cd1c261d8c7c80286856a33a6d}{getMotorCommand}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00331}00331\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00336}00336\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_aefd3a64c23da2818c8a210d499850101}{setMotorCommand}}(\textcolor{keywordtype}{double}\ newCommand);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00337}00337\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00341}\mbox{\hyperlink{classmyosyn_afcb87668d2fe31bfbeba3edcc1b07107}{00341}}\ \ \ \ \ void\ \ \ \ \ \ \ \ \ \ \ \ (*\mbox{\hyperlink{classmyosyn_afcb87668d2fe31bfbeba3edcc1b07107}{controlRoutine}})(\textcolor{keywordtype}{unsigned}\ numOutputs,\ \textcolor{keywordtype}{double}*\ outputs,\ \textcolor{keywordtype}{unsigned}\ numInputs,\ \textcolor{keywordtype}{double}*\ inputs);}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00342}00342\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00346}00346\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a9535f0da69d656ffa56393b2d7fc59f7}{executeControl}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00347}00347\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00352}00352\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmyosyn_a1d84c786e2c2aff13c2fca51364f8609}{stopMuscleControl}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00353}00353\ \};}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00355}\mbox{\hyperlink{class_t5encoder}{00355}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_t5encoder}{T5encoder}}\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00356}00356\ \ \ \ \ \mbox{\hyperlink{class_t5encoder}{T5encoder}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00357}00357\ \};}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00360}\mbox{\hyperlink{class_t5control}{00360}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_t5control}{T5control}}\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00361}00361\ \ \ \ \ \mbox{\hyperlink{class_t5control}{T5control}}();}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00362}00362\ \};}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00363}00363\ }
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00364}00364\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ !MYOSYN\_H}}
+\DoxyCodeLine{\Hypertarget{myosyn_8h_source_l00365}00365\ }
 
 \end{DoxyCode}

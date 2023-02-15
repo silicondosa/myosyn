@@ -1,0 +1,123 @@
+\hypertarget{myosyn__test_8cpp_source}{}\doxysection{myosyn\+\_\+test.\+cpp}
+\label{myosyn__test_8cpp_source}\index{C:/Users/tyros/codebase/myosyn/myosyn\_test/myosyn\_test.cpp@{C:/Users/tyros/codebase/myosyn/myosyn\_test/myosyn\_test.cpp}}
+\mbox{\hyperlink{myosyn__test_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00001}00001\ \textcolor{comment}{//\ myosyn\_test.cpp\ :\ This\ file\ contains\ the\ 'main'\ function.\ Program\ execution\ begins\ and\ ends\ there.}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00002}00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{myosyn_8h}{myosyn.h}}>}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <macrodef.h>}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <quickDAQ.h>}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00010}00010\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00012}\mbox{\hyperlink{myosyn__test_8cpp_a84eabba541dbbf2977579c8facdd3b26}{00012}}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn__test_8cpp_a84eabba541dbbf2977579c8facdd3b26}{nMuscles}}\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00013}\mbox{\hyperlink{myosyn__test_8cpp_a1254e82a6a76972295fb86a8d2a2d896}{00013}}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{myosyn__test_8cpp_a1254e82a6a76972295fb86a8d2a2d896}{muscleID}}[\mbox{\hyperlink{myosyn__test_8cpp_a84eabba541dbbf2977579c8facdd3b26}{nMuscles}}]\ =\ \{\ 3,2\ \};}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00016}\mbox{\hyperlink{myosyn__test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{00016}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{myosyn__test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00017}00017\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00018}00018\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Hello\ World!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00019}00019\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ i,\ j,\ updateCount;}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordtype}{double}\ t;}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordtype}{double}\ mySamplingRate\ =\ 1000.0;\ \textcolor{comment}{//\ Hz}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00022}00022\ \ \ \ \ \textcolor{keywordtype}{double}\ samplePeriod\ =\ 1\ /\ mySamplingRate;}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00023}00023\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ mySampleCount\ =\ 30000;}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{double}\ mc[\mbox{\hyperlink{myosyn__test_8cpp_a84eabba541dbbf2977579c8facdd3b26}{nMuscles}}];}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00025}00025\ \ \ \ \ \mbox{\hyperlink{classmyosyn}{myosyn}}\ *m\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classmyosyn}{myosyn}}[\mbox{\hyperlink{myosyn__test_8cpp_a84eabba541dbbf2977579c8facdd3b26}{nMuscles}}];}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00026}00026\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{comment}{//\ Stuff\ for\ measuring\ joint\ angle\ sensor}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00028}00028\ \ \ \ \ \textcolor{keywordtype}{double}\ jtAngle;}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//quickDAQinit();}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//pinMode(5,\ ANALOG\_IN,\ 31);}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//\ Initialize\ myosyn\ library}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00034}00034\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_ad492e40407daefd5eaa813aeee02dd9c}{myosynSetConfiguration}}(\mbox{\hyperlink{myosyn_8h_a1b5b9f20bb727a23c7c53bf11984d57ca18f070aae02568c53d8c81a728411a12}{RING\_OF\_FIRE}});}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00035}00035\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a3aacfdc80e33218f8b6ffffb6a8b0c42}{myosynSamplingRate}}(mySamplingRate);}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ \mbox{\hyperlink{myosyn__test_8cpp_a84eabba541dbbf2977579c8facdd3b26}{nMuscles}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}(\&(m[i]))\ \mbox{\hyperlink{classmyosyn}{myosyn}}(\mbox{\hyperlink{myosyn__test_8cpp_a1254e82a6a76972295fb86a8d2a2d896}{muscleID}}[i]);\ \textcolor{comment}{//\ Based\ on\ https://stackoverflow.com/a/35089001/4028978}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00040}00040\ \ \ \ \ pinMode(5,\ ANALOG\_IN,\ 31);}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00042}00042\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Muscles\ initialized.\ Press\ any\ key\ to\ calibrate\ loadcells\ and\ wind\ up\ motor\ for\ each\ muscle...\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00043}00043\ \ \ \ \ getchar();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ \mbox{\hyperlink{myosyn__test_8cpp_a84eabba541dbbf2977579c8facdd3b26}{nMuscles}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ m[i].\mbox{\hyperlink{classmyosyn_a6133bc6f02de779b7c7109a5861f04f7}{calibrateTension}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ m[i].\mbox{\hyperlink{classmyosyn_a068ddcda483e1de41cf8a5a1954195ed}{windUp}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)t-\/\ Muscle\ "{}}\ <<\ i\ <<\ \textcolor{stringliteral}{"{}\ wound\ up\ and\ LC\ calibrated...\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00048}00048\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00049}00049\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a9dc655ef449cbc431f8c364f33d5cce4}{myosynWaitForClock}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00051}00051\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Muscle\ windup\ complete!\ Press\ any\ key\ to\ calibrate\ encoders\ for\ each\ muscle...\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00052}00052\ \ \ \ \ getchar();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00053}00053\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a9dc655ef449cbc431f8c364f33d5cce4}{myosynWaitForClock}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ \mbox{\hyperlink{myosyn__test_8cpp_a84eabba541dbbf2977579c8facdd3b26}{nMuscles}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ m[i].\mbox{\hyperlink{classmyosyn_af4a40e78c17c0b3b2c8530f318ec89fb}{calibrateExcursion}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)t-\/\ Muscle\ "{}}\ <<\ i\ <<\ \textcolor{stringliteral}{"{}\ calibrated...\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00059}00059\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Calibration\ complete!\ Let's\ read\ data\ for\ "{}}\ <<\ mySampleCount/mySamplingRate\ <<\ \textcolor{stringliteral}{"{}seconds...\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00060}00060\ \ \ \ \ getchar();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00061}00061\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a9dc655ef449cbc431f8c364f33d5cce4}{myosynWaitForClock}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00062}00062\ \ \ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0,\ t\ =\ 0.0,\ updateCount\ =\ 0;\ i\ <\ mySampleCount;\ i++,\ t\ +=\ samplePeriod)\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Changing\ motor\ command\ every\ second}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ \mbox{\hyperlink{myosyn_8h_a0bc01c8405a05d3791f2b153f6a82f9c}{myosynNumMuscles}}();\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[j].\mbox{\hyperlink{classmyosyn_a8026ffacb3e524e93488ff5b73af3a27}{startMuscleControl}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ write\ motor\ command}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//mc[j]\ =\ m[j].getMuscleToneTension()\ +\ (updateCount\ \%\ 2\ ==\ 0)\ ?\ ((j\ \%\ 2\ ==\ 0)\ ?\ (0.1\ *\ (updateCount))\ :\ 0)\ :\ ((j\ \%\ 2\ ==\ 0)\ ?\ 0\ :\ (0.1\ *\ (updateCount)));}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ mc[j]\ =\ max(((j\%2==0)?4:4)\ *\ cos(2\ *\ 3.1416\ *\ 1\ *\ t\ +\ ((j\%2==0)?0:3.1416)),\ 0);}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//cortexDrive[1]\ =\ max((cortexVoluntaryAmp\ -\/\ 0)\ *\ sin(2\ *\ 3.1416\ *\ cortexVoluntaryFreq\ *\ tick\ +\ 3.1416),\ 0);}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ m[j].\mbox{\hyperlink{classmyosyn_aefd3a64c23da2818c8a210d499850101}{setMotorCommand}}(mc[j]);}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ m[0].\mbox{\hyperlink{classmyosyn_a9535f0da69d656ffa56393b2d7fc59f7}{executeControl}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a9dc655ef449cbc431f8c364f33d5cce4}{myosynWaitForClock}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ m[0].\mbox{\hyperlink{classmyosyn_a5d22a46b73b012b1fe1427f4a8f6b8e9}{readMuscleTension}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ m[0].\mbox{\hyperlink{classmyosyn_ad46386043f11221d25f3945f2c35b042}{readTendonExcursion}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ jtAngle\ =\ (double)\ getAnalogInPin(5,\ 31);}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%0.3lf:\ q1\ \%+06.2lf\ "{}},\ t,\ jtAngle);}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ \mbox{\hyperlink{myosyn_8h_a0bc01c8405a05d3791f2b153f6a82f9c}{myosynNumMuscles}}();\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SCR:\ DO\ PRINTING\ HERE}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}|\ M(\%d):\ MC\ \%+06.2lfV,\ MT\ \%+06.2lfN,\ TE\ \%+06.2lfmm\ "{}},\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{int})m[j].getChannelID(),\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[j].getMotorCommand(),\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[j].getMuscleTension(),\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m[j].getTendonExcursion());}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)r"{}});}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00096}00096\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00097}00097\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nSampling\ complete!\ Press\ any\ key\ to\ wind\ down\ motors.\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00098}00098\ \ \ \ \ getchar();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00099}00099\ \ \ \ \ \mbox{\hyperlink{myosyn_8h_a9dc655ef449cbc431f8c364f33d5cce4}{myosynWaitForClock}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00100}00100\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ \mbox{\hyperlink{myosyn__test_8cpp_a84eabba541dbbf2977579c8facdd3b26}{nMuscles}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ m[i].\mbox{\hyperlink{classmyosyn_ad3ca2f1bfb9cf9e0546a02230414569c}{windDown}}();}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00102}00102\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00103}00103\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00104}00104\ \ \ \ \ \textcolor{keyword}{delete}[]\ m;}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00105}00105\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00106}00106\ \}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00108}00108\ \textcolor{comment}{//\ Run\ program:\ Ctrl\ +\ F5\ or\ Debug\ >\ Start\ Without\ Debugging\ menu}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00109}00109\ \textcolor{comment}{//\ Debug\ program:\ F5\ or\ Debug\ >\ Start\ Debugging\ menu}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00111}00111\ \textcolor{comment}{//\ Tips\ for\ Getting\ Started:\ }}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00112}00112\ \textcolor{comment}{//\ \ \ 1.\ Use\ the\ Solution\ Explorer\ window\ to\ add/manage\ files}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00113}00113\ \textcolor{comment}{//\ \ \ 2.\ Use\ the\ Team\ Explorer\ window\ to\ connect\ to\ source\ control}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00114}00114\ \textcolor{comment}{//\ \ \ 3.\ Use\ the\ Output\ window\ to\ see\ build\ output\ and\ other\ messages}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00115}00115\ \textcolor{comment}{//\ \ \ 4.\ Use\ the\ Error\ List\ window\ to\ view\ errors}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00116}00116\ \textcolor{comment}{//\ \ \ 5.\ Go\ to\ Project\ >\ Add\ New\ Item\ to\ create\ new\ code\ files,\ or\ Project\ >\ Add\ Existing\ Item\ to\ add\ existing\ code\ files\ to\ the\ project}}
+\DoxyCodeLine{\Hypertarget{myosyn__test_8cpp_source_l00117}00117\ \textcolor{comment}{//\ \ \ 6.\ In\ the\ future,\ to\ open\ this\ project\ again,\ go\ to\ File\ >\ Open\ >\ Project\ and\ select\ the\ .sln\ file}}
+
+\end{DoxyCode}

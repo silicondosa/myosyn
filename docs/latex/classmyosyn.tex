@@ -80,6 +80,10 @@ void($\ast$ \mbox{\hyperlink{classmyosyn_afcb87668d2fe31bfbeba3edcc1b07107}{cont
 \doxysubsection{Detailed Description}
 This is the class object for each muscle channel. 
 
+Definition at line \mbox{\hyperlink{myosyn_8h_source_l00129}{129}} of file \mbox{\hyperlink{myosyn_8h_source}{myosyn.\+h}}.
+
+
+
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classmyosyn_a53c064ce15595167c52b00f4443580fe}\label{classmyosyn_a53c064ce15595167c52b00f4443580fe}} 
 \index{myosyn@{myosyn}!myosyn@{myosyn}}
@@ -90,6 +94,10 @@ This is the class object for each muscle channel.
 
 
 Default constructor of the \mbox{\hyperlink{classmyosyn}{myosyn}} class. Auto-\/selects muscle channel when setting up a muscle channel. 
+
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00214}{214}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
 
 \mbox{\Hypertarget{classmyosyn_a104ac0efd09a49ecfd327950cc7b7a0c}\label{classmyosyn_a104ac0efd09a49ecfd327950cc7b7a0c}} 
 \index{myosyn@{myosyn}!myosyn@{myosyn}}
@@ -106,11 +114,19 @@ Constructor for the \mbox{\hyperlink{classmyosyn}{myosyn}} class. User provides 
 {\em muscle\+Channel} & The channel number/\+ID of the muscle channel that is to be configured. \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00219}{219}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a4f7e3cdb90d8bc3b95b67f26195665ac}\label{classmyosyn_a4f7e3cdb90d8bc3b95b67f26195665ac}} 
 \index{myosyn@{myosyn}!````~myosyn@{$\sim$myosyn}}
 \index{````~myosyn@{$\sim$myosyn}!myosyn@{myosyn}}
 \doxysubsubsection{\texorpdfstring{$\sim$myosyn()}{~myosyn()}}
 {\footnotesize\ttfamily myosyn\+::$\sim$myosyn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00342}{342}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
 
 
 
@@ -130,6 +146,10 @@ Calibrates the rotary incremental shaft encoder to zero degrees and set the conv
 {\em spool\+Diameter} & The diameter of the shaft (in mm) that is used to spool the tendon. \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00536}{536}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a6133bc6f02de779b7c7109a5861f04f7}\label{classmyosyn_a6133bc6f02de779b7c7109a5861f04f7}} 
 \index{myosyn@{myosyn}!calibrateTension@{calibrateTension}}
 \index{calibrateTension@{calibrateTension}!myosyn@{myosyn}}
@@ -145,6 +165,10 @@ Sets the gain to calibrate the transformation of the loadcell voltage to force i
 {\em load\+Cell\+Gain} & The gain value (units\+: N/V) \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00468}{468}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a8cd47827761c6f47ccb3c169b5a121ee}\label{classmyosyn_a8cd47827761c6f47ccb3c169b5a121ee}} 
 \index{myosyn@{myosyn}!encoderAngle2Excursion@{encoderAngle2Excursion}}
 \index{encoderAngle2Excursion@{encoderAngle2Excursion}!myosyn@{myosyn}}
@@ -163,6 +187,10 @@ Returns the tendon excursion given an encoder angle.
 \begin{DoxyReturn}{Returns}
 Tendon excursion (in mm). 
 \end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00563}{563}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a9535f0da69d656ffa56393b2d7fc59f7}\label{classmyosyn_a9535f0da69d656ffa56393b2d7fc59f7}} 
 \index{myosyn@{myosyn}!executeControl@{executeControl}}
 \index{executeControl@{executeControl}!myosyn@{myosyn}}
@@ -172,6 +200,10 @@ Tendon excursion (in mm).
 
 
 Executes the control law set by the \mbox{\hyperlink{classmyosyn_afcb87668d2fe31bfbeba3edcc1b07107}{control\+Routine}} function pointer. 
+
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00624}{624}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
 
 \mbox{\Hypertarget{classmyosyn_add0d22f7fb81b603a3d62dd7129c1c39}\label{classmyosyn_add0d22f7fb81b603a3d62dd7129c1c39}} 
 \index{myosyn@{myosyn}!getChannelID@{getChannelID}}
@@ -186,6 +218,10 @@ Returns the channel ID number of the muscle channel.
 \begin{DoxyReturn}{Returns}
 The channel number of the muscle (values greater than or equal to 0 possible). 
 \end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00364}{364}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a21d035c56e256fbac60e34de244cbbc3}\label{classmyosyn_a21d035c56e256fbac60e34de244cbbc3}} 
 \index{myosyn@{myosyn}!getMaxMuscleTension@{getMaxMuscleTension}}
 \index{getMaxMuscleTension@{getMaxMuscleTension}!myosyn@{myosyn}}
@@ -199,6 +235,10 @@ Returns the upper limit of possible muscle tensions by the motor of the muscle c
 \begin{DoxyReturn}{Returns}
 The upper limit (in newtons) of the motor of the muscle channel. 
 \end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00442}{442}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_affa7c9cd1c261d8c7c80286856a33a6d}\label{classmyosyn_affa7c9cd1c261d8c7c80286856a33a6d}} 
 \index{myosyn@{myosyn}!getMotorCommand@{getMotorCommand}}
 \index{getMotorCommand@{getMotorCommand}!myosyn@{myosyn}}
@@ -212,6 +252,10 @@ Returns the current motor command that is being commanded to the motor.
 \begin{DoxyReturn}{Returns}
 Current motor command by the motor controller (in volts) 
 \end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00605}{605}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a9b800afda40b957c6bbea4794e89a2b1}\label{classmyosyn_a9b800afda40b957c6bbea4794e89a2b1}} 
 \index{myosyn@{myosyn}!getMuscleStatus@{getMuscleStatus}}
 \index{getMuscleStatus@{getMuscleStatus}!myosyn@{myosyn}}
@@ -225,6 +269,10 @@ Returns the status of the muscle channel. The possible statuses are listed in th
 \begin{DoxyReturn}{Returns}
 Returns the muscle status as a \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscle\+Status}} type-\/defined enum. 
 \end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00369}{369}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_ac38b57ced8fd1f81b9a295fefb4615f9}\label{classmyosyn_ac38b57ced8fd1f81b9a295fefb4615f9}} 
 \index{myosyn@{myosyn}!getMuscleTension@{getMuscleTension}}
 \index{getMuscleTension@{getMuscleTension}!myosyn@{myosyn}}
@@ -238,6 +286,10 @@ Returns the current muscle tension value (in newtons) in the internal memory.
 \begin{DoxyReturn}{Returns}
 The current muscle tension value (in newtons) stored in the muscle channel object. 
 \end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00520}{520}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a37b2075db1fc9183f56fe0f7686834f3}\label{classmyosyn_a37b2075db1fc9183f56fe0f7686834f3}} 
 \index{myosyn@{myosyn}!getMuscleToneTension@{getMuscleToneTension}}
 \index{getMuscleToneTension@{getMuscleToneTension}!myosyn@{myosyn}}
@@ -251,6 +303,10 @@ Returns the current muscle tone of the muscle channel.
 \begin{DoxyReturn}{Returns}
 The currently set muscle tone of the channel (in newtons). 
 \end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00432}{432}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_aa4cb0bd37afe5ee587853fe9ad6c3d61}\label{classmyosyn_aa4cb0bd37afe5ee587853fe9ad6c3d61}} 
 \index{myosyn@{myosyn}!getReferenceTension@{getReferenceTension}}
 \index{getReferenceTension@{getReferenceTension}!myosyn@{myosyn}}
@@ -264,6 +320,10 @@ Returns the current reference/target muscle tension that the motor controller is
 \begin{DoxyReturn}{Returns}
 The current reference/target muscle tension (in newtons) that the motor controller is trying to achieve/maintain. 
 \end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00462}{462}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_ab53798aea3f900ad0958da3ec50b03f3}\label{classmyosyn_ab53798aea3f900ad0958da3ec50b03f3}} 
 \index{myosyn@{myosyn}!getTendonExcursion@{getTendonExcursion}}
 \index{getTendonExcursion@{getTendonExcursion}!myosyn@{myosyn}}
@@ -277,6 +337,10 @@ Returns the current tendon excursion value (in mm) in the internal memory.
 \begin{DoxyReturn}{Returns}
 The current tendon excursion value (in mm) stored in the muscle channel object. 
 \end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00578}{578}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a4916ea49e1658bd2d527b179677f8c00}\label{classmyosyn_a4916ea49e1658bd2d527b179677f8c00}} 
 \index{myosyn@{myosyn}!loadcellV2F@{loadcellV2F}}
 \index{loadcellV2F@{loadcellV2F}!myosyn@{myosyn}}
@@ -295,6 +359,10 @@ Returns the force on the loadcell when supplied with the voltage based on the ga
 \begin{DoxyReturn}{Returns}
 The force/tension (in newtons) corresponding to the voltage supplied. 
 \end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00501}{501}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a5d22a46b73b012b1fe1427f4a8f6b8e9}\label{classmyosyn_a5d22a46b73b012b1fe1427f4a8f6b8e9}} 
 \index{myosyn@{myosyn}!readMuscleTension@{readMuscleTension}}
 \index{readMuscleTension@{readMuscleTension}!myosyn@{myosyn}}
@@ -305,6 +373,10 @@ The force/tension (in newtons) corresponding to the voltage supplied.
 
 Uses the DAQ subsystem to read the muscle tension detected by the loadcell and puts it in the internal memory. Use \mbox{\hyperlink{classmyosyn_ac38b57ced8fd1f81b9a295fefb4615f9}{get\+Muscle\+Tension}} to read the value in the internal memory. 
 
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00506}{506}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_ad46386043f11221d25f3945f2c35b042}\label{classmyosyn_ad46386043f11221d25f3945f2c35b042}} 
 \index{myosyn@{myosyn}!readTendonExcursion@{readTendonExcursion}}
 \index{readTendonExcursion@{readTendonExcursion}!myosyn@{myosyn}}
@@ -314,6 +386,10 @@ Uses the DAQ subsystem to read the muscle tension detected by the loadcell and p
 
 
 Uses the DAQ subsystem to read the tendon excursion detected by the shaft encoder and puts it in the internal memory. 
+
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00568}{568}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
 
 \mbox{\Hypertarget{classmyosyn_ad6160bef03384a6bfbfe2330a3e9d942}\label{classmyosyn_ad6160bef03384a6bfbfe2330a3e9d942}} 
 \index{myosyn@{myosyn}!setMaxMuscleTension@{setMaxMuscleTension}}
@@ -330,6 +406,10 @@ Sets the upper limit to possible muscle tension of the motor of the muscle chann
 {\em max\+\_\+tension} & The upper limit (in newtons) of the muscle tension of the motor. \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00437}{437}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_aefd3a64c23da2818c8a210d499850101}\label{classmyosyn_aefd3a64c23da2818c8a210d499850101}} 
 \index{myosyn@{myosyn}!setMotorCommand@{setMotorCommand}}
 \index{setMotorCommand@{setMotorCommand}!myosyn@{myosyn}}
@@ -345,6 +425,10 @@ Sets the current motor command to be sent to the DC motor.
 {\em new\+Command} & The new motor command (in volts) to be send to the motor. \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00610}{610}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a9181416b760b5a3ed5751c73e6bd38d4}\label{classmyosyn_a9181416b760b5a3ed5751c73e6bd38d4}} 
 \index{myosyn@{myosyn}!setMuscleStatus@{setMuscleStatus}}
 \index{setMuscleStatus@{setMuscleStatus}!myosyn@{myosyn}}
@@ -360,6 +444,10 @@ Function sets the status of the muscle channel object.
 {\em new\+Status} & The new status of the object of type \mbox{\hyperlink{myosyn_8h_a5a0787d20537340300e0998221a24ffe}{muscle\+Status}} . \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00374}{374}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a78984938b0b17198c76f0bc03b15e1b4}\label{classmyosyn_a78984938b0b17198c76f0bc03b15e1b4}} 
 \index{myosyn@{myosyn}!setMuscleToneTension@{setMuscleToneTension}}
 \index{setMuscleToneTension@{setMuscleToneTension}!myosyn@{myosyn}}
@@ -375,6 +463,10 @@ Sets the minimum tension held by the motor of a muscle channel. Corresponds to m
 {\em my\+Muscle\+Tone\+\_\+value} & Muscle tone and minimum muscle tension allowed (in newtons). \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00427}{427}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a3c94e74103eff80a885ed031b7b9c8aa}\label{classmyosyn_a3c94e74103eff80a885ed031b7b9c8aa}} 
 \index{myosyn@{myosyn}!setReferenceTension@{setReferenceTension}}
 \index{setReferenceTension@{setReferenceTension}!myosyn@{myosyn}}
@@ -390,6 +482,10 @@ The current reference/target muscle tension which the internal closed-\/loop con
 {\em my\+Tension} & The reference/target muscle tension (in newtons) which the motor controller should try to achieve. \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00447}{447}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a8026ffacb3e524e93488ff5b73af3a27}\label{classmyosyn_a8026ffacb3e524e93488ff5b73af3a27}} 
 \index{myosyn@{myosyn}!startMuscleControl@{startMuscleControl}}
 \index{startMuscleControl@{startMuscleControl}!myosyn@{myosyn}}
@@ -399,6 +495,10 @@ The current reference/target muscle tension which the internal closed-\/loop con
 
 
 Starts the force controller and update the status of the muscle channel. This function only needs to be called for one of the muscle channels. 
+
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00589}{589}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
 
 \mbox{\Hypertarget{classmyosyn_a1d84c786e2c2aff13c2fca51364f8609}\label{classmyosyn_a1d84c786e2c2aff13c2fca51364f8609}} 
 \index{myosyn@{myosyn}!stopMuscleControl@{stopMuscleControl}}
@@ -410,6 +510,10 @@ Starts the force controller and update the status of the muscle channel. This fu
 
 Stops the force controller and update the status of the muscle channel. This function only needs to be called for one of the muscle channels. 
 
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00634}{634}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_ad3ca2f1bfb9cf9e0546a02230414569c}\label{classmyosyn_ad3ca2f1bfb9cf9e0546a02230414569c}} 
 \index{myosyn@{myosyn}!windDown@{windDown}}
 \index{windDown@{windDown}!myosyn@{myosyn}}
@@ -420,6 +524,10 @@ Stops the force controller and update the status of the muscle channel. This fun
 
 Function stops/deenergizes the motor of the muscle channel to wind down the tendons before system shutdown. 
 
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00400}{400}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
+
 \mbox{\Hypertarget{classmyosyn_a068ddcda483e1de41cf8a5a1954195ed}\label{classmyosyn_a068ddcda483e1de41cf8a5a1954195ed}} 
 \index{myosyn@{myosyn}!windUp@{windUp}}
 \index{windUp@{windUp}!myosyn@{myosyn}}
@@ -429,6 +537,10 @@ Function stops/deenergizes the motor of the muscle channel to wind down the tend
 
 
 Function starts/energizes the motor of the muscle channel to wind up the tendons to prevent slack. 
+
+
+
+Definition at line \mbox{\hyperlink{myosyn_8cpp_source_l00380}{380}} of file \mbox{\hyperlink{myosyn_8cpp_source}{myosyn.\+cpp}}.
 
 
 
@@ -443,6 +555,10 @@ Function starts/energizes the motor of the muscle channel to wind up the tendons
 
 \mbox{[}FOR FUTURE USE ONLY\mbox{]} Function pointer to any control law you might want the muscle channel to use. 
 
+
+
+Definition at line \mbox{\hyperlink{myosyn_8h_source_l00341}{341}} of file \mbox{\hyperlink{myosyn_8h_source}{myosyn.\+h}}.
+
 \mbox{\Hypertarget{classmyosyn_ac3f7729273ba171b28f9ed47ef4ac48e}\label{classmyosyn_ac3f7729273ba171b28f9ed47ef4ac48e}} 
 \index{myosyn@{myosyn}!startDAQ@{startDAQ}}
 \index{startDAQ@{startDAQ}!myosyn@{myosyn}}
@@ -453,6 +569,10 @@ Function starts/energizes the motor of the muscle channel to wind up the tendons
 
 Function pointer to the global \mbox{\hyperlink{myosyn_8h_a75283dbd1a036bfa47049dcf498b40dd}{myosyn\+Start}} function to start data acquisition. Only need to call this for one of the class objects. 
 
+
+
+Definition at line \mbox{\hyperlink{myosyn_8h_source_l00204}{204}} of file \mbox{\hyperlink{myosyn_8h_source}{myosyn.\+h}}.
+
 \mbox{\Hypertarget{classmyosyn_aabb17483617255b552a054a1d878fdae}\label{classmyosyn_aabb17483617255b552a054a1d878fdae}} 
 \index{myosyn@{myosyn}!stopDAQ@{stopDAQ}}
 \index{stopDAQ@{stopDAQ}!myosyn@{myosyn}}
@@ -462,6 +582,10 @@ Function pointer to the global \mbox{\hyperlink{myosyn_8h_a75283dbd1a036bfa47049
 
 
 Function pointer to the global \mbox{\hyperlink{myosyn_8h_aac01bf38d1e6f86c3a83788e8aede235}{myosyn\+Stop}} function to stop data acquisition. Only need to call this for one of the class objects. 
+
+
+
+Definition at line \mbox{\hyperlink{myosyn_8h_source_l00210}{210}} of file \mbox{\hyperlink{myosyn_8h_source}{myosyn.\+h}}.
 
 
 

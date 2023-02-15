@@ -5,13 +5,21 @@ A control API for a novel modular synthetic muscle, MyoSyn is a portmanteau of S
 ## Dependencies
 
 MyoSyn requires the following libraries:
-
-- QuickDAQ: A custom data acquisition library able to utilize National Instruments DAQ hardware
-- MiniPID: A PID control and tuning library
-- cLinkedList: A small C library that implements a simple double linked list
+- NI-DAQmx: 
+- QuickDAQ: A custom data acquisition library able to utilize National Instruments DAQ hardware (included as submodule)
+- MiniPID: A PID control and tuning library (included as submodule)
+- cLinkedList: A small C library that implements a simple double linked list (included as submodule)
 
 ## Installation
 
 In addition to the API, the dependencies are also included in this repo as git submodules.
 
-To clone this repo, use the `git clone --recursive` command.
+To clone this repo, use the `git clone --recursive-submodules` command.
+
+## Documentation
+
+You can find the DoxyGen-generated documentation [here](https://solaremperor.github.io/myosyn/), complete with an example.
+
+## LICENSE
+
+This library is distributed under the GNU Lesser GPL v3. The license file is located in the root directory of this repo.

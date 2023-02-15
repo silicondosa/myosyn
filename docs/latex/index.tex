@@ -2,13 +2,14 @@
 \Hypertarget{index_md_C__Users_tyros_codebase_myosyn_README}%
  A control API for a novel modular synthetic muscle, Myo\+Syn is a portmanteau of Synthetic (as in man-\/made) and Myosin (a protein fundamental to muscle function, which is also how you pronounce Myo\+Syn). This C++ API allows us to actuate this muscle with closed-\/loop control using our custom Quick\+DAQ software.\hypertarget{index_autotoc_md1}{}\doxysection{Dependencies}\label{index_autotoc_md1}
 Myo\+Syn requires the following libraries\+:
-
-
 \begin{DoxyItemize}
-\item Quick\+DAQ\+: A custom data acquisition library able to utilize National Instruments DAQ hardware
-\item Mini\+PID\+: A PID control and tuning library
-\item c\+Linked\+List\+: A small C library that implements a simple double linked list
+\item NI-\/\+DAQmx\+:
+\item Quick\+DAQ\+: A custom data acquisition library able to utilize National Instruments DAQ hardware (included as submodule)
+\item Mini\+PID\+: A PID control and tuning library (included as submodule)
+\item c\+Linked\+List\+: A small C library that implements a simple double linked list (included as submodule)
 \end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysection{Installation}\label{index_autotoc_md2}
 In addition to the API, the dependencies are also included in this repo as git submodules.
 
-To clone this repo, use the {\ttfamily git clone -\/-\/recursive} command. 
+To clone this repo, use the {\ttfamily git clone -\/-\/recursive-\/submodules} command.\hypertarget{index_autotoc_md3}{}\doxysection{Documentation}\label{index_autotoc_md3}
+You can find the Doxy\+Gen-\/generated documentation \href{https://solaremperor.github.io/myosyn/}{\texttt{ here}}, complete with an example.\hypertarget{index_autotoc_md4}{}\doxysection{LICENSE}\label{index_autotoc_md4}
+This library is distributed under the GNU Lesser GPL v3. The license file is located in the root directory of this repo. 

@@ -18,7 +18,7 @@ To clone this repo, use the `git clone --recursive-submodules` command.
 
 ## Documentation
 
-You can find the DoxyGen-generated documentation [here](https://solaremperor.github.io/myosyn/), complete with an example.
+You can find the DoxyGen-generated documentation [here](https://solaremperor.github.io/myosyn/), complete with an [example](https://solaremperor.github.io/myosyn/myosyn__test_8cpp_source.html).
 
 ## LICENSE
 

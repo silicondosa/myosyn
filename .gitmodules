@@ -1,6 +1,0 @@
-[submodule "lib/quickDAQ"]
-	path = lib/quickDAQ
-	url = git@github.com:silicondosa/quickDAQ.git
-[submodule "lib/cLinkedList"]
-	path = lib/cLinkedList
-	url = git@github.com:silicondosa/cLinkedList.git

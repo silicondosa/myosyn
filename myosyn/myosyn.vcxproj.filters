@@ -23,12 +23,6 @@
     <ClInclude Include="..\include\myosyn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\lib\cLinkedList\include\cLinkedList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\cLinkedList\include\macrodef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\lib\quickDAQ\include\msunistd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -47,14 +41,11 @@
     <ClInclude Include="..\lib\quickDAQ\lib\NI-DAQmx\include\NIDAQmx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\lib\cLinkedList\bin\cLinkedList.lib" />
-    <Library Include="..\lib\quickDAQ\bin\win32\quickDAQ.lib" />
-    <Library Include="..\lib\quickDAQ\lib\NI-DAQmx\NIDAQmx.lib" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\lib\quickDAQ\bin\win32\quickDAQ.idb" />
-    <None Include="..\lib\quickDAQ\bin\win32\quickDAQ.pdb" />
+    <ClInclude Include="..\lib\quickDAQ\lib\cLinkedList\include\cLinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\quickDAQ\lib\cLinkedList\include\macrodef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

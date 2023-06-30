@@ -71,10 +71,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)..\bin\win32\</OutDir>
+    <OutDir>$(SolutionDir)..\bin\msvc\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)..\bin\win32\</OutDir>
+    <OutDir>$(SolutionDir)..\bin\msvc\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)..\bin\msvc\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)..\bin\msvc\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -82,13 +88,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\include;$(SolutionDir)..\lib\quickDAQ\include;$(SolutionDir)..\lib\cLinkedList\include;$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\quickDAQ\lib\cLinkedList\include;$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\include;$(SolutionDir)..\lib\quickDAQ\include;$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <Optimization>MaxSpeed</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\suraj\codebase\myosyn\bin\win32;C:\Users\suraj\codebase\myosyn\lib\quickDAQ\lib\NI-DAQmx;C:\Users\suraj\codebase\myosyn\lib\quickDAQ\bin\win32;C:\Users\suraj\codebase\myosyn\lib\cLinkedList\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\lib\cLinkedList\bin\msvc\$(Platform)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>myosyn.lib;quickDAQ.lib;NIDAQmx.lib;cLinkedList.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -99,15 +108,17 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\include;$(SolutionDir)..\lib\quickDAQ\include;$(SolutionDir)..\lib\cLinkedList\include;$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\quickDAQ\lib\cLinkedList\include;$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\include;$(SolutionDir)..\lib\quickDAQ\include;$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\suraj\codebase\myosyn\bin\win32;C:\Users\suraj\codebase\myosyn\lib\quickDAQ\lib\NI-DAQmx;C:\Users\suraj\codebase\myosyn\lib\quickDAQ\bin\win32;C:\Users\suraj\codebase\myosyn\lib\cLinkedList\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\lib\cLinkedList\bin\msvc\$(Platform)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>myosyn.lib;quickDAQ.lib;NIDAQmx.lib;cLinkedList.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -116,12 +127,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\include;$(SolutionDir)..\lib\quickDAQ\include;$(SolutionDir)..\lib\cLinkedList\include;$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\quickDAQ\lib\cLinkedList\include;$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\include;$(SolutionDir)..\lib\quickDAQ\include;$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <Optimization>MaxSpeed</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\lib\cLinkedList\bin\msvc\$(Platform)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>myosyn.lib;quickDAQ.lib;NIDAQmx.lib;cLinkedList.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -132,14 +147,17 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\include;$(SolutionDir)..\lib\quickDAQ\include;$(SolutionDir)..\lib\cLinkedList\include;$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\lib\quickDAQ\lib\cLinkedList\include;$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\include;$(SolutionDir)..\lib\quickDAQ\include;$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\lib\NI-DAQmx\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\bin\msvc\$(Platform)\;$(SolutionDir)..\lib\quickDAQ\lib\cLinkedList\bin\msvc\$(Platform)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>myosyn.lib;quickDAQ.lib;NIDAQmx.lib;cLinkedList.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -147,24 +165,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\myosyn.h" />
-    <ClInclude Include="..\lib\cLinkedList\include\cLinkedList.h" />
-    <ClInclude Include="..\lib\cLinkedList\include\macrodef.h" />
     <ClInclude Include="..\lib\quickDAQ\include\msunistd.h" />
     <ClInclude Include="..\lib\quickDAQ\include\quickDAQ.h" />
     <ClInclude Include="..\lib\quickDAQ\include\stdafx.h" />
     <ClInclude Include="..\lib\quickDAQ\include\targetver.h" />
+    <ClInclude Include="..\lib\quickDAQ\lib\cLinkedList\include\cLinkedList.h" />
+    <ClInclude Include="..\lib\quickDAQ\lib\cLinkedList\include\macrodef.h" />
     <ClInclude Include="..\lib\quickDAQ\lib\NI-DAQmx\include\ansi_c.h" />
     <ClInclude Include="..\lib\quickDAQ\lib\NI-DAQmx\include\NIDAQmx.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\bin\win32\myosyn.lib" />
-    <Library Include="..\lib\cLinkedList\bin\cLinkedList.lib" />
-    <Library Include="..\lib\quickDAQ\bin\win32\quickDAQ.lib" />
-    <Library Include="..\lib\quickDAQ\lib\NI-DAQmx\NIDAQmx.lib" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\bin\win32\myosyn.pdb" />
-    <None Include="..\lib\quickDAQ\bin\win32\quickDAQ.pdb" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

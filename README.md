@@ -2,6 +2,9 @@
 
 A control API for a novel modular synthetic muscle, MyoSyn is a portmanteau of Synthetic (as in man-made) and Myosin (a protein fundamental to muscle function, which is also how you pronounce MyoSyn). This C++ API allows us to actuate this muscle with closed-loop control using our custom QuickDAQ software.
 
+## [IMPORTANT] Cloning the repo with submodules
+This library is designed to use some dependencies that are linked to the repo as submodules. So, use the `git clone --recurse-submodules <remote-URL>` command when cloning the repo.
+
 ## Dependencies
 
 MyoSyn requires the following libraries:
